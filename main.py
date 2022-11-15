@@ -37,7 +37,7 @@ elif c == 2:
     c = 1
     preto += 1
 
-n = int(500)
+n = int(5)
 
 gain = 0
 loss = 0
