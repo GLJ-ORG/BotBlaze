@@ -3,8 +3,8 @@ import json
 import time
 
 previsao = int(0)
-lista_previsoes = []
-lista_previsoes.append(0)
+lista_previsoes = [0]
+# lista_previsoes.append(0)
 saida_recente = int(0)
 lista_recents = []
 lista_comparacao = int(0)
@@ -39,7 +39,16 @@ somas = int(0)
 divsao_somas = int(0)
 resultado_divisao = int(0)
 
+# somar contadores de vitorias e derrotas
+if num1 == prev1:
+    gain = gain + 1
+    contador_losses = 0
+if num1 != prev1:
+    contador_losses += 1
 
+if contador_losses == 3:
+    contador_losses -= 3
+    loss += 1
 
 while rodada == 0:
     a = int(num1)
@@ -51,22 +60,12 @@ while rodada == 0:
     lista_previsoes.insert(0, int(previsao))
     lista_recents.insert(0, int(num1))
 
-    #somar contadores de vitorias e derrotas
-    if num1 == prev2:
-        gain += 1
-    if num1 != prev2:
-        contador_losses += 1
-
-        if contador_losses == 3:
-            contador_losses -= 3
-            loss += 1
-
-    if divsao_somas % 2 == 0:
+    if int(divsao_somas % 2) == 0:
         previsao = 2
-        print('Preto Par')
+        print('Preto')
     else:
         previsao = 1
-        print('Vermelho Impar')
+        print('Vermelho')
 
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
@@ -74,15 +73,15 @@ while rodada == 0:
 
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
-#inverter valores somar cores catalogar
 
+    # inverter valores somar cores catalogar
     if num1 == 0:
         branco += 1
         num1 = 0
     elif num1 == 1:
         vermelho += 1
         num1 = 2
-    elif num1  == 2:
+    elif num1 == 2:
         num1 = 1
         preto += 1
 
@@ -106,11 +105,41 @@ while rodada == 0:
         num3 = 1
         preto += 1
 
-    print('Gain {}'.format(gain), 'Loss {}'.format(loss))
-   # print(contador_gains, contador_losses, contador_branco)
-    print(num1,num2, prev1, prev2)
-   # print(lista_recents)
-    #print(lista_previsoes)
+    if prev1 == 0:
+            branco += 1
+            prev1 = 0
+    elif prev1 == 1:
+            vermelho += 1
+            prev1 = 2
+    elif prev1 == 2:
+            prev1 = 1
+            preto += 1
 
+    if prev2 == 0:
+            branco += 1
+            prev2 = 0
+    elif prev2 == 1:
+            vermelho += 1
+            prev2 = 2
+    elif prev2 == 2:
+            prev2 = 1
+            preto += 1
+
+    if prev3 == 0:
+            branco += 1
+            prev3 = 0
+    elif prev3 == 1:
+            vermelho += 1
+            prev3 = 2
+    elif prev3 == 2:
+            prev3 = 1
+            preto += 1
+
+    print('Gain {}'.format(gain), 'Loss {}'.format(loss))
+    print(contador_gains, contador_losses, gain, loss)
+    print(num1, prev1, prev2)
+    print()
+    # print(lista_recents)
+    # print(lista_previsoes)
 
     time.sleep(30)
