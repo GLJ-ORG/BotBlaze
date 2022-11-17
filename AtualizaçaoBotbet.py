@@ -37,24 +37,25 @@ g2 = int(0)
 total_rodadas = int(0)
 rodada = int(num1)
 condicao = int(0)
-somas = int(0)
-divsao_somas = int(0)
-resultado_divisao = int(0)
+somas = 0
+divsao_somas = 0
+resultado_divisao = 0
 
 
 # Laço de start
 while rodada == 0:
-    a = num1
+    a = int(rodada)
     somas = somas + num1
     divsao_somas = somas / 2
     total_rodadas = total_rodadas + 1
 
     # condição de previsão
-    # Preto padrão API numero Par
     if int(divsao_somas % 2) == 0:
+        # Preto padrão API numero Par
         previsao = 2
-    # Vermelho padrão API numero Impar
+
     else:
+        # Vermelho padrão API numero Impar
         previsao = 1
 
     if previsao == 2:
@@ -77,15 +78,12 @@ while rodada == 0:
     rece1, rece2, *outras_recentes = lista_recents
 
     # somar contadores de vitorias e derrotas
-    if num1 == prev2 & prev2 > 0:
+    if prev2 == num1 & prev2 > 0:
         contador_gains += 1
         gain += 1
 
-    if prev2 > 0 & num1 != prev2:
+    if num1 != prev2 & prev2 > 0:
         contador_losses += 1
-
-    if num1 == prev2:
-        contador_losses +1
 
     if contador_losses == 3:
         contador_losses -= 3
@@ -160,5 +158,4 @@ while rodada == 0:
 
     # print(lista_recents)
     # print(lista_previsoes)
-
     time.sleep(28)
