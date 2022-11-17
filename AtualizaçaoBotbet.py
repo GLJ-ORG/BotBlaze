@@ -57,7 +57,7 @@ while rodada == 0:
     else:
         previsao = 1
 
-    if previsao == 1:
+    if previsao == 2:
         prev_text = 'Preto'
     else:
         prev_text = 'Vermelho'
@@ -77,14 +77,17 @@ while rodada == 0:
     rece1, rece2, *outras_recentes = lista_recents
 
     # somar contadores de vitorias e derrotas
-    if num2 == prev1:
+    if num1 == prev2 & prev2 > 0:
         contador_gains += 1
-        gain = gain + 1
-        contador_losses = 0
-    if num1 != prev1 & num1 > 0:
+        gain += 1
+
+    if prev2 > 0 & num1 != prev2:
         contador_losses += 1
 
-    if contador_losses == 3 & contador_losses > 0:
+    if num1 == prev2:
+        contador_losses +1
+
+    if contador_losses == 3:
         contador_losses -= 3
         loss += 1
 
@@ -158,4 +161,4 @@ while rodada == 0:
     # print(lista_recents)
     # print(lista_previsoes)
 
-    time.sleep(30)
+    time.sleep(28)
