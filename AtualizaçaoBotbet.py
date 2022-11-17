@@ -2,12 +2,14 @@ import requests
 import json
 import time
 
+
 previsao = int(0)
 lista_previsoes = [0]
 # lista_previsoes.append(0)
 saida_recente = int(0)
-lista_recents = []
+lista_recents = [0]
 lista_comparacao = int(0)
+prev_text = str()
 
 preto = int(0)
 vermelho = int(0)
@@ -33,46 +35,58 @@ g1 = int(0)
 g2 = int(0)
 
 total_rodadas = int(0)
-rodada = int(0)
+rodada = int(num1)
 condicao = int(0)
 somas = int(0)
 divsao_somas = int(0)
 resultado_divisao = int(0)
 
-# somar contadores de vitorias e derrotas
-if num1 == prev1:
-    gain = gain + 1
-    contador_losses = 0
-if num1 != prev1:
-    contador_losses += 1
 
-if contador_losses == 3:
-    contador_losses -= 3
-    loss += 1
-
+# Laço de start
 while rodada == 0:
-    a = int(num1)
-    somas += num1
-    divsao_somas = int(somas / 2)
-    total_rodadas += 1
+    a = num1
+    somas = somas + num1
+    divsao_somas = somas / 2
+    total_rodadas = total_rodadas + 1
+
+    # condição de previsão
+    # Preto padrão API numero Par
+    if int(divsao_somas % 2) == 0:
+        previsao = 2
+    # Vermelho padrão API numero Impar
+    else:
+        previsao = 1
+
+    if previsao == 1:
+        prev_text = 'Preto'
+    else:
+        prev_text = 'Vermelho'
 
     # Gerar lista de previsoes e recentes
     lista_previsoes.insert(0, int(previsao))
-    lista_recents.insert(0, int(num1))
+    lista_recents.insert(0, int(rodada))
 
-    if int(divsao_somas % 2) == 0:
-        previsao = 2
-        print('Preto')
-    else:
-        previsao = 1
-        print('Vermelho')
-
+    # Receber dados da api
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
+    # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
+    rece1, rece2, *outras_recentes = lista_recents
+
+    # somar contadores de vitorias e derrotas
+    if num2 == prev1:
+        contador_gains += 1
+        gain = gain + 1
+        contador_losses = 0
+    if num1 != prev1 & num1 > 0:
+        contador_losses += 1
+
+    if contador_losses == 3 & contador_losses > 0:
+        contador_losses -= 3
+        loss += 1
 
     # inverter valores somar cores catalogar
     if num1 == 0:
@@ -134,10 +148,11 @@ while rodada == 0:
     elif prev3 == 2:
             prev3 = 1
             preto += 1
-
+    #print(str(Previsao))
+    print(prev_text)
     print('Gain {}'.format(gain), 'Loss {}'.format(loss))
     print(contador_gains, contador_losses, gain, loss)
-    print(num1, prev1, prev2)
+    print(num1,num2, prev1, prev2, rece1, rece2)
     print()
     # print(lista_recents)
     # print(lista_previsoes)
