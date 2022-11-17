@@ -149,11 +149,12 @@ while rodada == 0:
             prev3 = 1
             preto += 1
     #print(str(Previsao))
+    print()
     print(prev_text)
     print('Gain {}'.format(gain), 'Loss {}'.format(loss))
     print(contador_gains, contador_losses, gain, loss)
     print(num1,num2, prev1, prev2, rece1, rece2)
-    print()
+
     # print(lista_recents)
     # print(lista_previsoes)
 
