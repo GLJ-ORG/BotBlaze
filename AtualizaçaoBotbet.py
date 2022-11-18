@@ -9,7 +9,7 @@ saida_recente = int(0)
 lista_recents = [0]
 lista_comparacao = int(0)
 prev_text = str()
-convert_prev = int(0)
+convert_prev = int(previsao)
 
 preto = int(0)
 vermelho = int(0)
@@ -18,15 +18,18 @@ branco = int(0)
 # numeros recentes invertido para calculo de previsoes
 num1 = int(0)
 num2 = int(0)
-num3 = int(0)
+num_recent = num1
+num_anterior = num2
 
 prev1 = int(0)
 prev2 = int(0)
-prev3 = int(0)
+prev_recent = prev1
+prev_anterior = prev2
 
 gain = int(0)
-contador_gains = int(0)
 loss = int(0)
+
+contador_gains = int(0)
 contador_losses = int(0)
 zerador_losses = contador_losses
 contador_branco = int(0)
@@ -35,133 +38,122 @@ g1 = int(0)
 g2 = int(0)
 
 total_rodadas = int(0)
-rodada = int(num1)
+rodada = num1
 condicao = int(0)
 somas = 0
-divsao_somas = 0
+dividir_somas = 0
 resultado_divisao = 0
 
 
 # Laço de start
 while rodada == 0:
-    a = int(rodada)
-    somas = somas + num1
-    divsao_somas = somas / 2
-    total_rodadas = total_rodadas + 1
-
-    # condição de previsão
-    if int(divsao_somas % 2) == 0:
-        # Preto padrão API numero Par
-        previsao = 2
-
-    else:
-        # Vermelho padrão API numero Impar
-        previsao = 1
-    # converter previsao para calculo logico
-    if previsao == 1:
-        convet_prev = 2
-    else:
-        convert_prev = 1
-
-    if previsao == 1:
-        prev_text = 'Preto'
-    else:
-        prev_text = 'Vermelho'
-
-    # Gerar lista de previsoes e recentes
-    lista_previsoes.insert(0, int(convert_prev))
-    lista_recents.insert(0, int(rodada))
 
     # Receber dados da api
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
+    # Gerar lista de previsoes e recentes
+    lista_previsoes.insert(0, int(convert_prev))
+    lista_recents.insert(0, int(rodada))
+
     # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
     rece1, rece2, *outras_recentes = lista_recents
 
-    # somar contadores de vitorias e derrotas
-    if prev2 == num1 & prev2 > 0:
-        contador_gains += 1
-        gain += 1
-        contador_losses = 1 - (zerador_losses - 1)
+    # inverter valores, somar cores e catalogar OK
+    if num1 == 0:
+        num_recent = 0
+        branco += 1
+    if num1 == 1:
+        num_recent = 2
+        vermelho += 1
+    if num1 == 2:
+        num_recent = 1
+        preto += 1
 
-    if num1 != prev2 & prev2 > 0:
+    if num2 == 0:
+        num_anterior = 0
+        branco += 1
+    if num2 == 1:
+        num_anterior = 2
+        vermelho += 1
+    if num2 == 2:
+        num_anterior = 1
+        preto += 1
+
+    if prev1 == 0:
+        prev_recent = 0
+        branco += 1
+    if prev1 == 1:
+        prev_recent = 2
+        vermelho += 1
+    if prev1 == 2:
+        prev_recent = 1
+        preto += 1
+
+    if prev2 == 0:
+        prev_anterior = 0
+        branco += 1
+    if prev2 == 1:
+        prev_anterior = 2
+        vermelho += 1
+    if prev2 == 2:
+        prev_anterior = 1
+        preto += 1
+
+    # calculo para logica da previsao OK
+    a = int(num_recent)
+    somas += a
+    dividir_somas = somas
+    resultado_divisao = int(dividir_somas / 2)
+    total_rodadas = total_rodadas + 1
+
+    # condição de previsão OK
+    if resultado_divisao % 2 == 0:
+        # Preto padrão API numero Par OK
+        previsao = 1
+    else:
+        # Vermelho padrão API numero Impar OK
+        previsao = 2
+
+    # Definir string para previsoes
+    if previsao == 1:
+        prev_text = 'Preto'
+    else:
+        prev_text = 'Vermelho'
+
+        # converter previsao para calculo logico
+
+    if previsao == 2:
+        convert_prev = 1
+
+
+
+    # somar contadores de vitorias e derrotas
+    if prev_anterior == num_recent & prev_anterior > 0:
+        gain =1
+        contador_gains += 1
+
+        contador_losses = 1 - (zerador_losses + 1)
+
+    if num_recent != prev2 & prev2 > 0:
         contador_losses += 1
 
     if contador_losses == 3:
         contador_losses -= 3
         loss += 1
 
-    # inverter valores somar cores catalogar
-    if num1 == 0:
-        branco += 1
-        num1 = 0
-    elif num1 == 1:
-        vermelho += 1
-        num1 = 2
-    elif num1 == 2:
-        num1 = 1
-        preto += 1
 
-    if num2 == 0:
-        branco += 1
-        num2 = 0
-    elif num2 == 1:
-        vermelho += 1
-        num2 = 2
-    elif num2 == 2:
-        num2 = 1
-        preto += 1
 
-    if num3 == 0:
-        branco += 1
-        num3 = 0
-    elif num3 == 1:
-        vermelho += 1
-        num3 = 2
-    elif num3 == 2:
-        num3 = 1
-        preto += 1
-
-    if prev1 == 0:
-            branco += 1
-            prev1 = 0
-    elif prev1 == 1:
-            vermelho += 1
-            prev1 = 2
-    elif prev1 == 2:
-            prev1 = 1
-            preto += 1
-
-    if prev2 == 0:
-            branco += 1
-            prev2 = 0
-    elif prev2 == 1:
-            vermelho += 1
-            prev2 = 2
-    elif prev2 == 2:
-            prev2 = 1
-            preto += 1
-
-    if prev3 == 0:
-            branco += 1
-            prev3 = 0
-    elif prev3 == 1:
-            vermelho += 1
-            prev3 = 2
-    elif prev3 == 2:
-            prev3 = 1
-            preto += 1
     #print(str(Previsao))
     print()
     print(prev_text)
     print('Gain {}'.format(gain), 'Loss {}'.format(loss))
     print(contador_gains, contador_losses, gain, loss)
-    print(num1,num2, prev1, prev2, rece1, rece2)
+    print(num_recent,num_anterior, prev_recent, prev_anterior, previsao, convert_prev)
 
-    # print(lista_recents)
-    # print(lista_previsoes)
-    time.sleep(28)
+    #print(lista_recents)
+    #print(lista_previsoes)
+    #time.sleep(28)
