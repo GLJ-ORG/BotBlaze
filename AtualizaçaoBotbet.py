@@ -5,11 +5,11 @@ import time
 
 previsao = int(0)
 lista_previsoes = [0]
-# lista_previsoes.append(0)
 saida_recente = int(0)
 lista_recents = [0]
 lista_comparacao = int(0)
 prev_text = str()
+convert_prev = int(0)
 
 preto = int(0)
 vermelho = int(0)
@@ -28,7 +28,7 @@ gain = int(0)
 contador_gains = int(0)
 loss = int(0)
 contador_losses = int(0)
-
+zerador_losses = contador_losses
 contador_branco = int(0)
 entrada = int(0)
 g1 = int(0)
@@ -57,14 +57,19 @@ while rodada == 0:
     else:
         # Vermelho padrão API numero Impar
         previsao = 1
+    # converter previsao para calculo logico
+    if previsao == 1:
+        convet_prev = 2
+    else:
+        convert_prev = 1
 
-    if previsao == 2:
+    if previsao == 1:
         prev_text = 'Preto'
     else:
         prev_text = 'Vermelho'
 
     # Gerar lista de previsoes e recentes
-    lista_previsoes.insert(0, int(previsao))
+    lista_previsoes.insert(0, int(convert_prev))
     lista_recents.insert(0, int(rodada))
 
     # Receber dados da api
@@ -81,6 +86,7 @@ while rodada == 0:
     if prev2 == num1 & prev2 > 0:
         contador_gains += 1
         gain += 1
+        contador_losses = 1 - (zerador_losses - 1)
 
     if num1 != prev2 & prev2 > 0:
         contador_losses += 1
