@@ -54,13 +54,14 @@ while rodada == 0:
     lista = [x['color'] for x in resultado]
 
     # Gerar lista de previsoes e recentes
-    lista_previsoes.insert(0, int(convert_prev))
+    lista_previsoes.insert(0, int(previsao))
     lista_recents.insert(0, int(rodada))
 
     # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
     rece1, rece2, *outras_recentes = lista_recents
+
 
     # inverter valores, somar cores e catalogar OK
     if num1 == 0:
@@ -124,22 +125,15 @@ while rodada == 0:
     else:
         prev_text = 'Vermelho'
 
-        # converter previsao para calculo logico
-
-    if previsao == 2:
-        convert_prev = 1
-
-
-
     # somar contadores de vitorias e derrotas
-    if prev_anterior == num_recent & prev_anterior > 0:
-        gain =1
+    if previsao == num_recent:
+        gain += 1
         contador_gains += 1
-
-        contador_losses = 1 - (zerador_losses + 1)
-
-    if num_recent != prev2 & prev2 > 0:
+        contador_losses = zerador_losses
+    else:
         contador_losses += 1
+        zerador_losses += 1
+        continue
 
     if contador_losses == 3:
         contador_losses -= 3
@@ -151,9 +145,9 @@ while rodada == 0:
     print()
     print(prev_text)
     print('Gain {}'.format(gain), 'Loss {}'.format(loss))
-    print(contador_gains, contador_losses, gain, loss)
+    print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent,num_anterior, prev_recent, prev_anterior, previsao, convert_prev)
 
     #print(lista_recents)
     #print(lista_previsoes)
-    #time.sleep(28)
+    time.sleep(28)
