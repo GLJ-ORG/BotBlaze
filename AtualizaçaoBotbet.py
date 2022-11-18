@@ -129,7 +129,7 @@ while rodada == 0:
         prev_text = 'Preto'
     if previsao == 2:
         prev_text = 'Vermelho'
-    else:
+    if previsao == 0:
         prev_text = 'Branco'
 
     # Definir string de rodadas
@@ -162,6 +162,15 @@ while rodada == 0:
 
     if num_recent == 0:
         somas_coringas += 1
+        gain += 1
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+        loss -= 1
+        a -= a
+        somas -= somas
+        dividir_somas -= dividir_somas
+        resultado_divisao -= resultado_divisao
+
 
     #print(str(Previsao))
     print()
