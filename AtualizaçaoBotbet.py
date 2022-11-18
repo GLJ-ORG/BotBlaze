@@ -126,17 +126,19 @@ while rodada == 0:
         prev_text = 'Vermelho'
 
     # somar contadores de vitorias e derrotas
-    if previsao == num_recent:
+    if prev_anterior == num_recent & prev_anterior > 0:
         gain += 1
         contador_gains += 1
-        contador_losses = zerador_losses
+        contador_losses -= zerador_losses
+        zerador_losses -= zerador_losses
     else:
         contador_losses += 1
         zerador_losses += 1
-        continue
+
 
     if contador_losses == 3:
         contador_losses -= 3
+        zerador_losses -= 3
         loss += 1
 
 
