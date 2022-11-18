@@ -8,12 +8,17 @@ lista_previsoes = [0]
 saida_recente = int(0)
 lista_recents = [0]
 lista_comparacao = int(0)
+
 prev_text = str()
+rodada_text = str()
+
 convert_prev = int(previsao)
 
 preto = int(0)
 vermelho = int(0)
 branco = int(0)
+coringa = str()
+somas_coringas = int(0)
 
 # numeros recentes invertido para calculo de previsoes
 num1 = int(0)
@@ -37,8 +42,8 @@ entrada = int(0)
 g1 = int(0)
 g2 = int(0)
 
-total_rodadas = int(0)
-rodada = num1
+total_rodadas = int(0 - 2)
+rodada = int(0)
 condicao = int(0)
 somas = 0
 dividir_somas = 0
@@ -122,11 +127,21 @@ while rodada == 0:
     # Definir string para previsoes
     if previsao == 1:
         prev_text = 'Preto'
-    else:
+    if previsao == 2:
         prev_text = 'Vermelho'
+    else:
+        prev_text = 'Branco'
+
+    # Definir string de rodadas
+    if rodada == 0:
+        coringa = 'Coringa'
+    if rodada == 1:
+        coringa = 'Preto'
+    else:
+        coringa = 'Vermelho'
 
     # somar contadores de vitorias e derrotas
-    if prev_anterior == num_recent & prev_anterior > 0:
+    if prev_anterior == num_recent & num_recent == 0:
         gain += 1
         contador_gains += 1
         contador_losses -= zerador_losses
@@ -141,14 +156,22 @@ while rodada == 0:
         zerador_losses -= 3
         loss += 1
 
+    if prev_anterior == 0:
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
 
+    if num_recent == 0:
+        somas_coringas += 1
 
     #print(str(Previsao))
     print()
-    print(prev_text)
-    print('Gain {}'.format(gain), 'Loss {}'.format(loss))
-    print(contador_gains, contador_losses, gain, loss, zerador_losses)
-    print(num_recent,num_anterior, prev_recent, prev_anterior, previsao, convert_prev)
+    print('Apostar na cor: {}'.format(prev_text))
+    print('Partida Nº: {}'.format(total_rodadas))
+    #print()
+    print('Cor da rodada: {}'.format(coringa))
+    print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
+    #print(contador_gains, contador_losses, gain, loss, zerador_losses)
+    #print(num_recent,num_anterior, prev_recent, prev_anterior, previsao, convert_prev)
 
     #print(lista_recents)
     #print(lista_previsoes)
