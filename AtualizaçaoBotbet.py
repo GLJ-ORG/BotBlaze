@@ -12,8 +12,6 @@ lista_comparacao = int(0)
 prev_text = str()
 rodada_text = str()
 
-convert_prev = int(previsao)
-
 preto = int(0)
 vermelho = int(0)
 branco = int(0)
@@ -28,8 +26,8 @@ num_anterior = num2
 
 prev1 = int(0)
 prev2 = int(0)
-prev_recent = prev1
-prev_anterior = prev2
+prev_recent = int(0)
+prev_anterior = int(0)
 
 gain = int(0)
 loss = int(0)
@@ -42,8 +40,8 @@ entrada = int(0)
 g1 = int(0)
 g2 = int(0)
 
-total_rodadas = int(0 - 2)
-rodada = int(0)
+total_rodadas = int(0 - 1)
+rodada = num1
 condicao = int(0)
 somas = 0
 dividir_somas = 0
@@ -53,14 +51,29 @@ resultado_divisao = 0
 # Laço de start
 while rodada == 0:
 
-    # Receber dados da api
+    # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
-    # Gerar lista de previsoes e recentes
+    # calculo para logica da previsao OK
+    a = int(num_recent)
+    somas += a
+    dividir_somas = somas
+    resultado_divisao = int(dividir_somas / 2)
+    total_rodadas = total_rodadas + 1
+
+    # condição de previsão OK
+    if resultado_divisao % 2 == 0:
+        # Preto padrão API numero Par OK
+        previsao = 2
+    else:
+        # Vermelho padrão API numero Impar OK
+        previsao = 1
+
+    # Gerar lista de previsoes e recentes OK
     lista_previsoes.insert(0, int(previsao))
-    lista_recents.insert(0, int(rodada))
+    lista_recents.insert(0, int(num_recent))
 
     # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista
@@ -89,87 +102,48 @@ while rodada == 0:
         num_anterior = 1
         preto += 1
 
-    if prev1 == 0:
-        prev_recent = 0
-        branco += 1
-    if prev1 == 1:
-        prev_recent = 2
-        vermelho += 1
-    if prev1 == 2:
-        prev_recent = 1
-        preto += 1
-
-    if prev2 == 0:
-        prev_anterior = 0
-        branco += 1
-    if prev2 == 1:
-        prev_anterior = 2
-        vermelho += 1
-    if prev2 == 2:
-        prev_anterior = 1
-        preto += 1
-
-    # calculo para logica da previsao OK
-    a = int(num_recent)
-    somas += a
-    dividir_somas = somas
-    resultado_divisao = int(dividir_somas / 2)
-    total_rodadas = total_rodadas + 1
-
-    # condição de previsão OK
-    if resultado_divisao % 2 == 0:
-        # Preto padrão API numero Par OK
-        previsao = 1
-    else:
-        # Vermelho padrão API numero Impar OK
-        previsao = 2
-
-    # Definir string para previsoes
+    # Definir string para previsoes OK
     if previsao == 1:
         prev_text = 'Preto'
     if previsao == 2:
         prev_text = 'Vermelho'
-    if previsao == 0:
-        prev_text = 'Branco'
 
-    # Definir string de rodadas
-    if rodada == 0:
+
+    # Definir string de rodadas ok
+    if num1 == 0:
         coringa = 'Coringa'
-    if rodada == 1:
+    if num1 == 2:
         coringa = 'Preto'
-    else:
+    if num1 == 1:
         coringa = 'Vermelho'
 
     # somar contadores de vitorias e derrotas
-    if prev_anterior == num_recent & num_recent == 0:
-        gain += 1
-        contador_gains += 1
-        contador_losses -= zerador_losses
-        zerador_losses -= zerador_losses
-    else:
-        contador_losses += 1
-        zerador_losses += 1
-
-
     if contador_losses == 3:
+        loss += 1
         contador_losses -= 3
         zerador_losses -= 3
-        loss += 1
 
-    if prev_anterior == 0:
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
-
-    if num_recent == 0:
+    if num1 == 0:
         somas_coringas += 1
-        gain += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-        loss -= 1
-        a -= a
         somas -= somas
         dividir_somas -= dividir_somas
         resultado_divisao -= resultado_divisao
+
+    if num_recent != prev2 & prev2 != 0 & num_recent != 0:
+        contador_losses += 1
+        zerador_losses += 1
+    elif prev2 != 0:
+        gain += 1
+        contador_gains += 1
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+
+
+
+
 
 
     #print(str(Previsao))
@@ -179,9 +153,9 @@ while rodada == 0:
     #print()
     print('Cor da rodada: {}'.format(coringa))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    #print(contador_gains, contador_losses, gain, loss, zerador_losses)
-    #print(num_recent,num_anterior, prev_recent, prev_anterior, previsao, convert_prev)
+    print(contador_gains, contador_losses, gain, loss, zerador_losses)
+    print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
 
+    print(lista)
     #print(lista_recents)
-    #print(lista_previsoes)
-    time.sleep(28)
+    time.sleep(30)
