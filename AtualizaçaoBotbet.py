@@ -27,7 +27,7 @@ num_anterior = num2
 prev1 = int(0)
 prev2 = int(0)
 prev_recent = int(0)
-prev_anterior = int(0)
+prev_anterior = int(prev2)
 
 gain = int(0)
 loss = int(0)
@@ -56,6 +56,16 @@ while rodada == 0:
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
+    # Gerar lista de previsoes e recentes OK
+    lista_previsoes.insert(0, int(previsao))
+    lista_recents.insert(0, int(num_recent))
+
+    # Pegar numeros separadamente da lista
+    num1, num2, *outras_lista = lista
+    prev1, prev2, *outras_previsoes = lista_previsoes
+    rece1, rece2, *outras_recentes = lista_recents
+
+
     # calculo para logica da previsao OK
     a = int(num_recent)
     somas += a
@@ -70,16 +80,6 @@ while rodada == 0:
     else:
         # Vermelho padrão API numero Impar OK
         previsao = 1
-
-    # Gerar lista de previsoes e recentes OK
-    lista_previsoes.insert(0, int(previsao))
-    lista_recents.insert(0, int(num_recent))
-
-    # Pegar numeros separadamente da lista
-    num1, num2, *outras_lista = lista
-    prev1, prev2, *outras_previsoes = lista_previsoes
-    rece1, rece2, *outras_recentes = lista_recents
-
 
     # inverter valores, somar cores e catalogar OK
     if num1 == 0:
@@ -102,10 +102,27 @@ while rodada == 0:
         num_anterior = 1
         preto += 1
 
+    if prev1 == 0:
+        prev_recent = 0
+        branco += 1
+    if prev1 == 1:
+        prev_recent = 2
+        vermelho += 1
+    if prev1 == 2:
+        prev1_recent = 1
+        preto += 1
+
+    if prev2 == 1:
+        prev_recent = 2
+        vermelho += 1
+    if prev2 == 2:
+        prev_recent = 1
+        preto += 1
+
     # Definir string para previsoes OK
-    if previsao == 1:
-        prev_text = 'Preto'
     if previsao == 2:
+        prev_text = 'Preto'
+    if previsao == 1:
         prev_text = 'Vermelho'
 
 
@@ -118,29 +135,26 @@ while rodada == 0:
         coringa = 'Vermelho'
 
     # somar contadores de vitorias e derrotas
+    if num_recent == prev2 & prev2 > 0 & num_recent == 0:
+        gain += 1
+        contador_gains += 1
+
+    if num_recent != prev2 & prev2 > 0 & num_recent != 0:
+        contador_losses += 1
+        zerador_losses += 1
+
     if contador_losses == 3:
         loss += 1
         contador_losses -= 3
         zerador_losses -= 3
 
-    if num1 == 0:
+    if a == 0:
         somas_coringas += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
         somas -= somas
         dividir_somas -= dividir_somas
         resultado_divisao -= resultado_divisao
-
-    if num_recent != prev2 & prev2 != 0 & num_recent != 0:
-        contador_losses += 1
-        zerador_losses += 1
-    elif prev2 != 0:
-        gain += 1
-        contador_gains += 1
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
-
-
 
 
 
@@ -154,7 +168,7 @@ while rodada == 0:
     print('Cor da rodada: {}'.format(coringa))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
-    print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
+    print(num_recent, num_anterior, prev_recent, prev_anterior, rodada, previsao)
 
     print(lista)
     #print(lista_recents)
