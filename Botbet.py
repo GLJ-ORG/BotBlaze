@@ -8,6 +8,7 @@ lista_previsoes = [0]
 saida_recente = int(0)
 lista_recents = [0]
 lista_comparacao = int(0)
+x = 0
 
 prev_text = str()
 rodada_text = str()
@@ -56,22 +57,13 @@ while rodada == 0:
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
-    # Gerar lista de previsoes e recentes OK
-    lista_previsoes.insert(0, int(previsao))
-    lista_recents.insert(0, int(num_recent))
-
-    # Pegar numeros separadamente da lista
-    num1, num2, *outras_lista = lista
-    prev1, prev2, *outras_previsoes = lista_previsoes
-    rece1, rece2, *outras_recentes = lista_recents
-
-
     # calculo para logica da previsao OK
-    a = int(num_recent)
+    a = int(num1)
     somas += a
     dividir_somas = somas
     resultado_divisao = int(dividir_somas / 2)
     total_rodadas = total_rodadas + 1
+
 
     # condição de previsão OK
     if resultado_divisao % 2 == 0:
@@ -80,6 +72,15 @@ while rodada == 0:
     else:
         # Vermelho padrão API numero Impar OK
         previsao = 1
+
+    # Gerar lista de previsoes e recentes OK
+    lista_previsoes.insert(0, int(previsao))
+    lista_recents.insert(0, int(num_recent))
+
+    # Pegar numeros separadamente da lista
+    num1, num2, *outras_lista = lista
+    prev1, prev2, *outras_previsoes = lista_previsoes
+    rece1, rece2, *outras_recentes = lista_recents
 
     # inverter valores, somar cores e catalogar OK
     if num1 == 0:
@@ -120,9 +121,9 @@ while rodada == 0:
         preto += 1
 
     # Definir string para previsoes OK
-    if previsao == 2:
-        prev_text = 'Preto'
     if previsao == 1:
+        prev_text = 'Preto'
+    if previsao == 2:
         prev_text = 'Vermelho'
 
 
@@ -134,31 +135,25 @@ while rodada == 0:
     if num1 == 1:
         coringa = 'Vermelho'
 
+    if num_recent == 0:
+        somas_coringas += 1
+        contador_losses = 0
+        zerador_losses = 0
+
     # somar contadores de vitorias e derrotas
-    if num_recent == prev2 & num1 == 0:
+    if num_recent == prev2 & prev2 > 0:
         gain += 1
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-    else:
+    elif prev2 > 0:
             contador_losses += 1
             zerador_losses += 1
 
-    if contador_losses == 3:
+    if contador_losses == 4:
         loss += 1
-        contador_losses -= 3
-        zerador_losses -= 3
-
-    if a == 0:
-        somas_coringas += 1
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
-        somas -= somas
-        dividir_somas -= dividir_somas
-        resultado_divisao -= resultado_divisao
-
-
-
+        contador_losses -= 4
+        zerador_losses -= 4
 
 
     #print(str(Previsao))
