@@ -168,7 +168,9 @@ while rodada == 0:
     lucro_bruto = (gain * 5)+(somas_coringas * 2 * 14)
     lucro_liquido = lucro_bruto - (loss * 81)
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
-
+    hora_atual = 0
+    hora_atual = total_rodadas * 0.3 / 60
+    print('Tempo de trabalho: {}'.format(hora_atual))
     #print(contador_gains, contador_losses, gain, loss, zerador_losses)
     #print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
 
