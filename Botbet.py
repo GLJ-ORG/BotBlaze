@@ -135,11 +135,6 @@ while rodada == 0:
     if num1 == 1:
         coringa = 'Vermelho'
 
-    if num_recent == 0:
-        somas_coringas += 1
-        contador_losses = 0
-        zerador_losses = 0
-
     # somar contadores de vitorias e derrotas
     if num_recent == prev2 & prev2 > 0:
         gain += 1
@@ -149,6 +144,11 @@ while rodada == 0:
     elif prev2 > 0:
             contador_losses += 1
             zerador_losses += 1
+
+    if num_recent == 0:
+        somas_coringas += 1
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
 
     if contador_losses == 4:
         loss += 1
@@ -163,9 +163,15 @@ while rodada == 0:
     #print()
     print('Cor da rodada: {}'.format(coringa))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    print(contador_gains, contador_losses, gain, loss, zerador_losses)
-    print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
+    lucro_bruto = 0
+    lucro_liquido = 0
+    lucro_bruto = (gain * 5)+(somas_coringas * 2 * 14)
+    lucro_liquido = lucro_bruto - (loss * 81)
+    print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
+
+    #print(contador_gains, contador_losses, gain, loss, zerador_losses)
+    #print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
 
     #print(lista)
     #print(lista_recents)
-    time.sleep(30)
+    time.sleep(28)
