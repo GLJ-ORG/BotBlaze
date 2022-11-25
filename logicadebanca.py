@@ -45,18 +45,18 @@ g2 = int(0)
 total_rodadas = int(0 - 1)
 rodada = num1
 condicao = int(0)
-somas = 0
-dividir_somas = 0
-resultado_divisao = 0
+somas = int(0)
+dividir_somas = int(0)
+resultado_divisao = int(0)
 
-banca_total = 0
-tipo_conta = 0
-valor_banca = 0
-entrada = 0
-multiplicador = 0
-valor_branco = 0
+banca_total = int(0)
+tipo_conta = int(0)
+valor_banca = int(0)
+entrada = int(0)
+multiplicador = int(0)
+valor_branco = int(0)
 
-
+g = int(0)
 g1 = int(0)
 g2 = int(0)
 g3 = int(0)
@@ -66,8 +66,8 @@ g5 = int(0)
 somas_gain = int(0)
 somas_loss = int(0)
 somas_branco = int(0)
-stop_loss = 0
-stop_gain = 0
+stop_loss = int(0)
+stop_gain = int(0)
 
 
 tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
@@ -78,7 +78,26 @@ stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 0 #int(input('Quantos gales você quer?'))
 multiplicador = int(2) #int(input('Qual será seu fator multiplicador de gale?'))
 
+ #simulador banca
+g1 = int(0)
+g2 = int(0)
+g3 = int(0)
+g4 = int(0)
+g5 = int(0)
 
+# definindo valor do branco
+valor_branco = int(entrada * 0.1)
+if valor_branco < 2:
+    valor_branco = 2
+somas_branco = int(valor_branco * 14)
+
+# Definições de gales
+g = valor_branco + (entrada * multiplicador)
+g1 = g * multiplicador
+g2 = g1 * multiplicador
+g3 = g2 * multiplicador
+g4 = g3 * multiplicador
+g5 = g4 * multiplicador
 
 # Laço de start
 while rodada == 0:
@@ -186,52 +205,44 @@ while rodada == 0:
         contador_losses -= 4
         zerador_losses -= 4
 
+
     # Simulador de banca
 
-     #definindo valor do branco
-    valor_branco = int(entrada * 0.1)
-    if valor_branco < 2:
-        valor_branco = 2
-    somas_branco = int(valor_branco * 14)
-
-    #Definições de gales
-    g1 = entrada * multiplicador
-    g2 = g1 * multiplicador
-    g3 = g2 * multiplicador
-    g4 = g3 * multiplicador
-    g5 = g4 * multiplicador
-
-#condicionais para atualização por rodada do saldo em banca
+    #condicionais para atualização por rodada do saldo em banca
     if num_recent == prev2 & prev2 > 0:
-        somas_gain += entrada + somas_branco
+        somas_gain += entrada
         somas_loss -= somas_loss
-    elif contador_gains >= 0:
+    else:
         somas_loss -= entrada + valor_branco
+        somas_gain -= somas_gain
+
+    if num_recent == 0:
+        banca_total += somas_branco
 
 
     if contador_losses == 1:
-        somas_loss -= g1 + valor_branco
-        banca_total -= g1 - valor_branco
+        somas_loss += -g1
+        banca_total -= g1
 
 
     if contador_losses == 2:
-        somas_loss -= g2 + valor_branco
-        banca_total -= g2 + valor_branco
+        somas_loss += -g2
+        banca_total -= g2
 
 
     if contador_losses == 3:
-        somas_loss -= g3 + valor_branco
-        banca_total -= g3 + valor_branco
+        somas_loss += -g3
+        banca_total -= g3
 
 
     if contador_losses == 4:
-        somas_loss -= g4 + valor_branco
-        banca_total -= g4 + valor_branco
+        somas_loss += -g4
+        banca_total -= g4
 
 
     if contador_losses == 5:
-        somas_loss -= g5 + valor_branco
-        banca_total -= g5 + valor_branco
+        somas_loss += -g5
+        banca_total -= g5
 
 
     #if contador_losses == 6:
@@ -239,7 +250,7 @@ while rodada == 0:
      #   banca_total -= entrada + g1 + valor_branco
      #   somas_gain -= entrada + g1 + valor_branco
 
-    banca_total = valor_banca + (somas_gain + (somas_coringas * somas_branco) - (valor_branco * loss) + (loss * 5))
+    banca_total = valor_banca + (gain * entrada) + (somas_coringas * valor_branco) + (somas_loss)
 
 
     #print(str(Previsao))
@@ -261,9 +272,10 @@ while rodada == 0:
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
-    print(g1, g2, g3, g4, g5)
+    print(g, g1, g2, g3, g4, g5)
     #print(lista)
     #print(lista_recents)
+    valor_banca = banca_total
     time.sleep(30)
 
 
