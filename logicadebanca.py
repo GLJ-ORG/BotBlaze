@@ -217,7 +217,8 @@ while rodada == 0:
         somas_gain -= somas_gain
 
     if num_recent == 0:
-        banca_total += somas_branco
+        banca_total += valor_branco * 14
+        
 
 
     if contador_losses == 1:
