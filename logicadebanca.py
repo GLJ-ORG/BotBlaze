@@ -187,55 +187,59 @@ while rodada == 0:
         zerador_losses -= 4
 
     # Simulador de banca
-    g1 = valor_branco + (entrada * multiplicador)
-    g2 = valor_branco + (g1 * multiplicador)
-    g3 = valor_branco + (g2 * multiplicador)
-    g4 = valor_branco + (g3 * multiplicador)
-    g5 = valor_branco + (g4 * multiplicador)
 
-
+     #definindo valor do branco
     valor_branco = int(entrada * 0.1)
-    somas_branco = int(valor_branco * 14)
     if valor_branco < 2:
         valor_branco = 2
+    somas_branco = int(valor_branco * 14)
 
+    #Definições de gales
+    g1 = entrada * multiplicador
+    g2 = g1 * multiplicador
+    g3 = g2 * multiplicador
+    g4 = g3 * multiplicador
+    g5 = g4 * multiplicador
+
+#condicionais para atualização por rodada do saldo em banca
     if num_recent == prev2 & prev2 > 0:
-        somas_gain += somas_branco + entrada
+        somas_gain += entrada + somas_branco
         somas_loss -= somas_loss
-    elif contador_gains > 0:
-        somas_gain -= somas_gain
+    elif contador_gains >= 0:
+        somas_loss -= entrada + valor_branco
+
 
     if contador_losses == 1:
-        somas_loss += entrada + g1 + valor_branco
-        banca_total -= entrada - g1 - valor_branco
-        somas_gain -= entrada - g1 - valor_branco
+        somas_loss -= g1 + valor_branco
+        banca_total -= g1 - valor_branco
+
 
     if contador_losses == 2:
-        somas_loss += entrada + g2 + valor_branco
-        banca_total -= g1 + valor_branco
-        somas_gain -= g1 + valor_branco
+        somas_loss -= g2 + valor_branco
+        banca_total -= g2 + valor_branco
+
 
     if contador_losses == 3:
-        somas_loss += g2
-        banca_total -= g2 + valor_branco
-        somas_gain -= g2 + valor_branco
+        somas_loss -= g3 + valor_branco
+        banca_total -= g3 + valor_branco
+
 
     if contador_losses == 4:
-        somas_loss += g3
-        banca_total -= g3 + valor_branco
-        somas_gain -= g3 + valor_branco
+        somas_loss -= g4 + valor_branco
+        banca_total -= g4 + valor_branco
+
 
     if contador_losses == 5:
-        somas_loss += g4
-        banca_total -= g4 + valor_branco
-        somas_gain -= g4 + valor_branco
-
-    if contador_losses == 6:
-        somas_loss += g5
+        somas_loss -= g5 + valor_branco
         banca_total -= g5 + valor_branco
-        somas_gain -= g5 + valor_branco
 
-    banca_total = valor_banca + somas_branco + somas_gain - (loss * 5)
+
+    #if contador_losses == 6:
+     #   somas_loss += g1 + valor_branco
+     #   banca_total -= entrada + g1 + valor_branco
+     #   somas_gain -= entrada + g1 + valor_branco
+
+    banca_total = valor_banca + (somas_gain + (somas_coringas * somas_branco) - (valor_branco * loss) + (loss * 5))
 
 
     #print(str(Previsao))
@@ -257,6 +261,7 @@ while rodada == 0:
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
+    print(g1, g2, g3, g4, g5)
     #print(lista)
     #print(lista_recents)
     time.sleep(30)
