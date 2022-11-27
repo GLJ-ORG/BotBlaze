@@ -47,7 +47,7 @@ rodada = num1
 condicao = int(0)
 somas = int(0)
 dividir_somas = int(0)
-resultado_divisao = int(0)
+resultado_divisao = (0)
 
 banca_total = int(0)
 tipo_conta = int(0)
@@ -73,8 +73,8 @@ stop_gain = int(0)
 tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
 valor_banca = int(100) #int(input('Qual o valor da sua banca?'))
 entrada = int(5) #int(input('Qual valor da sua primeira entrada?'))
-stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
-stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
+stop_loss = 4 #int(input('Quantos loss você aceita tomar?'))
+stop_gain = 100 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 0 #int(input('Quantos gales você quer?'))
 multiplicador = int(2) #int(input('Qual será seu fator multiplicador de gale?'))
 
@@ -127,7 +127,7 @@ while rodada == 0:
     lista_previsoes.insert(0, int(previsao))
     lista_recents.insert(0, int(num_recent))
 
-    # Pegar numeros separadamente da lista
+    # Pegar numeros separadamente da lista ok
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
     rece1, rece2, *outras_recentes = lista_recents
@@ -208,49 +208,11 @@ while rodada == 0:
 
     # Simulador de banca
 
-    #condicionais para atualização por rodada do saldo em banca
-    if num_recent == prev2 & prev2 > 0:
-        somas_gain += entrada
-        somas_loss -= somas_loss
-    else:
-        somas_loss -= entrada + valor_branco
-        somas_gain -= somas_gain
-
-    if num_recent == 0:
-        banca_total += somas_branco
 
 
-    if contador_losses == 1:
-        somas_loss += -g1
-        banca_total -= g1
 
 
-    if contador_losses == 2:
-        somas_loss += -g2
-        banca_total -= g2
 
-
-    if contador_losses == 3:
-        somas_loss += -g3
-        banca_total -= g3
-
-
-    if contador_losses == 4:
-        somas_loss += -g4
-        banca_total -= g4
-
-
-    if contador_losses == 5:
-        somas_loss += -g5
-        banca_total -= g5
-
-
-    #if contador_losses == 6:
-     #   somas_loss += g1 + valor_branco
-     #   banca_total -= entrada + g1 + valor_branco
-     #   somas_gain -= entrada + g1 + valor_branco
-
-    banca_total = valor_banca + (gain * entrada) + (somas_coringas * valor_branco) + (somas_loss)
 
 
     #print(str(Previsao))
@@ -263,7 +225,7 @@ while rodada == 0:
     lucro_bruto = 0
     lucro_liquido = 0
     lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
-    lucro_liquido = lucro_bruto - (loss * 81)
+    lucro_liquido = lucro_bruto - (gain * (entrada - valor_branco)) - (loss * (entrada ++ stop_loss))
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
     hora_atual = float(0)
     hora_atual = total_rodadas * 0.3 / 0.6
@@ -273,9 +235,8 @@ while rodada == 0:
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
     print(g, g1, g2, g3, g4, g5)
-    #print(lista)
+    print(resultado_divisao)
     #print(lista_recents)
-    valor_banca = banca_total
     time.sleep(30)
 
 
