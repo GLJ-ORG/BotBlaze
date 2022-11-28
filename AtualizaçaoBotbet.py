@@ -225,7 +225,7 @@ while rodada == 0:
     lucro_bruto = 0
     lucro_liquido = 0
     lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
-    lucro_liquido = lucro_bruto - (gain * (entrada - valor_branco)) - (loss * (entrada ++ stop_loss))
+    lucro_liquido = lucro_bruto - (gain * (entrada - valor_branco)) + (loss * (entrada * int(10 / 100)))
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
     hora_atual = float(0)
     hora_atual = total_rodadas * 0.3 / 0.6
@@ -237,7 +237,7 @@ while rodada == 0:
     print(g, g1, g2, g3, g4, g5)
     print(resultado_divisao)
     #print(lista_recents)
-    time.sleep(30)
+    time.sleep(29.7)
 
 
 
