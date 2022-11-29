@@ -208,6 +208,8 @@ while rodada == 0:
 
     # Simulador de banca
 
+# Definicao de qual gale esta na partida
+
 
 
 
@@ -237,7 +239,7 @@ while rodada == 0:
     print(g, g1, g2, g3, g4, g5)
     print(resultado_divisao)
     #print(lista_recents)
-    time.sleep(29.7)
+    time.sleep(29.63)
 
 
 
