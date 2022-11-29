@@ -180,29 +180,33 @@ while rodada == 0:
 
     #Definiçao de derrota
     if contador_losses == 0:
-        derrota += in_g
-        banca_atual -= derrota
+        banca_atual -= entrada
+        banca_atual -= valor_branco
 
     if contador_losses == 1:
-        derrota += in_g1
+        derrota += res_g1
         banca_atual -= derrota
+        banca_atual -= valor_branco
 
     if contador_losses == 2:
         derrota += in_g2
         banca_atual -= in_g2
+        banca_atual -= valor_branco
 
     if contador_losses == 3:
         derrota += in_g3
         banca_atual -= in_g3
+        banca_atual -= valor_branco
 
     if contador_losses == 4:
         derrota += in_g4
         banca_atual -= in_g4
+        banca_atual -= valor_branco
 
     if contador_losses == 5:
         derrota += in_g5
         banca_atual -= in_g5
-
+        banca_atual -= valor_branco
 
     # somar contadores de vitorias e derrotas
     if num_recent == prev2 & prev2 > 0:
@@ -210,23 +214,28 @@ while rodada == 0:
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-        lucro_liquido += entrada - valor_branco
-        banca_atual = entrada - valor_branco
+        banca_atual += somas_gain
+
     elif prev2 > 0:
         contador_losses += 1
         zerador_losses += 1
-        banca_atual -= derrota
+
 
     if num_recent == 0:
         somas_coringas += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-        banca_atual -= derrota
+        banca_atual += somas_branco - derrota
+        derrota -= derrota
+
 
     if contador_losses == 4:
         loss += 1
         contador_losses -= 4
         zerador_losses -= 4
+
+    somas_gain = gain * (entrada - valor_branco)
+
 
     lucro_bruto = (gain * entrada) + (somas_coringas * (valor_branco * 14))
 
@@ -251,7 +260,7 @@ while rodada == 0:
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
     #print(g, g1, g2, g3, g4, g5)
-    print(banca_inicial, banca_atual, derrota)
+    print(banca_inicial, derrota)
     # print(lista_recents)
     time.sleep(29.63)
 
