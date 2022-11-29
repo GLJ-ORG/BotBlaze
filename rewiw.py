@@ -2,8 +2,6 @@ import requests
 import json
 import time
 
-
-
 previsao = int(0)
 lista_previsoes = [0]
 saida_recente = int(0)
@@ -49,41 +47,31 @@ somas = int(0)
 dividir_somas = int(0)
 resultado_divisao = (0)
 
-banca_total = int(0)
+
 tipo_conta = int(0)
 valor_banca = int(0)
 entrada = int(0)
 multiplicador = int(0)
 valor_branco = int(0)
-
-g = int(0)
-g1 = int(0)
-g2 = int(0)
-g3 = int(0)
-g4 = int(0)
-g5 = int(0)
+lucro_bruto = 0
+lucro_liquido = 0
 
 somas_gain = int(0)
 somas_loss = int(0)
 somas_branco = int(0)
 stop_loss = int(0)
 stop_gain = int(0)
+derrota = 0
 
-
-tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
-valor_banca = int(100) #int(input('Qual o valor da sua banca?'))
-entrada = int(5) #int(input('Qual valor da sua primeira entrada?'))
-stop_loss = 4 #int(input('Quantos loss você aceita tomar?'))
-stop_gain = 100 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
-quantidade_gales = 0 #int(input('Quantos gales você quer?'))
-multiplicador = int(2) #int(input('Qual será seu fator multiplicador de gale?'))
-
- #simulador banca
-g1 = int(0)
-g2 = int(0)
-g3 = int(0)
-g4 = int(0)
-g5 = int(0)
+tipo_conta = int(0)  # int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
+banca_inicial = int(100)  # int(input('Qual o valor da sua banca?'))
+entrada = int(5)  # int(input('Qual valor da sua primeira entrada?'))
+stop_loss = 4  # int(input('Quantos loss você aceita tomar?'))
+stop_gain = 100  # int(input('Qual sua meta de vitória em porcentagem(%)?'))
+quantidade_gales = 0  # int(input('Quantos gales você quer?'))
+multiplicador = int(2)  # int(input('Qual será seu fator multiplicador de gale?'))
+banca_atual = banca_inicial
+# simulador banca
 
 # definindo valor do branco
 valor_branco = int(entrada * 0.1)
@@ -92,12 +80,19 @@ if valor_branco < 2:
 somas_branco = int(valor_branco * 14)
 
 # Definições de gales
-g = valor_branco + (entrada * multiplicador)
-g1 = g * multiplicador
-g2 = g1 * multiplicador
-g3 = g2 * multiplicador
-g4 = g3 * multiplicador
-g5 = g4 * multiplicador
+in_g = entrada
+in_g1 = in_g * multiplicador
+in_g2 = in_g1 * multiplicador
+in_g3 = in_g2 * multiplicador
+in_g4 = in_g3 * multiplicador
+in_g5 = in_g4 * multiplicador
+
+res_g = entrada
+res_g1 = res_g + (res_g * multiplicador)
+res_g2 = res_g1 + (in_g1 + multiplicador)
+res_g3 = res_g2 + (in_g2 + multiplicador)
+res_g4 = res_g3 + (in_g3 + multiplicador)
+res_g5 = res_g4 + (in_g4 + multiplicador)
 
 # Laço de start
 while rodada == 0:
@@ -113,7 +108,6 @@ while rodada == 0:
     dividir_somas = somas
     resultado_divisao = int(dividir_somas / 2)
     total_rodadas = total_rodadas + 1
-
 
     # condição de previsão OK
     if resultado_divisao % 2 == 0:
@@ -176,7 +170,6 @@ while rodada == 0:
     if previsao == 2:
         prev_text = 'Vermelho'
 
-
     # Definir string de rodadas ok
     if num1 == 0:
         coringa = 'Coringa'
@@ -185,62 +178,81 @@ while rodada == 0:
     if num1 == 1:
         coringa = 'Vermelho'
 
+    #Definiçao de derrota
+    if contador_losses == 0:
+        derrota += in_g
+        banca_atual -= derrota
+
+    if contador_losses == 1:
+        derrota += in_g1
+        banca_atual -= derrota
+
+    if contador_losses == 2:
+        derrota += in_g2
+        banca_atual -= in_g2
+
+    if contador_losses == 3:
+        derrota += in_g3
+        banca_atual -= in_g3
+
+    if contador_losses == 4:
+        derrota += in_g4
+        banca_atual -= in_g4
+
+    if contador_losses == 5:
+        derrota += in_g5
+        banca_atual -= in_g5
+
+
     # somar contadores de vitorias e derrotas
     if num_recent == prev2 & prev2 > 0:
         gain += 1
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-
-
+        lucro_liquido += entrada - valor_branco
+        banca_atual = entrada - valor_branco
     elif prev2 > 0:
-            contador_losses += 1
-            zerador_losses += 1
+        contador_losses += 1
+        zerador_losses += 1
+        banca_atual -= derrota
 
     if num_recent == 0:
         somas_coringas += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
+        banca_atual -= derrota
 
     if contador_losses == 4:
         loss += 1
         contador_losses -= 4
         zerador_losses -= 4
 
+    lucro_bruto = (gain * entrada) + (somas_coringas * (valor_branco * 14))
 
     # Simulador de banca
 
-# Definicao de qual gale esta na partida
 
+    # Definicao de qual gale esta na partida
 
-
-
-
-
-
-
-    #print(str(Previsao))
+    # print(str(Previsao))
     print()
     print('Apostar na cor: {}'.format(prev_text))
     print('Partida Nº: {}'.format(total_rodadas))
-    #print()
+    # print()
     print('Cor da rodada: {}'.format(coringa))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    lucro_bruto = 0
-    lucro_liquido = 0
-    lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
-    lucro_liquido = lucro_bruto - (gain * (entrada - valor_branco)) + (loss * (entrada * int(10 / 100)))
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
     hora_atual = float(0)
     hora_atual = total_rodadas * 0.3 / 0.6
     print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
-    print('Saldo atual:{}'.format(banca_total))
+    print('Saldo atual:{}'.format(banca_atual))
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
-    print(g, g1, g2, g3, g4, g5)
-    print(resultado_divisao)
-    #print(lista_recents)
+    #print(g, g1, g2, g3, g4, g5)
+    print(banca_inicial, banca_atual, derrota)
+    # print(lista_recents)
     time.sleep(29.63)
 
 
