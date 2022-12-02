@@ -43,8 +43,8 @@ g2 = int(0)
 total_rodadas = int(0 - 1)
 rodada = num1
 condicao = int(0)
-somas = int(0)
-dividir_somas = int(0)
+somas = (0)
+dividir_somas = (0)
 resultado_divisao = (0)
 
 
@@ -93,21 +93,27 @@ res_g2 = res_g1 + (in_g1 + multiplicador)
 res_g3 = res_g2 + (in_g2 + multiplicador)
 res_g4 = res_g3 + (in_g3 + multiplicador)
 res_g5 = res_g4 + (in_g4 + multiplicador)
-
+contador_soma = 0
 # Laço de start
 while rodada == 0:
+
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
 
+    contador_soma += 1
+
     # calculo para logica da previsao OK
-    a = int(num1)
+    a = (num1)
     somas += a
     dividir_somas = somas
-    resultado_divisao = int(dividir_somas / 2)
+    resultado_divisao = dividir_somas / 2
     total_rodadas = total_rodadas + 1
+    if contador_soma < 9:
+        dividir_somas -= dividir_somas
+        somas -= somas
 
     # condição de previsão OK
     if resultado_divisao % 2 == 0:
@@ -165,9 +171,9 @@ while rodada == 0:
         preto += 1
 
     # Definir string para previsoes OK
-    if previsao == 1:
-        prev_text = 'Preto'
     if previsao == 2:
+        prev_text = 'Preto'
+    if previsao == 1:
         prev_text = 'Vermelho'
 
     # Definir string de rodadas ok
@@ -214,7 +220,7 @@ while rodada == 0:
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-        banca_atual += somas_gain
+
 
     elif prev2 > 0:
         contador_losses += 1
@@ -225,20 +231,19 @@ while rodada == 0:
         somas_coringas += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-        banca_atual += somas_branco - derrota
         derrota -= derrota
 
 
-    if contador_losses == 4:
+    if contador_losses == 3:
         loss += 1
-        contador_losses -= 4
-        zerador_losses -= 4
+        contador_losses -= 3
+        zerador_losses -= 3
 
     somas_gain = gain * (entrada - valor_branco)
 
 
     lucro_bruto = (gain * entrada) + (somas_coringas * (valor_branco * 14))
-
+    lucro_liquido = lucro_bruto - (loss * res_g3 - (loss * (valor_branco * 4)))
     # Simulador de banca
 
 
