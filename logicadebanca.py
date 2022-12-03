@@ -295,7 +295,7 @@ while rodada == 0:
     #print(lista)
     #print(lista_recents)
 
-    time.sleep(30)
+    time.sleep(29.63)
 
 
 
