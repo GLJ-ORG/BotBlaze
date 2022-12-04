@@ -220,24 +220,24 @@ while rodada == 0:
         somas_gain += (entrada * 2 ) + (valor_branco * 3)
 
     elif contador_losses == 2:
-        banca_total -= (entrada * 3 ) + (valor_branco * 3)
-        somas_loss -= (entrada * 3 ) + (valor_branco * 3)
-        somas_gain += (entrada * 3 ) + (valor_branco * 3)
+        banca_total -= (entrada * 4 ) + (valor_branco * 3)
+        somas_loss -= (entrada * 4 ) + (valor_branco * 3)
+        somas_gain += (entrada * 4 ) + (valor_branco * 3)
 
     elif contador_losses == 3:
-        banca_total -= (entrada * 7 ) + (valor_branco * 4)
-        somas_loss -= (entrada * 7 ) + (valor_branco * 4)
-        somas_gain += (entrada * 7 ) + (valor_branco * 4)
+        banca_total -= (entrada * 8 ) + (valor_branco * 4)
+        somas_loss -= (entrada * 8 ) + (valor_branco * 4)
+        somas_gain += (entrada * 8 ) + (valor_branco * 4)
 
     elif contador_losses == 4:
-        banca_total -= (entrada * 15 ) + (valor_branco * 4)
-        somas_loss -= (entrada * 15 ) + (valor_branco * 4)
-        somas_gain += (entrada * 15 ) + (valor_branco * 4)
+        banca_total -= (entrada * 16 ) + (valor_branco * 4)
+        somas_loss -= (entrada * 16 ) + (valor_branco * 4)
+        somas_gain += (entrada * 16 ) + (valor_branco * 4)
 
     elif contador_losses == 5:
-        banca_total -= (entrada * 31 ) + (valor_branco * 5)
-        somas_loss -= (entrada * 31 ) + (valor_branco * 5)
-        somas_gain += (entrada * 31 ) + (valor_branco * 5)
+        banca_total -= (entrada * 32 ) + (valor_branco * 5)
+        somas_loss -= (entrada * 32 ) + (valor_branco * 5)
+        somas_gain += (entrada * 32 ) + (valor_branco * 5)
 
     if num_recent == prev2 & prev2 > 0:
         banca_total += somas_gain + entrada
