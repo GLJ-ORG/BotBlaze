@@ -302,4 +302,4 @@ while rodada == 0:
     #print(somas_gain, somas_loss)
     print(resultado_divisao)
 
-    time.sleep(29.645)
+    time.sleep(29.7)
