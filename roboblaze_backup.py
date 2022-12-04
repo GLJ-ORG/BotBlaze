@@ -201,10 +201,10 @@ while rodada == 0:
         zerador_losses -= zerador_losses
 
 
-    if contador_losses == 4:
+    if contador_losses == 6:
         loss += 1
-        contador_losses -= 4
-        zerador_losses -= 4
+        contador_losses -= 6
+        zerador_losses -= 6
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
@@ -243,9 +243,13 @@ while rodada == 0:
         banca_total += somas_gain + entrada
         somas_loss -= somas_loss
         somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
 
     if num_recent == 0 & contador_losses == 0:
         banca_total += somas_branco
+        banca_total -= entrada + (valor_branco * 2)
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
