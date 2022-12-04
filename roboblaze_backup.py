@@ -84,7 +84,7 @@ g4 = int(0)
 g5 = int(0)
 
 # definindo valor do branco
-valor_branco = int(entrada * 0.1)
+valor_branco = int(entrada * 0.15)
 if valor_branco < 2:
     valor_branco = 2
 somas_branco = int(valor_branco * 14)
@@ -244,11 +244,35 @@ while rodada == 0:
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
-    if num_recent == 0:
+    if num_recent == 0 & contador_losses == 0:
         banca_total += somas_branco
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
+    elif num_recent == 0 & contador_losses == 1:
+        banca_total += 14 * 3
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+
+    elif num_recent == 0 & contador_losses == 2:
+        banca_total += 14 * 3
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+
+    elif num_recent == 0 & contador_losses == 3:
+            banca_total += 14 * 4
+            somas_loss -= somas_loss
+            somas_gain -= somas_gain
+
+    elif num_recent == 0 & contador_losses == 4:
+            banca_total += 14 * 4
+            somas_loss -= somas_loss
+            somas_gain -= somas_gain
+
+    elif num_recent == 0 & contador_losses == 5:
+            banca_total += 14 * 5
+            somas_loss -= somas_loss
+            somas_gain -= somas_gain
 
     #condicionais para atualização por rodada do saldo em banca
 
