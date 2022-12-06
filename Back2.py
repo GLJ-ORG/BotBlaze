@@ -50,31 +50,31 @@ resultado_divisao = int(0)
 
 tipo_conta = int(0)
 banca_inicial = 0
-#entrada = int(0)
-multiplicador = int(0)
+#entrada = 0
+#multiplicador = int(0)
 valor_branco = int(0)
 
-g = int(0)
-g1 = int(0)
-g2 = int(0)
-g3 = int(0)
-g4 = int(0)
-g5 = int(0)
+#g = int(0)
+#g1 = int(0)
+#g2 = int(0)
+#g3 = int(0)
+#g4 = int(0)
+#g5 = int(0)
 
 somas_gain = int(0)
 somas_loss = int(0)
 somas_branco = int(0)
 stop_loss = int(0)
 stop_gain = int(0)
-banca_total = 100
+banca_total = 41.9
 
-tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
-banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
+#tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
+#banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
 entrada = int(5) #int(input('Qual valor da sua primeira entrada?'))
-stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
-stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
+#stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
+#stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 0 #int(input('Quantos gales você quer?'))
-multiplicador = int(2) #int(input('Qual será seu fator multiplicador de gale?'))
+multiplicador = int(1.7) #int(input('Qual será seu fator multiplicador de gale?'))
 
  #simulador banca
 g1 = int(0)
@@ -84,7 +84,7 @@ g4 = int(0)
 g5 = int(0)
 
 # definindo valor do branco
-valor_branco = entrada * 0.15
+valor_branco = int(entrada * 0.15)
 if valor_branco < 2:
     valor_branco = 2
 somas_branco = int(valor_branco * 14)
@@ -185,7 +185,86 @@ while total_rodadas < 301 or banca_total == 150:
 
     # somar contadores de vitorias e derrotas
 
-    if num_recent == prev2 & prev2 > 0:
+    if num_recent == 0 & contador_losses == 0:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 1:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 2:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 3:
+        somas_coringas += 1
+        banca_total += 14 * 3
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 4:
+        somas_coringas += 1
+        banca_total += 14 * 4
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 5:
+        somas_coringas += 1
+        banca_total += 14 *4
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 6:
+        somas_coringas += 1
+        banca_total += 14 * 5
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+
+
+    if num_recent == prev2 & prev2 > 0 & num_recent == 0:
         gain += 1
         contador_gains += 1
         contador_losses -= contador_losses
@@ -243,82 +322,6 @@ while total_rodadas < 301 or banca_total == 150:
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
 
-    if num_recent == 0 & contador_losses == 0:
-        somas_coringas += 1
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
-        banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
-        banca_total -= entrada + (valor_branco * 2)
-        somas_loss -= entrada + (valor_branco * 2)
-        somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 1:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += (valor_branco * 14)
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 2:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += (valor_branco * 14)
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 3:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += 14 * 3
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 4:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += 14 * 4
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 5:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += 14 *4
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-
-    elif num_recent == 0 & contador_losses == 6:
-            somas_coringas += 1
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-            banca_total += 14 * 5
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
 
     #condicionais para atualização por rodada do saldo em banca
 
