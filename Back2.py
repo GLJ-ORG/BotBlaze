@@ -73,7 +73,7 @@ banca_total = 41.9
 entrada = int(5) #int(input('Qual valor da sua primeira entrada?'))
 #stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
 #stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
-quantidade_gales = 0 #int(input('Quantos gales você quer?'))
+quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = int(1.7) #int(input('Qual será seu fator multiplicador de gale?'))
 
  #simulador banca
