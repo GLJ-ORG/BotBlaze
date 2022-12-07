@@ -98,7 +98,7 @@ g4 = g3 * multiplicador
 g5 = g4 * multiplicador
 
 # Laço de start
-while total_rodadas < 301 or banca_total == 150:
+while total_rodadas < 301:
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
@@ -255,15 +255,15 @@ while total_rodadas < 301 or banca_total == 150:
         zerador_losses -= zerador_losses
 
     elif num_recent == 0 & contador_losses == 1:
-            somas_coringas += 1
-            banca_total += (valor_branco * 14)
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
 
     elif num_recent == 0 & contador_losses == 2:
             somas_coringas += 1
@@ -348,4 +348,4 @@ while total_rodadas < 301 or banca_total == 150:
     #print(somas_gain, somas_loss)
     print(resultado_divisao)
 
-    time.sleep(29.7)
+    time.sleep(29.3)
