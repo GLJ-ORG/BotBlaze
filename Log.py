@@ -19,3 +19,4 @@ finally:
 
     logging.basicConfig(format=f'{DataHora} - %(message)s', level=logging.INFO, filename=Diretorio, encoding='utf-8')
     logging.info('Testando LOG')
+    os.system('cls')
