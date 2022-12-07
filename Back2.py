@@ -70,7 +70,7 @@ banca_total = 80
 
 #tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
 #banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
-entrada = int(1.7) #int(input('Qual valor da sua primeira entrada?'))
+entrada = int(2) #int(input('Qual valor da sua primeira entrada?'))
 #stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
 #stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 3 #int(input('Quantos gales você quer?'))
