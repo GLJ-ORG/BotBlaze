@@ -13,5 +13,9 @@ finally:
     Dia = date.today()
     Dia = Dia.strftime('%d')
     Diretorio = f'{Diretorio}/{Dia}.log'
-    logging.basicConfig(level=logging.DEBUG, filename=Diretorio, encoding='utf-8')
-    logging.info('Testando Log')
+
+    DataHora = datetime.datetime.now()
+    DataHora = DataHora.strftime('%d/%m/%Y %H:%M:%S')
+
+    logging.basicConfig(format=f'{DataHora} - %(message)s', level=logging.INFO, filename=Diretorio, encoding='utf-8')
+    logging.info('Testando LOG')
