@@ -66,11 +66,11 @@ somas_loss = int(0)
 somas_branco = int(0)
 stop_loss = int(0)
 stop_gain = int(0)
-banca_total = 80
+banca_total = 100
 
 #tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
 #banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
-entrada = int(2) #int(input('Qual valor da sua primeira entrada?'))
+entrada = int(3) #int(input('Qual valor da sua primeira entrada?'))
 #stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
 #stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 3 #int(input('Quantos gales você quer?'))
@@ -330,10 +330,10 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     #print(str(Previsao))
     print()
-    print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
+    print('Partida Nº: {}'.format(total_rodadas), datetime.now())
     print('Apostar na cor: {}'.format(prev_text))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    print('Saldo atual:{}'.format(banca_total))
+    print('Saldo Atual:{}'.format(banca_total))
     print('Cor da rodada: {}'.format(coringa))
 
     lucro_bruto = []
