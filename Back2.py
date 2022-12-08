@@ -98,7 +98,7 @@ g4 = g3 * multiplicador
 g5 = g4 * multiplicador
 
 # Laço de start
-while total_rodadas < 301 or banca_total == 150:
+while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
