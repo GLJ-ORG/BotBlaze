@@ -11,6 +11,7 @@ lista_recents = [0]
 lista_comparacao = int(0)
 lista_somas_gains = [0]
 lista_somas_losses = [0]
+lista_roll = [0]
 
 prev_text = str()
 rodada_text = str()
@@ -50,30 +51,30 @@ resultado_divisao = int(0)
 
 tipo_conta = int(0)
 banca_inicial = 0
-#entrada = int(0)
-multiplicador = int(0)
+#entrada = 0
+#multiplicador = int(0)
 valor_branco = int(0)
 
-g = int(0)
-g1 = int(0)
-g2 = int(0)
-g3 = int(0)
-g4 = int(0)
-g5 = int(0)
+#g = int(0)
+#g1 = int(0)
+#g2 = int(0)
+#g3 = int(0)
+#g4 = int(0)
+#g5 = int(0)
 
 somas_gain = int(0)
 somas_loss = int(0)
 somas_branco = int(0)
 stop_loss = int(0)
 stop_gain = int(0)
-banca_total = 100
+banca_total = 80
 
-tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
-banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
-entrada = int(5) #int(input('Qual valor da sua primeira entrada?'))
-stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
-stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
-quantidade_gales = 0 #int(input('Quantos gales você quer?'))
+#tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
+#banca_inicial = 0  #int(input('Qual o valor da sua banca?'))
+entrada = int(2) #int(input('Qual valor da sua primeira entrada?'))
+#stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))
+#stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
+quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = int(2) #int(input('Qual será seu fator multiplicador de gale?'))
 
  #simulador banca
@@ -98,12 +99,16 @@ g4 = g3 * multiplicador
 g5 = g4 * multiplicador
 
 # Laço de start
-while total_rodadas < 301:
+while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
+
+    dados_roll = requests.get('https://blaze.com/api/roulette_games/recent')
+    roll_atual = json.loads(dados.content)
+    lista_roll = [y['roll'] for y in roll_atual]
 
     # calculo para logica da previsao OK
     a = int(num1)
@@ -185,17 +190,97 @@ while total_rodadas < 301:
 
     # somar contadores de vitorias e derrotas
 
-    if num_recent == prev2 & prev2 > 0:
+    if num_recent == prev2 & prev2 > 0 & num_recent == 0:
         gain += 1
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
 
     elif prev2 > 0:
         contador_losses += 1
         zerador_losses += 1
 
+
+
+    if num_recent == 0 & contador_losses == 0:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 1:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 2:
+        somas_coringas += 1
+        banca_total += (valor_branco * 14)
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 3:
+        somas_coringas += 1
+        banca_total += 14 * 3
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 4:
+        somas_coringas += 1
+        banca_total += 14 * 4
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 5:
+        somas_coringas += 1
+        banca_total += 14 *4
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
+
+    elif num_recent == 0 & contador_losses == 6:
+        somas_coringas += 1
+        banca_total += 14 * 5
+        somas_loss -= somas_loss
+        somas_gain -= somas_gain
+        banca_total -= entrada + (valor_branco * 2)
+        somas_loss -= entrada + (valor_branco * 2)
+        somas_gain += entrada + (valor_branco * 2)
+        contador_losses -= contador_losses
+        zerador_losses -= zerador_losses
 
     if contador_losses == 4:
         loss += 1
@@ -237,88 +322,12 @@ while total_rodadas < 301:
 
     if num_recent == prev2 & prev2 > 0:
         banca_total += somas_gain + entrada
-        banca_total -= entrada + (valor_branco * 2)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
-        somas_loss -= entrada + (valor_branco * 2)
-        somas_gain += entrada + (valor_branco * 2)
-
-    if num_recent == 0 & contador_losses == 0:
-        somas_coringas += 1
-        banca_total += (valor_branco * 14)
         somas_loss -= somas_loss
         somas_gain -= somas_gain
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
 
-    elif num_recent == 0 & contador_losses == 1:
-        somas_coringas += 1
-        banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
-        banca_total -= entrada + (valor_branco * 2)
-        somas_loss -= entrada + (valor_branco * 2)
-        somas_gain += entrada + (valor_branco * 2)
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
-
-    elif num_recent == 0 & contador_losses == 2:
-            somas_coringas += 1
-            banca_total += (valor_branco * 14)
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-
-    elif num_recent == 0 & contador_losses == 3:
-            somas_coringas += 1
-            banca_total += 14 * 3
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-
-    elif num_recent == 0 & contador_losses == 4:
-            somas_coringas += 1
-            banca_total += 14 * 4
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-
-    elif num_recent == 0 & contador_losses == 5:
-            somas_coringas += 1
-            banca_total += 14 *4
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
-
-    elif num_recent == 0 & contador_losses == 6:
-            somas_coringas += 1
-            banca_total += 14 * 5
-            somas_loss -= somas_loss
-            somas_gain -= somas_gain
-            banca_total -= entrada + (valor_branco * 2)
-            somas_loss -= entrada + (valor_branco * 2)
-            somas_gain += entrada + (valor_branco * 2)
-            contador_losses -= contador_losses
-            zerador_losses -= zerador_losses
 
     #condicionais para atualização por rodada do saldo em banca
 
@@ -326,20 +335,23 @@ while total_rodadas < 301:
 
     #print(str(Previsao))
     print()
-    print('Apostar na cor: {}'.format(prev_text))
     print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
-    #print()
-    print('Cor da rodada: {}'.format(coringa))
+    print('Apostar na cor: {}'.format(prev_text))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    lucro_bruto = 0
-    lucro_liquido = 0
+    print('Saldo Atual:{}'.format(banca_total))
+    print('Partida Atual: {}'.format(coringa))
+
+    lucro_bruto = []
+    lucro_liquido = []
     lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
     lucro_liquido = lucro_bruto - (loss * entrada) + (somas_coringas * valor_branco) - valor_branco
+
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
+
     hora_atual = float(0)
     hora_atual = total_rodadas * 0.3 / 0.6
     print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
-    print('Saldo atual:{}'.format(banca_total))
+
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
@@ -348,4 +360,4 @@ while total_rodadas < 301:
     #print(somas_gain, somas_loss)
     print(resultado_divisao)
 
-    time.sleep(29.3)
+    time.sleep(29.7)

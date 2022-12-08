@@ -330,20 +330,23 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     #print(str(Previsao))
     print()
-    print('Apostar na cor: {}'.format(prev_text))
     print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
-    #print()
-    print('Cor da rodada: {}'.format(coringa))
+    print('Apostar na cor: {}'.format(prev_text))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    lucro_bruto = 0
-    lucro_liquido = 0
+    print('Saldo atual:{}'.format(banca_total))
+    print('Cor da rodada: {}'.format(coringa))
+
+    lucro_bruto = []
+    lucro_liquido = []
     lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
     lucro_liquido = lucro_bruto - (loss * entrada) + (somas_coringas * valor_branco) - valor_branco
+
     print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
+
     hora_atual = float(0)
     hora_atual = total_rodadas * 0.3 / 0.6
     print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
-    print('Saldo atual:{}'.format(banca_total))
+
     print(contador_gains, contador_losses, gain, loss, zerador_losses)
     print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
     print(somas_gain, somas_loss, valor_branco, somas_branco)
