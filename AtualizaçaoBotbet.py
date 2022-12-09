@@ -191,6 +191,8 @@ while rodada == 0:
         contador_gains += 1
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
+
+
     elif prev2 > 0:
             contador_losses += 1
             zerador_losses += 1
@@ -207,6 +209,8 @@ while rodada == 0:
 
 
     # Simulador de banca
+
+# Definicao de qual gale esta na partida
 
 
 
@@ -237,7 +241,7 @@ while rodada == 0:
     print(g, g1, g2, g3, g4, g5)
     print(resultado_divisao)
     #print(lista_recents)
-    time.sleep(29.7)
+    time.sleep(29.63)
 
 
 

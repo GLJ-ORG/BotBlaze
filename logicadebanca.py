@@ -292,10 +292,10 @@ while rodada == 0:
     print(somas_gain, somas_loss, valor_branco, somas_branco)
     print(sg_recent, sg_anterior, sl_recent, sl_anterior)
     #print(g, g1, g2, g3, g4, g5)
-    #print(lista)
+    print(resultado_divisao)
     #print(lista_recents)
 
-    time.sleep(30)
+    time.sleep(29.63)
 
 
 
