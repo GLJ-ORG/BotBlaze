@@ -368,7 +368,7 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     print(resultado_divisao)
 
     # Preenche o LOG
-    Log.PreencheLog(f'Tempo de trabalho: {hora_atual} min')
+    Log.PreencheLog(f'Tempo de trabalho: {hora_atual:.2f} min')
     Log.PreencheLog(f'{contador_gains, contador_losses, gain, loss, zerador_losses}')
     Log.PreencheLog(f'{num_recent, num_anterior, prev1, prev2, rodada, previsao}')
     Log.PreencheLog(f'{somas_gain, somas_loss, valor_branco, somas_branco}')
