@@ -84,7 +84,7 @@ g4 = int(0)
 g5 = int(0)
 
 # definindo valor do branco
-valor_branco = entrada * 0.15
+valor_branco = somas_gain * 0.15
 if valor_branco < 2:
     valor_branco = 2
 somas_branco = int(valor_branco * 14)
