@@ -6,7 +6,7 @@ import time
 rodada = 0
 lista_color = []
 lista_roll = []
-soma_color = 0
+soma_color = soma(lista_color)
 soma_roll = 0
 comparar_color = 0
 comparar_roll = 0
@@ -63,4 +63,4 @@ while rodada == 0:
 #prev1, prev2, *outras_previsoes = lista_previsoes
 #rece1, rece2, *outras_recentes = lista_recents
 
-    print(lista_color, lista_roll, num1, roll1)
+    print(lista_color, lista_roll, num1, roll1, soma_color, soma_roll)
