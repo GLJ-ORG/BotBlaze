@@ -204,8 +204,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     if num_recent == 0 & contador_losses == 0:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -215,8 +215,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 1:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -226,8 +226,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 2:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -277,16 +277,16 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
         somas_gain += entrada + (valor_branco * 2)
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
-
-    if contador_losses == 4:
+    # contador de gales
+    if contador_losses == 3:
         loss += 1
-        contador_losses -= 4
-        zerador_losses -= 4
+        contador_losses -= 3
+        zerador_losses -= 3
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
 # Simulador de banca
-    if contador_losses == 0:
+    if contador_losses == 0 & num_recent != 0:
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)

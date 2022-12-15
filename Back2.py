@@ -2,7 +2,7 @@ import requests
 import json
 import time
 from datetime import datetime
-
+import Log
 
 previsao = int(0)
 lista_previsoes = [0]
@@ -185,14 +185,15 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     # somar contadores de vitorias e derrotas
 
-    if num_recent == prev2 & prev2 > 0 & num_recent == 0:
+    if num_recent == prev2 & prev2 > 0 or num_recent == 0:
         gain += 1
         contador_gains += 1
-        contador_losses -= contador_losses
-        zerador_losses -= zerador_losses
+        contador_losses = 0
+        zerador_losses = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
+
 
     elif prev2 > 0:
         contador_losses += 1
@@ -203,8 +204,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     if num_recent == 0 & contador_losses == 0:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -214,8 +215,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 1:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -225,8 +226,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 2:
         somas_coringas += 1
         banca_total += (valor_branco * 14)
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -236,8 +237,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 3:
         somas_coringas += 1
         banca_total += 14 * 3
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -247,8 +248,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 4:
         somas_coringas += 1
         banca_total += 14 * 4
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -258,8 +259,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 5:
         somas_coringas += 1
         banca_total += 14 *4
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -269,8 +270,8 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     elif num_recent == 0 & contador_losses == 6:
         somas_coringas += 1
         banca_total += 14 * 5
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        somas_loss = 0
+        somas_gain = 0
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
@@ -279,50 +280,39 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     if contador_losses == 4:
         loss += 1
-        contador_losses -= 4
-        zerador_losses -= 4
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
+        contador_losses = 0
+        zerador_losses = 0
 
 # Simulador de banca
-    if contador_losses == 0:
+    if contador_losses == 0 & num_recent > 0:
         banca_total -= entrada + (valor_branco * 2)
         somas_loss -= entrada + (valor_branco * 2)
         somas_gain += entrada + (valor_branco * 2)
 
-    elif contador_losses == 1:
+    elif contador_losses == 1 & num_recent > 0:
         banca_total -= (entrada * 2 ) + (valor_branco * 3)
         somas_loss -= (entrada * 2 ) + (valor_branco * 3)
         somas_gain += (entrada * 2 ) + (valor_branco * 3)
 
-    elif contador_losses == 2:
+    elif contador_losses == 2 & num_recent > 0:
         banca_total -= (entrada * 4 ) + (valor_branco * 3)
         somas_loss -= (entrada * 4 ) + (valor_branco * 3)
         somas_gain += (entrada * 4 ) + (valor_branco * 3)
 
-    elif contador_losses == 3:
+    elif contador_losses == 3 & num_recent > 0:
         banca_total -= (entrada * 8 ) + (valor_branco * 4)
         somas_loss -= (entrada * 8 ) + (valor_branco * 4)
         somas_gain += (entrada * 8 ) + (valor_branco * 4)
 
-    elif contador_losses == 4:
+    elif contador_losses == 4 & num_recent > 0:
         banca_total -= (entrada * 16 ) + (valor_branco * 4)
         somas_loss -= (entrada * 16 ) + (valor_branco * 4)
         somas_gain += (entrada * 16 ) + (valor_branco * 4)
 
-    elif contador_losses == 5:
+    elif contador_losses == 5 & num_recent > 0:
         banca_total -= (entrada * 32 ) + (valor_branco * 5)
         somas_loss -= (entrada * 32 ) + (valor_branco * 5)
         somas_gain += (entrada * 32 ) + (valor_branco * 5)
-
-    if num_recent == prev2 & prev2 > 0:
-        banca_total += somas_gain + entrada
-        somas_loss -= somas_loss
-        somas_gain -= somas_gain
-        banca_total -= entrada + (valor_branco * 2)
-        somas_loss -= entrada + (valor_branco * 2)
-        somas_gain += entrada + (valor_branco * 2)
-
 
     #condicionais para atualização por rodada do saldo em banca
 
@@ -355,4 +345,22 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     #print(somas_gain, somas_loss)
     print(resultado_divisao)
 
-    time.sleep(29.7)
+    # Preenche o LOG
+    #Log.PreencheLog('')
+    #Log.PreencheLog(f'Partida Nº: {total_rodadas}')
+    #Log.PreencheLog(f'Apostar na cor: {prev_text}')
+    #Log.PreencheLog(f'Gain {gain} Loss {loss} Branco {somas_coringas}')
+    #Log.PreencheLog(f'Saldo atual: {banca_total}')
+    #Log.PreencheLog(f'Cor da rodada: {coringa}')
+
+    # Preenche o LOG
+    #Log.PreencheLog(f'Lucro bruto: {lucro_bruto} Lucro liquido: {lucro_liquido}'
+
+    # Preenche o LOG
+    #Log.PreencheLog(f'Tempo de trabalho: {hora_atual:.2f} min')
+    #Log.PreencheLog(f'{contador_gains, contador_losses, gain, loss, zerador_losses}')
+    #Log.PreencheLog(f'{num_recent, num_anterior, prev1, prev2, rodada, previsao}')
+    #Log.PreencheLog(f'{somas_gain, somas_loss, valor_branco, somas_branco}')
+    #Log.PreencheLog(resultado_divisao)
+
+    time.sleep(29)
