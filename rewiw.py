@@ -42,7 +42,6 @@ while rodada == 0:
     lista_roll = [y['roll'] for y in resultado2]
 
     soma_roll_back.insert(0, int(soma_roll))
-    comparar_roll.insert(0, int(roll2))
 
 # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista_color
@@ -52,14 +51,18 @@ while rodada == 0:
 
 
     soma_roll = sum(lista_roll)
-
+    time.sleep(3)
     #print()
-    #print(num_guardado, soma_roll)
+    #print(num_guardado, soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
-    time.sleep(1)
 
-if rolo1 != rolo2 or num1 == 0:
-    print(lista_roll)
+
+    if rolo1 != rolo2 or roll1 == 0:
+            print(lista_roll)
+            print(soma_roll_back)
+
+
+
 
 
 
