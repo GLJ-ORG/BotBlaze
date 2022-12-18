@@ -6,10 +6,15 @@ import time
 rodada = 0
 lista_color = []
 lista_roll = []
-soma_color = soma(lista_color)
+soma_color = 0
 soma_roll = 0
 comparar_color = 0
-comparar_roll = 0
+comparar_roll = []
+soma_color_back = 0
+soma_roll_back = [0]
+num_guardado = 0
+rolo1 = 0
+rolo2 = 0
 
 num1 = 0
 num2 = 0
@@ -36,9 +41,37 @@ while rodada == 0:
     resultado2 = json.loads(dados2.content)
     lista_roll = [y['roll'] for y in resultado2]
 
+    soma_roll_back.insert(0, int(soma_roll))
+    comparar_roll.insert(0, int(roll2))
+
 # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista_color
     roll1, roll2, *outras_lista2 = lista_roll
+    rolo1, rolo2, *outras_lista3 = soma_roll_back
+
+
+
+    soma_roll = sum(lista_roll)
+
+    #print()
+    #print(num_guardado, soma_roll)
+    #print(roll1, roll2, rolo1, rolo2)
+    time.sleep(1)
+
+if rolo1 != rolo2 or num1 == 0:
+    print(lista_roll)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # calculo para logica da previsao OK
@@ -63,4 +96,8 @@ while rodada == 0:
 #prev1, prev2, *outras_previsoes = lista_previsoes
 #rece1, rece2, *outras_recentes = lista_recents
 
-    print(lista_color, lista_roll, num1, roll1, soma_color, soma_roll)
+
+    #print(num_guardado, soma_roll)
+    #print(soma_roll_back)
+
+
