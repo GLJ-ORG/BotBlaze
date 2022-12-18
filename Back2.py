@@ -11,7 +11,11 @@ lista_recents = [0]
 lista_comparacao = int(0)
 lista_somas_gains = [0]
 lista_somas_losses = [0]
+soma_roll_back = [0]
 
+soma_roll = 0
+rolo1 = 0
+rolo2 = 0
 prev_text = str()
 rodada_text = str()
 
@@ -98,12 +102,16 @@ g4 = g3 * multiplicador
 g5 = g4 * multiplicador
 
 # Laço de start
-while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
+while total_rodadas < 10000:
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
+
+    dados2 = requests.get('https://blaze.com/api/roulette_games/recent')
+    resultado2 = json.loads(dados2.content)
+    lista_roll = [y['roll'] for y in resultado2]
 
     # calculo para logica da previsao OK
     a = int(num1)
@@ -124,11 +132,16 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     # Gerar lista de previsoes e recentes OK
     lista_previsoes.insert(0, int(previsao))
     lista_recents.insert(0, int(num_recent))
+    soma_roll_back.insert(0, int(soma_roll))
 
     # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
     rece1, rece2, *outras_recentes = lista_recents
+    roll1, roll2, *outras_lista2 = lista_roll
+    rolo1, rolo2, *outras_lista3 = soma_roll_back
+
+    soma_roll = sum(lista_roll)
 
     # inverter valores, somar cores e catalogar OK
     if num1 == 0:
@@ -317,33 +330,28 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     #condicionais para atualização por rodada do saldo em banca
 
 
-
-    #print(str(Previsao))
-    print()
-    print('Partida Nº: {}'.format(total_rodadas), datetime.now())
-    print('Apostar na cor: {}'.format(prev_text))
-    print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
-    print('Saldo Atual:{}'.format(banca_total))
-    print('Cor da rodada: {}'.format(coringa))
-
-    lucro_bruto = []
-    lucro_liquido = []
-    lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
-    lucro_liquido = lucro_bruto - (loss * entrada) + (somas_coringas * valor_branco) - valor_branco
-
-    print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
-
-    hora_atual = float(0)
-    hora_atual = total_rodadas * 0.3 / 0.6
-    print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
-
-    print(contador_gains, contador_losses, gain, loss, zerador_losses)
-    print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
-    print(somas_gain, somas_loss, valor_branco, somas_branco)
+    if rolo1 != rolo2 or num_recent == 0:
+        print()
+        print('Partida Nº: {}'.format(total_rodadas), datetime.now())
+        print('Apostar na cor: {}'.format(prev_text))
+        print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
+        print('Saldo Atual:{}'.format(banca_total))
+        print('Cor da rodada: {}'.format(coringa))
+        lucro_bruto = []
+        lucro_liquido = []
+        lucro_bruto = (gain * entrada)+(somas_coringas * valor_branco * 14)
+        lucro_liquido = lucro_bruto - (loss * entrada) + (somas_coringas * valor_branco) - valor_branco
+        print('Lucro bruto: {}'.format(lucro_bruto), 'Lucro liquido: {}'.format(lucro_liquido))
+        hora_atual = float(0)
+        hora_atual = total_rodadas * 0.3 / 0.6
+        print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
+        print(contador_gains, contador_losses, gain, loss, zerador_losses)
+        print(num_recent, num_anterior, prev1, prev2, rodada, previsao)
+        print(somas_gain, somas_loss, valor_branco, somas_branco)
     #print(sg_recent, sg_anterior, sl_recent, sl_anterior)
     #print(g, g1, g2, g3, g4, g5)
     #print(somas_gain, somas_loss)
-    print(resultado_divisao)
+        print(resultado_divisao)
 
     # Preenche o LOG
     #Log.PreencheLog('')
@@ -363,4 +371,4 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     #Log.PreencheLog(f'{somas_gain, somas_loss, valor_branco, somas_branco}')
     #Log.PreencheLog(resultado_divisao)
 
-    time.sleep(29)
+
