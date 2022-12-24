@@ -11,7 +11,7 @@ soma_roll = 0
 comparar_color = 0
 comparar_roll = []
 soma_color_back = 0
-soma_roll_back = [0]
+soma_roll_back = [0, 0]
 num_guardado = 0
 rolo1 = 0
 rolo2 = 0
@@ -20,6 +20,10 @@ num1 = 0
 num2 = 0
 roll1 = 0
 roll2 = 0
+previsao = 0
+somas = 0
+total_partidas = 0
+resultado_divisao = int(0)
 #informações usuario
 
 banca_inicial = 100 #(input('Qual o valor da sua banca?'))
@@ -42,6 +46,8 @@ while rodada == 0:
     lista_roll = [y['roll'] for y in resultado2]
 
     soma_roll_back.insert(0, int(soma_roll))
+    time.sleep(2)
+    #soma_roll_back.remove()
 
 # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista_color
@@ -51,15 +57,33 @@ while rodada == 0:
 
 
     soma_roll = sum(lista_roll)
-    time.sleep(3)
+    #time.sleep(2)
     #print()
-    #print(num_guardado, soma_roll_back)
+    #print(soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
 
+    if rolo1 != rolo2:
+        print(lista_roll)
+        #print(soma_roll_back)
 
-    if rolo1 != rolo2 or roll1 == 0:
-            print(lista_roll)
-            print(soma_roll_back)
+        #Calculo de previsão
+        a = (num1)
+        somas += a
+        dividir_somas = somas
+        resultado_divisao = int(dividir_somas / 2)
+        total_partidas = total_partidas + 1
+
+        print(f'Partida Nº{total_partidas}', f'Divisão:{resultado_divisao}')
+        #previsão da partida
+        if resultado_divisao % 2 == 0:
+            previsao = 1
+            prev_text = 'Preto'
+        else:
+            previsao = 2
+            prev_text = 'Vermelho'
+        print(f'Cor prevista para prox rodada: {prev_text}')
+        print()
+        #contadores de partida, vitorias e derotas
 
 
 
