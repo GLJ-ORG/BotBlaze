@@ -1,11 +1,15 @@
 import requests
 import json
 import time
+import Log
+
 
 #variaveis globais
 rodada = 0
 lista_color = []
 lista_roll = []
+lista_previsoes = [0, 0]
+
 soma_color = 0
 soma_roll = 0
 comparar_color = 0
@@ -15,7 +19,15 @@ soma_roll_back = [0, 0]
 num_guardado = 0
 rolo1 = 0
 rolo2 = 0
+prev1 = 0
+prev2 = 0
+contador_loss = 0
+contador_gain = 0
+zerador_loss = 0
+gain = 0
+loss = 0
 
+rev_previsao = 0
 num1 = 0
 num2 = 0
 roll1 = 0
@@ -45,9 +57,11 @@ while rodada == 0:
     resultado2 = json.loads(dados2.content)
     lista_roll = [y['roll'] for y in resultado2]
 
+
     soma_roll_back.insert(0, int(soma_roll))
-    time.sleep(2)
-    #soma_roll_back.remove()
+    time.sleep(1)
+    soma_roll_back.pop()
+
 
 # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista_color
@@ -58,14 +72,14 @@ while rodada == 0:
 
     soma_roll = sum(lista_roll)
     #time.sleep(2)
-    #print()
+    #print(lista_previsoes)
     #print(soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
 
     if rolo1 != rolo2:
         print(lista_roll)
         #print(soma_roll_back)
-
+        Log.PreencheLog(str(lista_roll))
         #Calculo de previsão
         a = (num1)
         somas += a
@@ -74,6 +88,9 @@ while rodada == 0:
         total_partidas = total_partidas + 1
 
         print(f'Partida Nº{total_partidas}', f'Divisão:{resultado_divisao}')
+        Log.PreencheLog(str(f'Partida Nº{total_partidas} Divisão:{resultado_divisao}'))
+
+
         #previsão da partida
         if resultado_divisao % 2 == 0:
             previsao = 1
@@ -82,9 +99,47 @@ while rodada == 0:
             previsao = 2
             prev_text = 'Vermelho'
         print(f'Cor prevista para prox rodada: {prev_text}')
-        print()
+        Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
+
+        def rev_previsao(rev_previsao):
+            if previsao == 1:
+                rev_previsao = 2
+            if previsao == 2:
+                rev_previsao = 1
+
+        lista_previsoes.insert(0, int(rev_previsao))
+        lista_previsoes.pop()
+        prev1, prev2, *outras_previsoes = lista_previsoes
+
+            #contadores
+        if num1 == prev2 & prev2 > 0 or num1 == 0:
+            gain += 1
+            contador_gain += 1
+            contador_loss = 0
+            zerador_loss = 0
+
+        elif prev2 > 0:
+            contador_loss += 1
+            zerador_loss += 1
+        def cor_rodada(num1):
+            if num1 == 1:
+                return "vermelho"
+            elif num1 == 2:
+                return "preto"
+            elif num1 == 0:
+                return "coringa"
+
+        print(f'Cor da Rodada: {cor_rodada(num1)}')
+        print(num1, prev2, lista_previsoes)
+        print(gain, loss)
+        print(contador_gain, contador_loss, zerador_loss)
+
+
+
         #contadores de partida, vitorias e derotas
 
+        #print(lista_previsoes)
+        #valor_entrada()
 
 
 
@@ -101,30 +156,5 @@ while rodada == 0:
 
 
 
-# calculo para logica da previsao OK
-#a = num1
-#somas += a
-#dividir_somas = somas
-#resultado_divisao = int(dividir_somas / 2)
-#total_rodadas = total_rodadas + 1
-
-# condição de previsão OK
-#if resultado_divisao % 2 == 0:
-    # Preto padrão API numero Par OK
- #   previsao = 1
-#else:
-    # Vermelho padrão API numero Impar OK
- #   previsao = 2
-
-# Gerar lista de previsoes e recentes OK
-#lista_previsoes.insert(0, int(previsao))
-#lista_recents.insert(0, int(num_recent))
-
-#prev1, prev2, *outras_previsoes = lista_previsoes
-#rece1, rece2, *outras_recentes = lista_recents
-
-
-    #print(num_guardado, soma_roll)
-    #print(soma_roll_back)
 
 
