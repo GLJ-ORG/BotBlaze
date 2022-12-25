@@ -27,7 +27,7 @@ zerador_loss = 0
 gain = 0
 loss = 0
 
-Rev_previsao = 0
+rev_previsao = int(0)
 num1 = 0
 num2 = 0
 roll1 = 0
@@ -72,7 +72,7 @@ while rodada == 0:
 
     soma_roll = sum(lista_roll)
     #time.sleep(2)
-    #print(lista_previsoes)
+    #print(previsao, resultados, lista_previsoes)
     #print(soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
 
@@ -101,17 +101,28 @@ while rodada == 0:
         print(f'Cor prevista para prox rodada: {prev_text}')
         Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
 
+
         def rev_previsao(previsao):
             if previsao == 1:
-                Rev_previsao = 2
-                return
-            if previsao == 2:
-                Rev_previsao = 1
-                return
-            
-        lista_previsoes.insert(0, int(Rev_previsao))
+                previsao = 2
+            elif previsao == 2:
+                previsao = 1
+            else:
+                previsao = 1
+            return previsao
+
+
+        res = rev_previsao(previsao)
+        lista_previsoes.insert(0, int(res)
+
         lista_previsoes.pop()
-        prev1, prev2, *outras_previsoes = lista_previsoes
+
+        print(res, previsao,  rev_previsao(previsao))
+
+
+        #lista_previsoes.insert(0, int(rev_previsao(previsao))
+        #lista_previsoes.pop()
+        #prev1, prev2, *outras_previsoes = lista_previsoes
 
             #contadores
         if num1 == prev2 & prev2 > 0 or num1 == 0:
@@ -123,6 +134,7 @@ while rodada == 0:
         elif prev2 > 0:
             contador_loss += 1
             zerador_loss += 1
+
         def cor_rodada(num1):
             if num1 == 1:
                 return "vermelho"
@@ -132,10 +144,12 @@ while rodada == 0:
                 return "coringa"
 
         print(f'Cor da Rodada: {cor_rodada(num1)}')
+
+        # print dados para analise
         print(num1, prev2, lista_previsoes)
         print(gain, loss)
         print(contador_gain, contador_loss, zerador_loss)
-
+        print()
 
 
         #contadores de partida, vitorias e derotas
