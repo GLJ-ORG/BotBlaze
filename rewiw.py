@@ -27,7 +27,7 @@ zerador_loss = 0
 gain = 0
 loss = 0
 
-rev_previsao = 0
+Rev_previsao = 0
 num1 = 0
 num2 = 0
 roll1 = 0
@@ -101,13 +101,15 @@ while rodada == 0:
         print(f'Cor prevista para prox rodada: {prev_text}')
         Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
 
-        def rev_previsao(rev_previsao):
+        def rev_previsao(previsao):
             if previsao == 1:
-                rev_previsao = 2
+                Rev_previsao = 2
+                return
             if previsao == 2:
-                rev_previsao = 1
-
-        lista_previsoes.insert(0, int(rev_previsao))
+                Rev_previsao = 1
+                return
+            
+        lista_previsoes.insert(0, int(Rev_previsao))
         lista_previsoes.pop()
         prev1, prev2, *outras_previsoes = lista_previsoes
 
