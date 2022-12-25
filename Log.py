@@ -7,7 +7,7 @@ def PreencheLog(Msg):
     MesAno = date.today()
     MesAno = MesAno.strftime('%m%Y')
 
-    Diretorio = f'C:\LogBot\{MesAno}'
+    Diretorio = f'C:\LogBot\Rewiw{MesAno}'
     try:
         os.makedirs(Diretorio)
     except:
