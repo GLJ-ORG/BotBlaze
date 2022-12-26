@@ -112,12 +112,12 @@ while rodada == 0:
             return previsao
 
 
-        res = rev_previsao(previsao)
-        lista_previsoes.insert(0, int(res)
+        #res = rev_previsao(previsao)
+        #lista_previsoes.insert(0, int(res)
 
-        lista_previsoes.pop()
+        #lista_previsoes.pop()
 
-        print(res, previsao,  rev_previsao(previsao))
+        #print(res, previsao,  rev_previsao(previsao))
 
 
         #lista_previsoes.insert(0, int(rev_previsao(previsao))
