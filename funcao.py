@@ -1,10 +1,25 @@
-from rewiw import num1
+import requests
+import rewiw
 
+numero_recente = rewiw.num1
 
-
+#variaveis globais
 valor_entrada = 5
 valor_branco = 2
-valor_entrada = gestao_banca(100, 3)
+#valor_entrada = gestao_banca(100, 3)
+roll1 = 0
+roll2 = 0
+
+print(numero_recente)
+
+def numero_roll():
+  lista_roll = []
+  while True:
+    response = requests.get('https://blaze.com/api/roulette_games/recent')
+    numero_roll = response.json()['numero_roll']
+    lista_roll.append(numero_roll)
+
+  roll1, roll2, *outras_lista2 = lista_roll
 
 def gales(valor_entrada, branco, contador):
   g = valor_entrada + branco
@@ -71,19 +86,25 @@ def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerad
       zerador_loss = 0
   return gain, loss, contador_loss, zerador_loss
 
-def cor_rodada(rewiw.
-
-    num1):
+def cor_rodada(num1):
   if num1 == 1:
     return "vermelho"
   elif num1 == 2:
     return "preto"
   elif num1 == 0:
     return "coringa"
+
+def simulador_banca(valor_banca, num1, prev2, g, branco):
+  if num1 == prev2:
+    valor_banca += gales(g, branco) * 2
+  elif num1 == 0:
+    valor_banca += branco * 14
+  else:
+    valor_banca -= gales(g, branco)
+  return valor_banca
+
+
 #def cor
-
-
-#def simulador_banca
 
 
 #def conta_real
