@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import Log
-
+import funcao
 
 #variaveis globais
 rodada = 0
@@ -71,10 +71,15 @@ while rodada == 0:
 
 
     soma_roll = sum(lista_roll)
+#prints antes da trava de atualização
+
     #time.sleep(2)
     #print(previsao, resultados, lista_previsoes)
     #print(soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
+
+    roll_recent = funcao.numero_roll()
+    print(roll_recent)
 
     if rolo1 != rolo2:
         print(lista_roll)
