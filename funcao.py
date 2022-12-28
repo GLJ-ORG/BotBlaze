@@ -1,7 +1,7 @@
 import requests
-import rewiw
 
-numero_recente = rewiw.num1
+
+#numero_recente = rewiw.num1
 
 #variaveis globais
 valor_entrada = 5
@@ -10,16 +10,19 @@ valor_branco = 2
 roll1 = 0
 roll2 = 0
 
-print(numero_recente)
+#print(numero_recente)
 
+#Numero atualizado do site
 def numero_roll():
-  lista_roll = []
-  while True:
-    response = requests.get('https://blaze.com/api/roulette_games/recent')
-    numero_roll = response.json()['numero_roll']
-    lista_roll.append(numero_roll)
+ lista_roll = []
+numero_roll = int(0)
+while True:
+  response = requests.get('https://blaze.com/api/roulette_games/recent')
+  numero_roll = response.json()["roll"]
 
-  roll1, roll2, *outras_lista2 = lista_roll
+
+lista_roll.append(numero_roll)
+roll1, roll2, *outras_lista2 = lista_roll
 
 def gales(valor_entrada, branco, contador):
   g = valor_entrada + branco
@@ -80,7 +83,7 @@ def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerad
   else:
     contador_loss += 1
     zerador_loss += 1
-    if contador_loss == quantidade_loss + 1:
+  if contador_loss == quantidade_loss + 1:
       loss += 1
       contador_loss = 0
       zerador_loss = 0
