@@ -27,6 +27,9 @@ num1 = int(0)
 num2 = int(0)
 num_recent = num1
 num_anterior = num2
+roll1 = 0
+roll2 = 0
+lista_roll = []
 
 prev1 = int(0)
 prev2 = int(0)
@@ -99,12 +102,16 @@ g4 = g3 * multiplicador
 g5 = g4 * multiplicador
 
 # Laço de start
-while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
+while total_rodadas < 10000:
 
     # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista = [x['color'] for x in resultado]
+
+    dados2 = requests.get('https://blaze.com/api/roulette_games/recent')
+    resultado2 = json.loads(dados2.content)
+    lista_roll = [y['roll'] for y in resultado2]
 
     # calculo para logica da previsao OK
     a = int(num1)
@@ -130,6 +137,7 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     num1, num2, *outras_lista = lista
     prev1, prev2, *outras_previsoes = lista_previsoes
     rece1, rece2, *outras_recentes = lista_recents
+    roll1, roll2, *outras_lista2 = lista_roll
 
     # inverter valores, somar cores e catalogar OK
     if num1 == 0:
@@ -327,15 +335,14 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
 
     #condicionais para atualização por rodada do saldo em banca
 
-
-
+    time.sleep(29.7)
     #print(str(Previsao))
     print()
     print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
     print('Apostar na cor: {}'.format(prev_text))
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
     print('Saldo atual:{}'.format(banca_total))
-    print('Cor da rodada: {}'.format(coringa))
+    print(f'Cor da rodada: {[roll1]} {coringa}')
 
     #Preenche o LOG
     Log.PreencheLog('')
@@ -343,7 +350,7 @@ while total_rodadas < 301 or banca_total == 150 or banca_total < 0:
     Log.PreencheLog(f'Apostar na cor: {prev_text}')
     Log.PreencheLog(f'Gain {gain} Loss {loss} Branco {somas_coringas}')
     Log.PreencheLog(f'Saldo atual: {banca_total}')
-    Log.PreencheLog(f'Cor da rodada: {coringa}')
+    Log.PreencheLog(f'Cor da rodada: {roll1} {coringa}')
 
     lucro_bruto = []
     lucro_liquido = []
