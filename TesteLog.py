@@ -286,7 +286,7 @@ while total_rodadas < 10000:
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
     # contador de gales
-    if contador_losses == 4:
+    if contador_losses == 3:
         loss += 1
         contador_losses = 0
         zerador_losses = 0
