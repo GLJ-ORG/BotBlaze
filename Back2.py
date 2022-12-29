@@ -129,6 +129,7 @@ while total_rodadas < 10000:
         # Vermelho padrão API numero Impar OK
         previsao = 2
 
+
     # Gerar lista de previsoes e recentes OK
     lista_previsoes.insert(0, int(previsao))
     lista_recents.insert(0, int(num_recent))
@@ -198,7 +199,7 @@ while total_rodadas < 10000:
 
     # somar contadores de vitorias e derrotas
 
-    if num_recent == prev2 & prev2 > 0 or num_recent == 0:
+
         gain += 1
         contador_gains += 1
         contador_losses = 0
@@ -329,10 +330,8 @@ while total_rodadas < 10000:
 
     #condicionais para atualização por rodada do saldo em banca
 
-
-    if rolo1 != rolo2 or num_recent == 0:
-        print()
-        print('Partida Nº: {}'.format(total_rodadas), datetime.now())
+        #if num_recent == prev2 & prev2 > 0 or num_recent == 0:
+        print(f'Partida Nº: {total_rodadas} {datetime.now}')
         print('Apostar na cor: {}'.format(prev_text))
         print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
         print('Saldo Atual:{}'.format(banca_total))
@@ -352,6 +351,7 @@ while total_rodadas < 10000:
     #print(g, g1, g2, g3, g4, g5)
     #print(somas_gain, somas_loss)
         print(resultado_divisao)
+        print()
 
     # Preenche o LOG
     #Log.PreencheLog('')
