@@ -286,10 +286,10 @@ while total_rodadas < 10000:
         contador_losses -= contador_losses
         zerador_losses -= zerador_losses
     # contador de gales
-    if contador_losses == 3:
+    if contador_losses == 4:
         loss += 1
-        contador_losses -= 3
-        zerador_losses -= 3
+        contador_losses = 0
+        zerador_losses = 0
         somas_loss -= somas_loss
         somas_gain -= somas_gain
 
@@ -335,7 +335,7 @@ while total_rodadas < 10000:
 
     #condicionais para atualização por rodada do saldo em banca
 
-    time.sleep(29.7)
+    #time.sleep(29.8)
     #print(str(Previsao))
     print()
     print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
