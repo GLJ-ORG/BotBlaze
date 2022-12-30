@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 import json
 import time
@@ -104,8 +105,7 @@ while 'true':
         resultado_divisao = int(dividir_somas / 2)
         total_partidas = total_partidas + 1
 
-        print(f'Partida Nº{total_partidas}', f'Divisão:{resultado_divisao}')
-        Log.PreencheLog(str(f'Partida Nº{total_partidas} Divisão:{resultado_divisao}'))
+
 
 
 
@@ -116,8 +116,6 @@ while 'true':
         else:
             previsao = 2
             prev_text = 'Preto'
-        print(f'Entrar na Cor:{[roll1]} {prev_text}')
-        Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
 
 
         #def rev_previsao(previsao):
@@ -158,6 +156,9 @@ while 'true':
             contador_losses = 0
             zerador_losses = 0
 
+        if num1 == 0:
+            coringa +=1
+
         def cor_rodada(num1):
             if num1 == 1:
                 return "vermelho"
@@ -166,8 +167,20 @@ while 'true':
             elif num1 == 0:
                 return "coringa"
 
+
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
-        print(f'Cor da Rodada: {cor_rodada(num1)}')
+
+        print(f'Entrar na Cor: {prev_text}')
+        Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
+
+        print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
+
+        print(f'Partida Nº{total_partidas}', f'Divisão:{datetime.now()}')
+        Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
+
+        hora_atual = float(0)
+        hora_atual = total_partidas * 0.3 / 0.6
+        print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
 
         # print dados para analise
         print(num1, prev2, lista_previsoes)
