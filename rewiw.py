@@ -26,6 +26,7 @@ contador_gain = 0
 zerador_loss = 0
 gain = 0
 loss = 0
+coringa = 0
 
 rev_previsao = int(0)
 num1 = 0
@@ -82,11 +83,22 @@ while 'true':
     #print(roll_recent)
 
     if rolo1 != rolo2:
-        print(lista_roll)
+        #print(lista_roll)
         #print(soma_roll_back)
         Log.PreencheLog(str(lista_roll))
         #Calculo de previsão
-        a = (num1)
+
+   # def rev_num(num1):
+    #    numero = 0
+     #   if num1 == 1:
+      #          numero = 2
+       # elif num1 == 2:
+        #        numero = 1
+       # else:
+        #        numero = 1
+        #return num1
+
+        a = num1
         somas += a
         dividir_somas = somas
         resultado_divisao = int(dividir_somas / 2)
@@ -96,25 +108,26 @@ while 'true':
         Log.PreencheLog(str(f'Partida Nº{total_partidas} Divisão:{resultado_divisao}'))
 
 
+
         #previsão da partida
         if resultado_divisao % 2 == 0:
             previsao = 1
-            prev_text = 'Preto'
+            prev_text = 'Vermelho'
         else:
             previsao = 2
-            prev_text = 'Vermelho'
-        print(f'Cor prevista para prox rodada: {prev_text}')
+            prev_text = 'Preto'
+        print(f'Entrar na Cor:{[roll1]} {prev_text}')
         Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
 
 
-        def rev_previsao(previsao):
-            if previsao == 1:
-                previsao = 2
-            elif previsao == 2:
-                previsao = 1
-            else:
-                previsao = 1
-            return previsao
+        #def rev_previsao(previsao):
+         #   if previsao == 1:
+          #      previsao = 2
+           # elif previsao == 2:
+            #    previsao = 1
+            #else:
+             #   previsao = 1
+            #return previsao
 
 
         #res = rev_previsao(previsao)
@@ -125,9 +138,9 @@ while 'true':
         #print(res, previsao,  rev_previsao(previsao))
 
 
-        #lista_previsoes.insert(0, int(rev_previsao(previsao))
-        #lista_previsoes.pop()
-        #prev1, prev2, *outras_previsoes = lista_previsoes
+        lista_previsoes.insert(0, int(previsao))
+        lista_previsoes.pop()
+        prev1, prev2, *outras_previsoes = lista_previsoes
 
             #contadores
         if num1 == prev2 & prev2 > 0 or num1 == 0:
@@ -140,6 +153,11 @@ while 'true':
             contador_loss += 1
             zerador_loss += 1
 
+        if contador_loss == 3:
+            loss += 1
+            contador_losses = 0
+            zerador_losses = 0
+
         def cor_rodada(num1):
             if num1 == 1:
                 return "vermelho"
@@ -150,6 +168,8 @@ while 'true':
 
         print(f'Cor da Rodada: {cor_rodada(num1)}')
 
+        print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
+
         # print dados para analise
         print(num1, prev2, lista_previsoes)
         print(gain, loss)
@@ -158,6 +178,7 @@ while 'true':
 
 
         #contadores de partida, vitorias e derotas
+
 
         #print(lista_previsoes)
         #valor_entrada()
