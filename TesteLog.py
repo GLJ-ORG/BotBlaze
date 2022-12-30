@@ -339,7 +339,7 @@ while total_rodadas < 10000:
     #print(str(Previsao))
     print()
     print(datetime.now(), 'Partida Nº: {}'.format(total_rodadas))
-    print('Apostar na cor: {}'.format(prev_text))
+    print(F'Apostar na cor: ~{prev_text}~')
     print('Gain {}'.format(gain), 'Loss {}'.format(loss), 'Branco {}'.format(somas_coringas))
     print('Saldo atual:{}'.format(banca_total))
     print(f'Cor da rodada: {[roll1]} {coringa}')
