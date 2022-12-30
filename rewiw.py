@@ -1,7 +1,6 @@
 from datetime import datetime
 import requests
 import json
-import time
 import Log
 #import funcao
 
@@ -61,7 +60,7 @@ while 'true':
 
 
     soma_roll_back.insert(0, int(soma_roll))
-    time.sleep(1)
+    #time.sleep(1)
     soma_roll_back.pop()
 
 
@@ -170,7 +169,7 @@ while 'true':
 
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
 
-        print(f'Entrar na Cor: {prev_text}')
+        print(f'Entrar na Cor: ~~{prev_text}~~')
         Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
 
         print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
