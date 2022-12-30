@@ -13,7 +13,7 @@ roll2 = 0
 #print(numero_recente)
 
 #Numero atualizado do site
-def numero_roll():
+def numero_roll(lista_roll):
  lista_roll = []
 numero_roll = int(0)
 while True:
