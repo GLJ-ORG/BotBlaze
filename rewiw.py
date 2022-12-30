@@ -166,9 +166,8 @@ while 'true':
             elif num1 == 0:
                 return "coringa"
 
-        print(f'Cor da Rodada: {cor_rodada(num1)}')
-
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
+        print(f'Cor da Rodada: {cor_rodada(num1)}')
 
         # print dados para analise
         print(num1, prev2, lista_previsoes)
