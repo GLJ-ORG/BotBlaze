@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import Log
-import funcao
+#import funcao
 
 #variaveis globais
 rodada = 0
@@ -47,7 +47,7 @@ quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = 2 #int(input('Qual será seu fator multiplicador de gale?'))
 
 
-while rodada == 0:
+while 'true':
 # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
@@ -78,8 +78,8 @@ while rodada == 0:
     #print(soma_roll_back)
     #print(roll1, roll2, rolo1, rolo2)
 
-    roll_recent = funcao.numero_roll()
-    print(roll_recent)
+    #roll_recent = funcao.numero_roll()
+    #print(roll_recent)
 
     if rolo1 != rolo2:
         print(lista_roll)
