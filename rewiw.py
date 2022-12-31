@@ -86,29 +86,15 @@ while 'true':
         #print(lista_roll)
         #print(soma_roll_back)
         Log.PreencheLog(str(lista_roll))
-        #Calculo de previsão
 
-   # def rev_num(num1):
-    #    numero = 0
-     #   if num1 == 1:
-      #          numero = 2
-       # elif num1 == 2:
-        #        numero = 1
-       # else:
-        #        numero = 1
-        #return num1
-
+    #Calculo de previsão
         a = num1
         somas += a
         dividir_somas = somas
         resultado_divisao = int(dividir_somas / 2)
         total_partidas = total_partidas + 1
 
-
-
-
-
-        #previsão da partida
+    #previsão da partida
         if resultado_divisao % 2 == 0:
             previsao = 1
             prev_text = 'Vermelho'
@@ -116,30 +102,11 @@ while 'true':
             previsao = 2
             prev_text = 'Preto'
 
-
-        #def rev_previsao(previsao):
-         #   if previsao == 1:
-          #      previsao = 2
-           # elif previsao == 2:
-            #    previsao = 1
-            #else:
-             #   previsao = 1
-            #return previsao
-
-
-        #res = rev_previsao(previsao)
-        #lista_previsoes.insert(0, int(res)
-
-        #lista_previsoes.pop()
-
-        #print(res, previsao,  rev_previsao(previsao))
-
-
         lista_previsoes.insert(0, int(previsao))
         lista_previsoes.pop()
         prev1, prev2, *outras_previsoes = lista_previsoes
 
-            #contadores
+    #contadores de vitorias e derrotas
         if num1 == prev2 & prev2 > 0 or num1 == 0:
             gain += 1
             contador_gain += 1
@@ -150,7 +117,7 @@ while 'true':
             contador_loss += 1
             zerador_loss += 1
 
-        if contador_loss == 3:
+        if contador_loss == 4:
             loss += 1
             contador_losses = 0
             zerador_losses = 0
@@ -167,6 +134,12 @@ while 'true':
                 return "coringa"
 
 
+        #def tempo_trabalhado():
+        tempo_trabalhado = float(0)
+        tempo_trabalhado = total_partidas * 0.3 / 0.6
+        #return Tempo_trabalhado
+
+
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
 
         print(f'Entrar na Cor: ~~{prev_text}~~')
@@ -177,11 +150,10 @@ while 'true':
         print(f'Partida Nº{total_partidas}', f'Divisão:{datetime.now()}')
         Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
 
-        hora_atual = float(0)
-        hora_atual = total_partidas * 0.3 / 0.6
-        print('Tempo de trabalho: {} mim'.format(hora_atual, 2))
 
-        # print dados para analise
+        print(f'Tempo de trabalho: {tempo_trabalhado} mim')
+
+    # print dos dados para análise
         print(num1, prev2, lista_previsoes)
         print(gain, loss)
         print(contador_gain, contador_loss, zerador_loss)
