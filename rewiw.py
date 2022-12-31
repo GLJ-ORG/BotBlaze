@@ -119,8 +119,8 @@ while 'true':
 
         if contador_loss == 4:
             loss += 1
-            contador_losses = 0
-            zerador_losses = 0
+            contador_loss = 0
+            zerador_loss = 0
 
         if num1 == 0:
             coringa +=1
