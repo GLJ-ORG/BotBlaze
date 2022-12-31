@@ -135,8 +135,8 @@ while 'true':
 
 
         #def tempo_trabalhado():
-        tempo_trabalhado = float(0)
-        tempo_trabalhado = total_partidas * 0.3 / 0.6
+        tempo_trabalho = float(0)
+        tempo_trabalho = total_partidas * 0.3 / 0.6
         #return Tempo_trabalhado
 
 
@@ -150,8 +150,7 @@ while 'true':
         print(f'Partida Nº{total_partidas}', f'Divisão:{datetime.now()}')
         Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
 
-
-        print(f'Tempo de trabalho: {tempo_trabalhado} mim')
+        print(f'Tempo de trabalho: {tempo_trabalho} mim')
 
     # print dos dados para análise
         print(num1, prev2, lista_previsoes)
@@ -164,22 +163,3 @@ while 'true':
 
 
         #print(lista_previsoes)
-        #valor_entrada()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
