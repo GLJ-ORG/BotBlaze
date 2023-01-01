@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 #numero_recente = rewiw.num1
 
@@ -13,16 +13,33 @@ roll2 = 0
 #print(numero_recente)
 
 #Numero atualizado do site
-def numero_roll(lista_roll):
- lista_roll = []
-numero_roll = int(0)
-while True:
-  response = requests.get('https://blaze.com/api/roulette_games/recent')
-  numero_roll = response.json()["roll"]
+def numero_roll(num_atual):
+  lista_roll = []
+  while True:
+    dados2 = requests.get('https://blaze.com/api/roulette_games/recent')
+    resultado2 = json.loads(dados2.content)
+    lista_roll = [y['roll'] for y in resultado2]
+
+    roll1, roll2, *outras_lista2 = lista_roll
+
+    #print(lista_roll)
+  print(numero_roll(num_atual), roll1, roll2)
+  pass
 
 
-lista_roll.append(numero_roll)
-roll1, roll2, *outras_lista2 = lista_roll
+def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerador_loss):
+  if num1 == prev2 & prev2 > 0 or num1 == 0:
+    gain += 1
+    contador_loss = 0
+    zerador_loss = 0
+  else:
+    contador_loss += 1
+    zerador_loss += 1
+  if contador_loss == quantidade_loss + 1:
+    loss += 1
+    contador_loss = 0
+    zerador_loss = 0
+  return gain, loss, contador_loss, zerador_loss
 
 def gales(valor_entrada, branco, contador):
   g = valor_entrada + branco
@@ -46,6 +63,9 @@ def gales(valor_entrada, branco, contador):
     return g5
   else:
     return "Contador inválido"
+
+  #print(gales())
+  #print(g, g1, g2, g3, g4, g5)
 
 
 def branco(entrada):
@@ -75,19 +95,7 @@ def gestao_banca(stop_loss, quantidade_gales):
     valor_entrada = 0
   return valor_entrada
 
-def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerador_loss):
-  if num1 == prev2 & prev2 > 0 or num1 == 0:
-    gain += 1
-    contador_loss = 0
-    zerador_loss = 0
-  else:
-    contador_loss += 1
-    zerador_loss += 1
-  if contador_loss == quantidade_loss + 1:
-      loss += 1
-      contador_loss = 0
-      zerador_loss = 0
-  return gain, loss, contador_loss, zerador_loss
+
 
 def cor_rodada(num1):
   if num1 == 1:
