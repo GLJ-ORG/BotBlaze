@@ -117,7 +117,7 @@ while 'true':
             contador_loss += 1
             zerador_loss += 1
 
-        if contador_loss == 4:
+        if contador_loss == 3:
             loss += 1
             contador_loss = 0
             zerador_loss = 0
