@@ -2,6 +2,7 @@ from datetime import datetime
 import requests
 import json
 import Log
+import time
 #import funcao
 
 #variaveis globais
@@ -159,12 +160,9 @@ while 'true':
         print(contador_gain, contador_loss, zerador_loss)
         print()
 
-
-        #contadores de partida, vitorias e derotas
-
-
         #print(lista_previsoes)
-        #valor_entrada()
+
+    time.sleep(1)
 
 
 
