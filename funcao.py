@@ -3,34 +3,38 @@ import json
 import time
 
 banca = 100
-
-lista_roll = []
 lista_color = []
+lista_roll = []
 roll1 = 0
 roll2 = 0
 num1 = 0
 num2 = 0
 # Receber dados da api OK
-def atualizador_roll():
+def atualizador_color():
 
   while True:
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista_color = [x['color'] for x in resultado]
+  num1, num2, *outras_lista = lista_color
+  return num1, lista_color
 
+def atualizador_roll():
+
+  while True:
     dados2 = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado2 = json.loads(dados2.content)
     lista_roll = [y['roll'] for y in resultado2]
-
-  num1, num2, *outras_lista = lista_color
   roll1, roll2, *outras_lista2 = lista_roll
-  print(roll1,roll2, num1, num2)
-  print(y)
+  print(lista_roll)
+  return roll1, lista_roll
+
+  #print(roll1,roll2, num1, num2)
+  #print()
   time.sleep(1)
-  return
 
 
-print(banca, roll1)
+print(banca,roll1 ,roll2, num1, num2, lista_roll)
 
     #print(lista_roll)
   #print(numero_roll(num_atual), roll1, roll2)
