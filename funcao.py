@@ -3,12 +3,6 @@ import json
 import time
 
 banca = 100
-lista_color = []
-lista_roll = []
-roll1 = 0
-roll2 = 0
-num1 = 0
-num2 = 0
 # Receber dados da api OK
 def atualizador_color():
 
@@ -17,7 +11,7 @@ def atualizador_color():
     resultado = json.loads(dados.content)
     lista_color = [x['color'] for x in resultado]
   num1, num2, *outras_lista = lista_color
-  return num1, lista_color
+    return num1, lista_color
 
 def atualizador_roll():
 
@@ -27,17 +21,17 @@ def atualizador_roll():
     lista_roll = [y['roll'] for y in resultado2]
   roll1, roll2, *outras_lista2 = lista_roll
   print(lista_roll)
-  return roll1, lista_roll
+    return roll1, lista_roll
 
-  #print(roll1,roll2, num1, num2)
-  #print()
+  print(roll1,roll2, num1, num2)
+  print()
   time.sleep(1)
 
 
-print(banca,roll1 ,roll2, num1, num2, lista_roll)
 
-    #print(lista_roll)
-  #print(numero_roll(num_atual), roll1, roll2)
+
+  print(lista_roll)
+  print(numero_roll(num_atual), roll1, roll2)
 
 
 
@@ -95,18 +89,18 @@ print(banca,roll1 ,roll2, num1, num2, lista_roll)
   #return soma / 2
 
 #def gestao_banca(stop_loss, quantidade_gales):
- # if quantidade_gales == 1:
-  #  valor_entrada = stop_loss / 3
+  #if quantidade_gales == 1:
+   # valor_entrada = stop_loss / 3
   #elif quantidade_gales == 2:
    # valor_entrada = stop_loss / 7
   #elif quantidade_gales == 3:
-    #valor_entrada = stop_loss / 15
+   # valor_entrada = stop_loss / 15
   #elif quantidade_gales == 4:
-    #valor_entrada = stop_loss / 31
+   # valor_entrada = stop_loss / 31
   #elif quantidade_gales == 5:
    # valor_entrada = stop_loss / 63
   #else:
-    #valor_entrada = 0
+   # valor_entrada = 0
   #return valor_entrada
 
 
@@ -118,15 +112,43 @@ print(banca,roll1 ,roll2, num1, num2, lista_roll)
    # return "preto"
   #elif num1 == 0:
    # return "coringa"
+#valor_entrada = banca * 0.01
+#if valor_entrada < 1.1:
+ # valor_entrada = 1.1
 
-#def simulador_banca(valor_banca, num1, prev2, g, branco):
- # if num1 == prev2:
-  #  valor_banca += gales(g, branco) * 2
-  #elif num1 == 0:
-   # valor_banca += branco * 14
-  #else:
-   # valor_banca -= gales(g, branco)
-  #return valor_banca
+#branco = valor_entrada * 0.15
+#if branco < 1.1:
+ # branco = 1.1
+
+#g = valor_entrada + branco + branco
+#g1 = (g * 2) + branco
+#g2 = (g1 * 2) + branco
+#g3 = (g2 * 2) + branco
+#g4 = (g3 * 2) + branco
+#g5 = (g4 * 2) + branco
+
+#if contador == 0:
+ # return g
+#elif contador == 1:
+ # return g1
+#elif contador == 2:
+ # return g2
+#elif contador == 3:
+ # return g3
+#elif contador == 4:
+ # return g4
+#elif contador == 5:
+ # return g5
+#else:
+''' return "Contador inválido"
+def simulador_banca(valor_banca, num1, prev2, g, branco):
+  if num1 == prev2:
+    valor_banca += gales(g, branco) * 2
+  elif num1 == 0:
+    valor_banca += branco * 14
+  else:
+    valor_banca -= gales(g, branco)
+  return valor_banca
 
 
 #def cor
@@ -143,5 +165,5 @@ print(banca,roll1 ,roll2, num1, num2, lista_roll)
 
 #def previsao_darodada
 
-      #      return text_cor
+      #      return text_cor '''
 
