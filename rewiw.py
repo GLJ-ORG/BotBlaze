@@ -61,34 +61,19 @@ while 'true':
     resultado2 = json.loads(dados2.content)
     lista_roll = [y['roll'] for y in resultado2]
 
-
     soma_roll_back.insert(0, int(soma_roll))
     #time.sleep(1)
     soma_roll_back.pop()
-
 
 # Pegar numeros separadamente da lista
     num1, num2, *outras_lista = lista_color
     roll1, roll2, *outras_lista2 = lista_roll
     rolo1, rolo2, *outras_lista3 = soma_roll_back
 
-
-
     soma_roll = sum(lista_roll)
-#prints antes da trava de atualização
 
-    #time.sleep(2)
-    #print(previsao, resultados, lista_previsoes)
-    #print(soma_roll_back)
-    #print(roll1, roll2, rolo1, rolo2)
-
-    #roll_recent = funcao.numero_roll()
-    #print(roll_recent)
 
     if rolo1 != rolo2:
-        #print(lista_roll)
-        #print(soma_roll_back)
-        Log.PreencheLog(str(lista_roll))
 
     #Calculo de previsão
         a = num1
@@ -193,21 +178,13 @@ while 'true':
 
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
-
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
-        Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-
         print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
-
         print(f'Partida Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
-
         print(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
-
         print("Saldo atual: %.2f"%banca, ["%.2f"%gale], ["%.2f"%somas_gale])
-
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     # print dos dados para análise
         print(num1, prev2, lista_previsoes)
@@ -215,8 +192,19 @@ while 'true':
         print(contador_gain, contador_loss, zerador_loss)
         print()
 
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
+        Log.PreencheLog(f'Partida Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+        Log.PreencheLog(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
+        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} {["%.2f"%gale]} {["%.2f"%somas_gale]}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    # print dos dados para análise
+        Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
+        Log.PreencheLog(f'{gain, loss}')
+        Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
+        Log.PreencheLog(f'~')
 
-        #contadores de partida, vitorias e derotas
-
-
-        #print(lista_previsoes)
