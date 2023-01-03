@@ -187,23 +187,24 @@ while 'true':
         else:
             banca -= gale
 
-
-
-
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
 
-        print(f'Entrar na Cor: ~~{prev_text}~~')
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
         Log.PreencheLog(f'Cor prevista para prox rodada: {prev_text}')
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
         print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
 
         print(f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}',f'Partida Nº{total_partidas}')
         Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
 
-        print(f'Tempo de trabalho: {tempo_trabalho} mim')
+        print(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
 
-        print("Saldo atual: %.2f"%banca, [gale], [somas_gale])
+        print("Saldo atual: %.2f"%banca, ["%.2f"%gale], ["%.2f"%somas_gale])
 
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     # print dos dados para análise
         print(num1, prev2, lista_previsoes)
         print(gain, loss)
