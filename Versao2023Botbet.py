@@ -1,6 +1,6 @@
 from funcao import *
 
+#r = atualizador_roll()
 
-r = atualizador_roll()[2]
-print(r)
+atualizador_roll()
 #print(r)
