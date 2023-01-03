@@ -175,6 +175,24 @@ while 'true':
         else:
             banca -= gale
 
+        #Preencher log
+            Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
+            Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
+            Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            Log.PreencheLog(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
+            Log.PreencheLog(
+                f'Partida Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+            Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
+            Log.PreencheLog(f'Saldo atual: {"%.2f" % banca} {["%.2f" % gale]} {["%.2f" % somas_gale]}')
+            Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            # print dos dados para análise
+            Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
+            Log.PreencheLog(f'{gain, loss}')
+            Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
+            Log.PreencheLog(f'~')
+            print('~')
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -192,19 +210,5 @@ while 'true':
         print(contador_gain, contador_loss, zerador_loss)
         print()'''
 
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
-        Log.PreencheLog(f'Partida Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
-        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} {["%.2f"%gale]} {["%.2f"%somas_gale]}')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    # print dos dados para análise
-        Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
-        Log.PreencheLog(f'{gain, loss}')
-        Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
-        Log.PreencheLog(f'~')
+
 
