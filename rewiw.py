@@ -175,22 +175,22 @@ while 'true':
         else:
             banca -= gale
 
+            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
+            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            print(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
+            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+            print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
+            print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+            print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
+            print("Saldo atual: %.2f" % banca, )
 
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
-        print(f'Partida Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        print(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
-        print("Saldo atual: %.2f"%banca, ["%.2f"%gale], ["%.2f"%somas_gale])
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    # print dos dados para análise
+        # print dos dados para análise
+        '''print(f'{["%.2f"%gale]}, {["%.2f"%somas_gale]}, {["%.2f"%branco]}')
         print(num1, prev2, lista_previsoes)
         print(gain, loss)
         print(contador_gain, contador_loss, zerador_loss)
-        print()
+        print()'''
 
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
