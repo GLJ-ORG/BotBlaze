@@ -131,11 +131,11 @@ while 'true':
 
         def cor_rodada(num1):
             if num1 == 1:
-                return "vermelho"
+                return "Vermelho"
             elif num1 == 2:
-                return "preto"
+                return "Preto"
             elif num1 == 0:
-                return "coringa"
+                return "CORINGA"
 
 
         #def tempo_trabalhado():
@@ -185,7 +185,7 @@ while 'true':
             banca -= gale
         elif num1 == 0:
             banca += branco * 14
-            somas_gale = gale
+            somas_gale = g
 
         else:
             banca -= gale
@@ -201,7 +201,7 @@ while 'true':
 
         print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
 
-        print(f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}',f'Partida Nº{total_partidas}')
+        print(f'Partida Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
 
         print(f'Tempo de trabalho: {"%.1f"%tempo_trabalho} min')
