@@ -192,7 +192,7 @@ while 'true':
 
 
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
+        print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
 
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
