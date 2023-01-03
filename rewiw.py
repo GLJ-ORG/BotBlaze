@@ -181,6 +181,7 @@ while 'true':
         if num1 == prev2 & prev2 > 0:
             banca += somas_gale - branco - branco
             somas_gale = 0
+            banca -= gale
         elif num1 == 0:
             banca += branco * 14
         else:
