@@ -197,12 +197,12 @@ while 'true':
 
         print(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
 
-        print(f'Partida Nº{total_partidas}', f'Hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+        print(f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}',f'Partida Nº{total_partidas}')
         Log.PreencheLog(str(f'Partida Nº{total_partidas} D|H Atual:{resultado_divisao}'))
 
         print(f'Tempo de trabalho: {tempo_trabalho} mim')
 
-        print("%.2f"%banca, [gale], [somas_gale])
+        print("Saldo atual: %.2f"%banca, [gale], [somas_gale])
 
     # print dos dados para análise
         print(num1, prev2, lista_previsoes)
