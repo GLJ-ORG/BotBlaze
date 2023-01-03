@@ -47,8 +47,9 @@ stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = 2 #int(input('Qual será seu fator multiplicador de gale?'))
 
-banca = 100
-gale = 0
+banca = int(100)
+gale = int(0)
+somas_gale = int(0)
 
 while 'true':
 # Receber dados da api OK
@@ -160,19 +161,26 @@ while 'true':
 
         if contador_loss == 0:
             gale = g
+            somas_gale += g
         elif contador_loss == 1:
             gale = g1
+            somas_gale += g1
         elif contador_loss == 2:
             gale = g2
+            somas_gale += g2
         elif contador_loss == 3:
             gale = g3
+            somas_gale += g3
         elif contador_loss == 4:
             gale = g4
+            somas_gale += g4
         elif contador_loss == 5:
             gale = g5
+            somas_gale += g5
 
         if num1 == prev2 & prev2 > 0:
-            banca += gale * 2
+            banca += somas_gale - branco - branco
+            somas_gale = 0
         elif num1 == 0:
             banca += branco * 14
         else:
@@ -193,7 +201,7 @@ while 'true':
 
         print(f'Tempo de trabalho: {tempo_trabalho} mim')
 
-        print(banca)
+        print(banca, [gale], [somas_gale])
 
     # print dos dados para análise
         print(num1, prev2, lista_previsoes)
