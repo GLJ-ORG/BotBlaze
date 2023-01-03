@@ -124,6 +124,7 @@ while 'true':
             loss += 1
             contador_loss = 0
             zerador_loss = 0
+            somas_gale = 0
 
         if num1 == 0:
             coringa +=1
@@ -178,14 +179,17 @@ while 'true':
             gale = g5
             somas_gale += g5
 
-        if num1 == prev2 & prev2 > 0:
+        if num1 == prev2:
             banca += somas_gale - branco - branco
-            somas_gale = 0
+            somas_gale = g
             banca -= gale
         elif num1 == 0:
             banca += branco * 14
+            somas_gale = gale
+
         else:
             banca -= gale
+
 
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Gain: {gain} Loss: {loss} Coringa: {coringa}')
