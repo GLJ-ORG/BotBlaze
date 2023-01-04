@@ -47,7 +47,7 @@ stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = 2 #int(input('Qual será seu fator multiplicador de gale?'))
 
-banca = int(100)
+banca = int(1000)
 gale = int(0)
 somas_gale = int(0)
 
@@ -192,7 +192,7 @@ while 'true':
             Log.PreencheLog(f'{gain, loss}')
             Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
             Log.PreencheLog(f'~')
-            print('~')
+
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
