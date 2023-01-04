@@ -100,6 +100,7 @@ while 'true':
             contador_gain += 1
             contador_loss = 0
             zerador_loss = 0
+            banca += somas_gale
 
         elif prev2 > 0:
             contador_loss += 1
@@ -129,51 +130,51 @@ while 'true':
         #return Tempo_trabalhado
 
     #Simulador de banca
+        if contador_loss >= 1:
+            valor_entrada = banca * 0.01
+            if valor_entrada < 1.1:
+                valor_entrada = 1.1
 
-        valor_entrada = banca * 0.01
-        if valor_entrada < 1.1:
-            valor_entrada = 1.1
+            branco = valor_entrada * 0.15
+            if branco < 1.1:
+                branco = 1.1
 
-        branco = valor_entrada * 0.15
-        if branco < 1.1:
-            branco = 1.1
+            g = valor_entrada + (branco * 2)
+            g1 = (g * 2) + branco
+            g2 = (g1 * 2) + branco
+            g3 = (g2 * 2) + branco
+            g4 = (g3 * 2) + branco
+            g5 = (g4 * 2) + branco
 
-        g = valor_entrada + (branco * 2)
-        g1 = (g * 2) + branco
-        g2 = (g1 * 2) + branco
-        g3 = (g2 * 2) + branco
-        g4 = (g3 * 2) + branco
-        g5 = (g4 * 2) + branco
+            if contador_loss == 0:
+                gale = 0
+                somas_gale += 0
+            elif contador_loss == 1:
+                gale = g
+                somas_gale += g
+            elif contador_loss == 2:
+                gale = g1
+                somas_gale += g1
+            elif contador_loss == 3:
+                gale = g2
+                somas_gale += g2
+            elif contador_loss == 4:
+                gale = g3
+                somas_gale += g3
+            elif contador_loss == 5:
+                gale = g4
+                somas_gale += g4
 
-        if contador_loss == 0:
-            gale = g
-            somas_gale += g
-        elif contador_loss == 1:
-            gale = g1
-            somas_gale += g1
-        elif contador_loss == 2:
-            gale = g2
-            somas_gale += g2
-        elif contador_loss == 3:
-            gale = g3
-            somas_gale += g3
-        elif contador_loss == 4:
-            gale = g4
-            somas_gale += g4
-        elif contador_loss == 5:
-            gale = g5
-            somas_gale += g5
+            if num1 == prev2:
+                banca += somas_gale - branco - branco
+                somas_gale = g
+                banca -= gale
+            elif num1 == 0:
+                banca += branco * 14
+                somas_gale = g
 
-        if num1 == prev2:
-            banca += somas_gale - branco - branco
-            somas_gale = g
-            banca -= gale
-        elif num1 == 0:
-            banca += branco * 14
-            somas_gale = g
-
-        else:
-            banca -= gale
+            else:
+                banca -= gale
 
         #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
