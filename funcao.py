@@ -3,6 +3,7 @@ import json
 import time
 
 
+
 banca = 100
 # Receber dados da api OK
 def atualizador_color():
@@ -34,7 +35,6 @@ def simuladorde_banca():
     valor_branco = float(0)
     gale = 0
     somas_gale = float(0)
-    quantidade_entradas = 4
     contador_loss = 1
     num1 = atualizador_roll()[0]
     prev2 = 1
