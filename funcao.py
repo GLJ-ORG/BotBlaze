@@ -2,6 +2,7 @@ import requests
 import json
 import time
 
+
 banca = 100
 # Receber dados da api OK
 def atualizador_color():
@@ -10,8 +11,8 @@ def atualizador_color():
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
     lista_color = [x['color'] for x in resultado]
-  num1, num2, *outras_lista = lista_color
-    return num1, lista_color
+    num1, num2, *outras_lista = lista_color
+    return num1, num2, lista_color
 
 def atualizador_roll():
 
@@ -19,21 +20,73 @@ def atualizador_roll():
     dados2 = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado2 = json.loads(dados2.content)
     lista_roll = [y['roll'] for y in resultado2]
-  roll1, roll2, *outras_lista2 = lista_roll
-  print(lista_roll)
-    return roll1, lista_roll
-
-  print(roll1,roll2, num1, num2)
-  print()
-  time.sleep(1)
+    roll1, roll2, *outras_lista2 = lista_roll
+    return roll1, roll2, lista_roll
 
 
+#Simulador de banca
+def simuladorde_banca():
+ while True:
+    banca = int(100)
+    entrada = banca * 0.01
+    valor_entrada = float(0)
+    branco = valor_entrada * 0.15
+    valor_branco = float(0)
+    gale = 0
+    somas_gale = float(0)
+    quantidade_entradas = 4
+    contador_loss = 1
+    num1 = atualizador_roll()[0]
+    prev2 = 1
+#Definindo entrada
+    if entrada < float(1.1):
+        valor_entrada = float(1.1)
+    else:
+        valor_entrada = entrada
+#definindo valor do branco
+    if branco < 1.1:
+          valor_branco = 1.1
+    else:
+        valor_branco = branco
+#definindo valores dos gales
+    g = (valor_entrada + branco) + branco
+    g1 = (g * 2) + branco
+    g2 = (g1 * 2) + branco
+    g3 = (g2 * 2) + branco
+    g4 = (g3 * 2) + branco
+    g5 = (g4 * 2) + branco
+    if contador_loss == 0:
+        gale = g
+        somas_gale = g
+    elif contador_loss == 1:
+        gale = g
+        somas_gale = g
+    elif contador_loss == 2:
+        gale = g1
+        somas_gale += g1
+    elif contador_loss == 3:
+        gale = g2
+        somas_gale += g2
+    elif contador_loss == 4:
+        gale = g3
+        somas_gale += g3
+    elif contador_loss == 5:
+        gale = g4
+        somas_gale += g4
+        return gale, somas_gale
+    else:
+        return 'Soma invalida'
 
+    if num1 == 0 & contador_loss >= 1:
+        banca += (branco * 14)
+        somas_gale = 0
+    elif num1 == prev2:
+        banca += (gale + valor_entrada)
+    elif contador_loss >= 1 & prev2 != num1:
+        banca -= gale
 
-  print(lista_roll)
-  print(numero_roll(num_atual), roll1, roll2)
-
-
+        #print(banca, valor_entrada, valor_branco, gale, somas_gale, entrada, branco)
+    return(banca)
 
 #def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerador_loss):
  # if num1 == prev2 & prev2 > 0 or num1 == 0:
