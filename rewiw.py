@@ -2,7 +2,8 @@ from datetime import datetime
 import requests
 import json
 import Log
-#import funcao
+from funcao import simuladorde_banca
+simulador = simuladorde_banca()
 
 #variaveis globais
 rodada = 0
@@ -48,10 +49,12 @@ quantidade_gales = 3 #int(input('Quantos gales você quer?'))
 multiplicador = 2 #int(input('Qual será seu fator multiplicador de gale?'))
 
 banca = int(1000)
-gale = int(0)
-somas_gale = int(0)
+gale = 0
+somas_gale = 0
+branco = 0
+valor_entrada = 0
 
-while 'true':
+while True:
 # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
     resultado = json.loads(dados.content)
@@ -100,7 +103,8 @@ while 'true':
             contador_gain += 1
             contador_loss = 0
             zerador_loss = 0
-            banca += somas_gale
+            somas_gale = 0
+            gale = 0
 
         elif prev2 > 0:
             contador_loss += 1
@@ -111,6 +115,7 @@ while 'true':
             contador_loss = 0
             zerador_loss = 0
             somas_gale = 0
+
 
         if num1 == 0:
             coringa +=1
@@ -135,11 +140,11 @@ while 'true':
             if valor_entrada < 1.1:
                 valor_entrada = 1.1
 
-            branco = valor_entrada * 0.15
+            branco = gale * 0.15
             if branco < 1.1:
                 branco = 1.1
 
-            g = valor_entrada + (branco * 2)
+            g = valor_entrada + branco + branco
             g1 = (g * 2) + branco
             g2 = (g1 * 2) + branco
             g3 = (g2 * 2) + branco
@@ -147,11 +152,11 @@ while 'true':
             g5 = (g4 * 2) + branco
 
             if contador_loss == 0:
-                gale = 0
-                somas_gale += 0
+                gale = g
+                somas_gale = g
             elif contador_loss == 1:
                 gale = g
-                somas_gale += g
+                somas_gale = g
             elif contador_loss == 2:
                 gale = g1
                 somas_gale += g1
@@ -165,16 +170,16 @@ while 'true':
                 gale = g4
                 somas_gale += g4
 
-            if num1 == prev2:
-                banca += somas_gale - branco - branco
-                somas_gale = g
-                banca -= gale
-            elif num1 == 0:
-                banca += branco * 14
-                somas_gale = g
 
-            else:
-                banca -= gale
+
+        if num1 == 0:
+            banca += (branco * 14)
+            somas_gale = 0
+        if num1 != prev2:
+            banca -= gale
+        if num1 != prev2 & contador_loss == 0:
+            banca += gale
+
 
         #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -202,14 +207,14 @@ while 'true':
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
-        print("Saldo atual: %.2f" % banca, )
-
+        print(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
-        '''print(f'{["%.2f"%gale]}, {["%.2f"%somas_gale]}, {["%.2f"%branco]}')
-        print(num1, prev2, lista_previsoes)
-        print(gain, loss)
-        print(contador_gain, contador_loss, zerador_loss)
-        print()'''
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]}')
+        print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
+        print(f'G:{gain} P:{loss}')
+        print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')
+        print(simulador)
 
 
 
