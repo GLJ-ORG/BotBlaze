@@ -1,6 +1,8 @@
 from funcao import *
 
+#print(r)
+
 #r = atualizador_roll()
 
-atualizador_roll()
-#print(r)
+print(atualizador_roll())
+print(simuladorde_banca())
