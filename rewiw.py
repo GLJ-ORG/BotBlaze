@@ -51,13 +51,14 @@ total_partidas = 0
 resultado_divisao = int(0)
 
 banca = int(1000)
-entrada = banca * 0.01
+valor_banca = banca
+entrada = 0
 valor_entrada = float(0)
-branco = 0
+branco = float(0)
 valor_branco = float(0)
 gale = 0
 somas_gale = float(0)
-
+somasgale = somas_gale
 #informações usuario
 
 '''banca_inicial = 100 #(input('Qual o valor da sua banca?'))
@@ -89,7 +90,7 @@ while True:
     soma_roll_back.pop()
 
 # Pegar numeros separadamente da lista
-    num1, num2, num3, *outras_lista = lista_color
+    num1, num, num2, numm, num3, *outras_lista = lista_color
     roll1, roll2, *outras_lista2 = lista_roll
     rolo1, rolo2, *outras_lista3 = soma_roll_back
 
@@ -168,16 +169,12 @@ while True:
 
     #Simulador de banca
         # Definindo entrada
-        if entrada < float(1.1):
-            valor_entrada = float(1.1)
+        entrada = banca * 0.01
+        if entrada < 1.1:
+            valor_entrada = 1.1
         else:
             valor_entrada = entrada
         # definindo valor do branco
-        branco = gale * 0.15
-        if branco < 1.1:
-            valor_branco = 1.1
-        else:
-            valor_branco = branco
 
         # definindo valores dos gales
         g = valor_entrada + (valor_branco * 2)
@@ -186,47 +183,50 @@ while True:
         g3 = (g2 * 2)
         g4 = (g3 * 2)
         g5 = (g4 * 2)
-        if contador_loss == 0:
-            gale = g
-            somas_gale = g
+
         if contador_loss == 1:
             gale = g
             somas_gale += g
+            branco = g * 0.15
         elif contador_loss == 2:
             gale = g1
             somas_gale += g1
+            branco = g1 * 0.15
         elif contador_loss == 3:
             gale = g2
             somas_gale += g2
+            branco = g2 * 0.15
         elif contador_loss == 4:
             gale = g3
             somas_gale += g3
+            branco = g3 * 0.15
         elif contador_loss == 5:
             gale = g4
             somas_gale += g4
+            branco = g4 * 0.15
+
+        if branco < 1.1:
+            valor_branco = 1.1
+        else:
+            valor_branco = branco
 
         if num1 == 0 & num2 != prev3:
             banca += (valor_branco * 14)
             somas_gale = g
             gale = gale
-       #elif num1 == prev2 & num2 != prev3 or contador_loss == 0 & prev3 != 0:
-        #    banca = banca + somas_gale + entrada + branco
-        #else:
-         #   banca = banca
-        #if num1 != prev2 & contador_loss != 0:
-         #  banca -= gale
+        if cont1 > 0:
+            somasgale += gale
+        elif cont1 == 0 & prev3 != num2 & prev3 !=  0:
+            valor_banca += somasgale + valor_entrada
+        elif cont1 > cont2:
+            valor_banca -= gale
 
-        #if num2 == prev3:
-         #   banca = banca'''
-        #lista_somagales.insert(0, int(somas_gale))
-        #lista_somagales.pop()
-        #gsoma1, gsoma2, *outras_gsoma = lista_somagales
 
-        if num1 == prev2 & prev3 != 0:
-            banca += somas_gale
-            banca += valor_entrada
-        elif contador_loss != 0:
-            banca -= gale
+        if num1 == prev2 & num2 != prev3 & cont1 < cont2 & cont1 == 0:
+            valor_banca += somas_gale
+        else:
+            valor_banca -= somas_gale
+
 
 
             #Preencher log
@@ -238,7 +238,7 @@ while True:
         Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
-        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
+        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%somasgale]}')
         # print dos dados para análise
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_branco]} {["%.2f" % branco]}')
@@ -257,12 +257,12 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
-        print(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%entrada]}')
+        print(f'Saldo atual: {"%.2f"%valor_banca} Aposta:{["%.2f"%entrada]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%valor_entrada]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        print(f'Cor:{lista_cor}Prev:{lista_previsoes}')
+        print(f'Cor:{[num1, num, num2, numm, num3]}Prev:{lista_previsoes}')
         print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
