@@ -218,12 +218,13 @@ while True:
 
         #if num2 == prev3:
          #   banca = banca'''
-        lista_somagales.insert(0, int(somas_gale))
-        lista_somagales.pop()
-        gsoma1, gsoma2, *outras_gsoma = lista_somagales
+        #lista_somagales.insert(0, int(somas_gale))
+        #lista_somagales.pop()
+        #gsoma1, gsoma2, *outras_gsoma = lista_somagales
 
         if num1 == prev2 & prev3 != 0:
-            banca += gsoma2
+            banca += somas_gale
+            banca += valor_entrada
         elif contador_loss != 0:
             banca -= gale
 
@@ -261,7 +262,8 @@ while True:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%valor_entrada]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        print(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}Gsoma:{lista_somagales}')
+        print(f'Cor:{lista_cor}Prev:{lista_previsoes}')
+        print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
         print()
