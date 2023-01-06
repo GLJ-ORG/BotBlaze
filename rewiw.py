@@ -2,14 +2,15 @@ from datetime import datetime
 import requests
 import json
 import Log
-from funcao import simuladorde_banca
-simulador = simuladorde_banca()
+from funcao import *
 
 #variaveis globais
 rodada = 0
+lista_cor = [0, 0, 0]
 lista_color = []
 lista_roll = []
-lista_previsoes = [0, 0]
+lista_previsoes = [0, 0, 0]
+lista_contador = [0, 0, 0]
 
 soma_color = 0
 soma_roll = 0
@@ -22,6 +23,7 @@ rolo1 = 0
 rolo2 = 0
 prev1 = 0
 prev2 = 0
+prev3 = 0
 contador_loss = 0
 contador_gain = 0
 zerador_loss = 0
@@ -32,17 +34,27 @@ coringa = 0
 rev_previsao = int(0)
 num1 = 0
 num2 = 0
+num3 = 0
 roll1 = 0
 roll2 = 0
 previsao = 0
 somas = 0
 total_partidas = 0
 resultado_divisao = int(0)
+
+banca = int(1000)
+entrada = banca * 0.01
+valor_entrada = float(0)
+branco = 0
+valor_branco = float(0)
+gale = 0
+somas_gale = float(0)
+
 #informações usuario
 
-banca_inicial = 100 #(input('Qual o valor da sua banca?'))
+'''banca_inicial = 100 #(input('Qual o valor da sua banca?'))
 tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
-entrada = int(50) #int(input('Qual valor da sua primeira entrada?'))
+entrada = int(0) #int(input('Qual valor da sua primeira entrada?'))
 stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))30
 stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
 quantidade_gales = 3 #int(input('Quantos gales você quer?'))
@@ -52,7 +64,7 @@ banca = int(1000)
 gale = 0
 somas_gale = 0
 branco = 0
-valor_entrada = 0
+valor_entrada = 0'''
 
 while True:
 # Receber dados da api OK
@@ -69,12 +81,15 @@ while True:
     soma_roll_back.pop()
 
 # Pegar numeros separadamente da lista
-    num1, num2, *outras_lista = lista_color
+    num1, num2, num3, *outras_lista = lista_color
     roll1, roll2, *outras_lista2 = lista_roll
     rolo1, rolo2, *outras_lista3 = soma_roll_back
 
     soma_roll = sum(lista_roll)
+    lista_cor.insert(0, int(num1))
+    lista_cor.pop()
 
+    nume1, nume2, nume3, *outros_nume = lista_cor
 
     if rolo1 != rolo2:
 
@@ -95,7 +110,7 @@ while True:
 
         lista_previsoes.insert(0, int(previsao))
         lista_previsoes.pop()
-        prev1, prev2, *outras_previsoes = lista_previsoes
+        prev1, prev2, prev3, *outras_previsoes = lista_previsoes
 
     #contadores de vitorias e derrotas
         if num1 == prev2 & prev2 > 0 or num1 == 0:
@@ -128,6 +143,9 @@ while True:
             elif num1 == 0:
                 return "CORINGA"
 
+        lista_contador.insert(0, int(contador_loss))
+        lista_contador.pop()
+        cont1, cont2, cont3, *outras_contadores = lista_contador
 
         #def tempo_trabalhado():
         tempo_trabalho = float(0)
@@ -135,64 +153,74 @@ while True:
         #return Tempo_trabalhado
 
     #Simulador de banca
-        if contador_loss >= 1:
-            valor_entrada = banca * 0.01
-            if valor_entrada < 1.1:
-                valor_entrada = 1.1
+        # Definindo entrada
+        if entrada < float(1.1):
+            valor_entrada = float(1.1)
+        else:
+            valor_entrada = entrada
+        # definindo valor do branco
+        branco = gale * 0.15
+        if branco < 1.1:
+            valor_branco = 1.1
+        else:
+            valor_branco = branco
+        # definindo valores dos gales
+        g = (valor_entrada + branco) + branco
+        g1 = (g * 2) + branco
+        g2 = (g1 * 2) + branco
+        g3 = (g2 * 2) + branco
+        g4 = (g3 * 2) + branco
+        g5 = (g4 * 2) + branco
+        if contador_loss == 0:
+            gale = g
+            somas_gale = g
+        elif contador_loss == 1:
+            gale = g
+            somas_gale = g
+        elif contador_loss == 2:
+            gale = g1
+            somas_gale += g1
+        elif contador_loss == 3:
+            gale = g2
+            somas_gale += g2
+        elif contador_loss == 4:
+            gale = g3
+            somas_gale += g3
+        elif contador_loss == 5:
+            gale = g4
+            somas_gale += g4
 
-            branco = gale * 0.15
-            if branco < 1.1:
-                branco = 1.1
+        if num1 == 0 & num2 != prev3:
+            banca += (valor_branco * 14)
 
-            g = valor_entrada + branco + branco
-            g1 = (g * 2) + branco
-            g2 = (g1 * 2) + branco
-            g3 = (g2 * 2) + branco
-            g4 = (g3 * 2) + branco
-            g5 = (g4 * 2) + branco
+        elif num1 == prev2 & num2 != prev3 or contador_loss == 0 & prev3 != 0:
+            banca = banca + somas_gale + entrada + branco
+        else:
+            banca = banca
+        if num1 != prev2 & contador_loss != 0:
+           banca -= gale
 
-            if contador_loss == 0:
-                gale = g
-                somas_gale = g
-            elif contador_loss == 1:
-                gale = g
-                somas_gale = g
-            elif contador_loss == 2:
-                gale = g1
-                somas_gale += g1
-            elif contador_loss == 3:
-                gale = g2
-                somas_gale += g2
-            elif contador_loss == 4:
-                gale = g3
-                somas_gale += g3
-            elif contador_loss == 5:
-                gale = g4
-                somas_gale += g4
+        if num2 == prev3:
+            banca = banca
+
+        if contador_loss == 0:
+            gale = g
 
 
-
-        if num1 == 0:
-            banca += (branco * 14)
-            somas_gale = 0
-        if num1 != prev2:
-            banca -= gale
-        if num1 != prev2 & contador_loss == 0:
-            banca += gale
-
-
-        #Preencher log
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
+            #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Cor da Rodada:{[roll1]} {cor_rodada(num1)}')
-        Log.PreencheLog(f'Partida Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
-        Log.PreencheLog(f'Saldo atual: {"%.2f" % banca} {["%.2f" % gale]} {["%.2f" % somas_gale]}')
+        Log.PreencheLog(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    # print dos dados para análise
+        Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
+        Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+        Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
+        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
+        # print dos dados para análise
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_branco]} {["%.2f" % branco]}')
+        Log.PreencheLog(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}')
         Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
         Log.PreencheLog(f'{gain, loss}')
         Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
@@ -210,11 +238,12 @@ while True:
         print(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]}')
-        print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        print(f'G:{gain} P:{loss}')
-        print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')
-        print(simulador)
+        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%valor_branco]} {["%.2f"%branco]}')
+       #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
+        print(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}')
+        #print(f'G:{gain} P:{loss}')
+        #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
+        print()
 
 
 
