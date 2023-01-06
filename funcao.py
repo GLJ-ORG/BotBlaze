@@ -24,6 +24,23 @@ def atualizador_roll():
     roll1, roll2, *outras_lista2 = lista_roll
     return roll1, roll2, lista_roll
 
+def contadores_vd():
+ while True:
+    num1 = simuladorde_banca()[1]
+
+    if num1 == prev2 & prev2 > 0 or num1 == 0:
+        gain += 1
+        contador_loss = 0
+        zerador_loss = 0
+    else:
+        contador_loss += 1
+        zerador_loss += 1
+
+    if contador_loss == 4:
+        loss += 1
+        contador_loss = 0
+        zerador_loss = 0
+    return gain, loss, contador_loss, zerador_loss
 
 #Simulador de banca
 def simuladorde_banca():
@@ -35,9 +52,9 @@ def simuladorde_banca():
     valor_branco = float(0)
     gale = 0
     somas_gale = float(0)
-    contador_loss = 1
     num1 = atualizador_roll()[0]
     prev2 = 1
+    contador_loss = contadores_vd()[2]
 #Definindo entrada
     if entrada < float(1.1):
         valor_entrada = float(1.1)
@@ -86,60 +103,13 @@ def simuladorde_banca():
         banca -= gale
 
         #print(banca, valor_entrada, valor_branco, gale, somas_gale, entrada, branco)
-    return(banca)
+    return(banca, num1)
 
-#def contadores_vd(num1, prev2, quantidade_loss, gain, loss, contador_loss, zerador_loss):
- # if num1 == prev2 & prev2 > 0 or num1 == 0:
-  #  gain += 1
-   # contador_loss = 0
-    #zerador_loss = 0
-  #else:
-   # contador_loss += 1
-    #zerador_loss += 1
-  #if contador_loss == quantidade_loss + 1:
-   # loss += 1
-    #contador_loss = 0
-    #zerador_loss = 0
-  #return gain, loss, contador_loss, zerador_loss
-
-#def gales(valor_entrada, branco, contador):
- # g = valor_entrada + branco
-  #g1 = (g * 2) + branco
-  #g2 = (g1 * 2) + branco
-  #g3 = (g2 * 2) + branco
-  #g4 = (g3 * 2) + branco
-  #g5 = (g4 * 2) + branco
-
-  #if contador == 0:
-   # return g
-  #elif contador == 1:
-   # return g1
-  #elif contador == 2:
-   # return g2
-  #elif contador == 3:
-   # return g3
-  #elif contador == 4:
-   # return g4
-  #elif contador == 5:
-   # return g5
-  #else:
-   # return "Contador inválido"
-
-  #print(gales())
-  #print(g, g1, g2, g3, g4, g5)
-
-
-#def branco(entrada):
- # valor_branco = entrada * 0.15
-  #if valor_branco < 1.1:
-   # valor_branco = 1.1
-  #return valor_branco
-
-#def estrategia(num1):
- # soma = num1
-  #for i in range(num1):
-   # soma += i
-  #return soma / 2
+def estrategia(num1):
+  soma = num1
+  for i in range(num1):
+    soma += i
+  return soma / 2
 
 #def gestao_banca(stop_loss, quantidade_gales):
   #if quantidade_gales == 1:
@@ -168,40 +138,6 @@ def simuladorde_banca():
 #valor_entrada = banca * 0.01
 #if valor_entrada < 1.1:
  # valor_entrada = 1.1
-
-#branco = valor_entrada * 0.15
-#if branco < 1.1:
- # branco = 1.1
-
-#g = valor_entrada + branco + branco
-#g1 = (g * 2) + branco
-#g2 = (g1 * 2) + branco
-#g3 = (g2 * 2) + branco
-#g4 = (g3 * 2) + branco
-#g5 = (g4 * 2) + branco
-
-#if contador == 0:
- # return g
-#elif contador == 1:
- # return g1
-#elif contador == 2:
- # return g2
-#elif contador == 3:
- # return g3
-#elif contador == 4:
- # return g4
-#elif contador == 5:
- # return g5
-#else:
-''' return "Contador inválido"
-def simulador_banca(valor_banca, num1, prev2, g, branco):
-  if num1 == prev2:
-    valor_banca += gales(g, branco) * 2
-  elif num1 == 0:
-    valor_banca += branco * 14
-  else:
-    valor_banca -= gales(g, branco)
-  return valor_banca
 
 
 #def cor
