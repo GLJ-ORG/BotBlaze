@@ -2,7 +2,7 @@ from datetime import datetime
 import requests
 import json
 import Log
-from funcao import *
+
 
 #variaveis globais
 rodada = 0
@@ -50,7 +50,7 @@ somas = 0
 total_partidas = 0
 resultado_divisao = int(0)
 
-banca = int(1000)
+banca = int(100)
 valor_banca = banca
 entrada = 0
 valor_entrada = float(0)
@@ -58,7 +58,13 @@ branco = float(0)
 valor_branco = float(0)
 gale = 0
 somas_gale = float(0)
-somasgale = somas_gale
+
+g = 0
+g1 = 0
+g2 = 0
+g3 = 0
+g4 = 0
+g5 = 0
 #informações usuario
 
 '''banca_inicial = 100 #(input('Qual o valor da sua banca?'))
@@ -90,7 +96,7 @@ while True:
     soma_roll_back.pop()
 
 # Pegar numeros separadamente da lista
-    num1, num, num2, numm, num3, *outras_lista = lista_color
+
     roll1, roll2, *outras_lista2 = lista_roll
     rolo1, rolo2, *outras_lista3 = soma_roll_back
 
@@ -101,7 +107,7 @@ while True:
     nume1, nume2, nume3, *outros_nume = lista_cor
 
     if rolo1 != rolo2:
-
+        num1, num2, num3,num, numm, *outras_lista = lista_color
     #Calculo de previsão
         a = num1
         somas += a
@@ -127,8 +133,6 @@ while True:
             contador_gain += 1
             contador_loss = 0
             zerador_loss = 0
-            somas_gale = 0
-            gale = 0
 
         elif prev2 > 0:
             contador_loss += 1
@@ -138,7 +142,7 @@ while True:
             loss += 1
             contador_loss = 0
             zerador_loss = 0
-            somas_gale = 0
+            somas_gale = g
 
 
         if num1 == 0:
@@ -169,65 +173,69 @@ while True:
 
     #Simulador de banca
         # Definindo entrada
-        entrada = banca * 0.01
-        if entrada < 1.1:
+        valor_entrada = banca * 0.01
+        if valor_entrada < 1.1:
             valor_entrada = 1.1
         else:
-            valor_entrada = entrada
-        # definindo valor do branco
+            valor_entrada = banca * 0.01
+
+        branco = gale * 0.15
+        if branco < 1.09:
+            branco = float(1.1)
+            valor_branco = float(1.1)
+        else:
+            branco = gale * 0.15
+            valor_branco = branco
 
         # definindo valores dos gales
         g = valor_entrada + (valor_branco * 2)
-        g1 = (g * 2)
-        g2 = (g1 * 2)
-        g3 = (g2 * 2)
-        g4 = (g3 * 2)
-        g5 = (g4 * 2)
+        g1 = (g * 2) + valor_entrada + (valor_branco * 2)
+        g2 = (g1 * 2) + valor_entrada + (valor_branco * 2)
+        g3 = (g2 * 2) + valor_entrada + (valor_branco * 2)
+        g4 = (g3 * 2) + valor_entrada + (valor_branco * 2)
+        g5 = (g4 * 2) + valor_entrada + (valor_branco * 2)
 
         if contador_loss == 1:
+            gale = 0
+            somas_gale = 0
+            valor_branco = 0
             gale = g
-            somas_gale += g
+            somas_gale = g
             branco = g * 0.15
+
         elif contador_loss == 2:
             gale = g1
             somas_gale += g1
             branco = g1 * 0.15
+
         elif contador_loss == 3:
             gale = g2
             somas_gale += g2
             branco = g2 * 0.15
+
         elif contador_loss == 4:
             gale = g3
             somas_gale += g3
             branco = g3 * 0.15
+
         elif contador_loss == 5:
             gale = g4
             somas_gale += g4
             branco = g4 * 0.15
 
-        if branco < 1.1:
-            valor_branco = 1.1
-        else:
-            valor_branco = branco
 
-        if num1 == 0 & num2 != prev3:
-            banca += (valor_branco * 14)
+        if num1 == 0 & cont1 > 0:
+            valor_banca += (valor_branco * 14)
             somas_gale = g
             gale = gale
-        if cont1 > 0:
-            somasgale += gale
-        elif cont1 == 0 & prev3 != num2 & prev3 !=  0:
-            valor_banca += somasgale + valor_entrada
-        elif cont1 > cont2:
-            valor_banca -= gale
 
-
-        if num1 == prev2 & num2 != prev3 & cont1 < cont2 & cont1 == 0:
+        if num1 == prev2 & num2 != prev3 & loss1 == loss2:
             valor_banca += somas_gale
-        else:
+            banca += valor_entrada
+
+        if loss1 > loss2:
+            banca -= somas_gale
             valor_banca -= somas_gale
-
-
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -238,10 +246,10 @@ while True:
         Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
-        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%somasgale]}')
+        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_branco]} {["%.2f" % branco]}')
+        Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_entrada]} {["%.2f" % valor_branco]}')
         Log.PreencheLog(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}loss:{lista_loss}Gsoma:{lista_somagales}')
         Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
         Log.PreencheLog(f'{gain, loss}')
@@ -257,12 +265,13 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
-        print(f'Saldo atual: {"%.2f"%valor_banca} Aposta:{["%.2f"%entrada]}')
+        print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%valor_entrada]} {["%.2f"%valor_branco]}')
+        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        print(f'Cor:{[num1, num, num2, numm, num3]}Prev:{lista_previsoes}')
+        print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
+        print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
         print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
