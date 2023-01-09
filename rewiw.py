@@ -209,12 +209,6 @@ while True:
             somas_gale += g4
             branco = g4 * 0.15
 
-
-        if num1 == 0 & cont1 > 0:
-            valor_banca += (branco * 14)
-            gale = g
-            somas_gale = g + valor_entrada
-
         if num1 != prev2:
             valor_banca -= gale
 
@@ -225,10 +219,10 @@ while True:
         if loss1 > loss2:
             banca -= somas_gale
 
-        if num2 == prev3 & cont1 == 0:
-            gale = g + valor_entrada
-
-
+        if num1 == 0 & cont1 > 0:
+            valor_banca += (branco * 14)
+            gale = g
+            somas_gale = g + valor_entrada
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
