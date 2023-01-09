@@ -211,17 +211,22 @@ while True:
 
 
         if num1 == 0 & cont1 > 0:
-            valor_banca += (valor_branco * 14)
-            gale = gale
+            valor_banca += (branco * 14)
+            gale = g
+            somas_gale = g + valor_entrada
 
-        if cont1 < cont2:
+        if num1 != prev2:
+            valor_banca -= gale
+
+        if cont1 < cont2 & num1 > 0:
             valor_banca += somas_gale
             banca += valor_entrada
-        else:
-            valor_banca -= gale
 
         if loss1 > loss2:
             banca -= somas_gale
+
+        if num2 == prev3 & cont1 == 0:
+            gale = g + valor_entrada
 
 
             #Preencher log
