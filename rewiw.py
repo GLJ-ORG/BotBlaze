@@ -67,20 +67,6 @@ g4 = 0
 g5 = 0
 #informações usuario
 
-'''banca_inicial = 100 #(input('Qual o valor da sua banca?'))
-tipo_conta = int(0) #int(input('Deseja operar em conta REAL(1) ou Treinamento(2)? (1 ou 2)'))
-entrada = int(0) #int(input('Qual valor da sua primeira entrada?'))
-stop_loss = 0 #int(input('Quantos loss você aceita tomar?'))30
-stop_gain = 0 #int(input('Qual sua meta de vitória em porcentagem(%)?'))
-quantidade_gales = 3 #int(input('Quantos gales você quer?'))
-multiplicador = 2 #int(input('Qual será seu fator multiplicador de gale?'))
-
-banca = int(1000)
-gale = 0
-somas_gale = 0
-branco = 0
-valor_entrada = 0'''
-
 while True:
 # Receber dados da api OK
     dados = requests.get('https://blaze.com/api/roulette_games/recent')
@@ -142,7 +128,7 @@ while True:
             loss += 1
             contador_loss = 0
             zerador_loss = 0
-            somas_gale = g
+
 
 
         if num1 == 0:
@@ -200,7 +186,7 @@ while True:
             somas_gale = 0
             valor_branco = 0
             gale = g
-            somas_gale = g
+            somas_gale = g + valor_entrada
             branco = g * 0.15
 
         elif contador_loss == 2:
@@ -226,16 +212,17 @@ while True:
 
         if num1 == 0 & cont1 > 0:
             valor_banca += (valor_branco * 14)
-            somas_gale = g
             gale = gale
 
-        if num1 == prev2 & num2 != prev3 & loss1 == loss2:
+        if cont1 < cont2:
             valor_banca += somas_gale
             banca += valor_entrada
+        else:
+            valor_banca -= gale
 
         if loss1 > loss2:
             banca -= somas_gale
-            valor_banca -= somas_gale
+
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
