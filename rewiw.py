@@ -251,14 +251,14 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
-        print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
+        #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
+        #print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
         print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
-        print(f'loss:{lista_loss} Cont:{lista_contador}')
+        #print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
         print()
