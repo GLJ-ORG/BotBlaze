@@ -58,6 +58,7 @@ branco = float(0)
 valor_branco = float(0)
 gale = 0
 somas_gale = float(0)
+ultimo_loss = int(0)
 
 g = 0
 g1 = 0
@@ -223,6 +224,9 @@ while True:
             valor_banca += (branco * 14)
             gale = g
             somas_gale = g + valor_entrada
+
+        if loss1 > loss2:
+            ultimo_loss = total_partidas
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
@@ -231,7 +235,7 @@ while True:
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min')
+        Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min. Ultimo loss: Nº{ultimo_loss}')
         Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -250,7 +254,7 @@ while True:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
+        print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min. Ultimo loss: Rodada Nº{ultimo_loss}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
