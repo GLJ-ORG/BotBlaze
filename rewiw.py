@@ -51,7 +51,7 @@ somas = 0
 total_partidas = int(0)
 resultado_divisao = int(0)
 
-banca = int(100)
+banca = int(500)
 valor_banca = banca
 entrada = 0
 valor_entrada = float(0)
@@ -61,7 +61,9 @@ gale = 0
 somas_gale = float(0)
 ultimo_loss = int(0)
 diferenca_loss = int(0)
-guardar = int(0)
+guardar1 = int(0)
+guardar2 = int(0)
+guardar3 = int(0)
 
 g = 0
 g1 = 0
@@ -128,7 +130,7 @@ while True:
             contador_loss += 1
             zerador_loss += 1
 
-        if contador_loss == 3:
+        if contador_loss == 4:
             loss += 1
             contador_loss = 0
             zerador_loss = 0
@@ -222,18 +224,19 @@ while True:
 
         if loss1 > loss2:
             banca -= somas_gale
+            ultimo_loss = total_partidas
+            guardar2 = contador_gain - guardar1
+            guardar1 = gain
+
+            lista_diferenca_loss.insert(0, int(guardar2))
+            lista_diferenca_loss.pop()
 
         if num1 == 0 & cont1 > 0:
             valor_banca += (branco * 14)
             gale = g
             somas_gale = g + valor_entrada
 
-        if loss1 > loss2:
-            ultimo_loss = total_partidas
-            diferenca_loss = int(total_partidas - ultimo_loss)
-            guardar = diferenca_loss
-            lista_diferenca_loss.insert(0, int(guardar))
-            lista_diferenca_loss.pop()
+
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -263,16 +266,16 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
-        print(f'Ultimo loss: Nº{ultimo_loss}')
-        print(f'Diferença losses: {lista_diferenca_loss} {guardar}')
+        print(f'Ultimo loss: Nº{ultimo_loss} Valor Branco: {branco}')
+        print(f'Diferença losses: {lista_diferenca_loss} {guardar1, guardar2, guardar3}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
+        #print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
         #print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
         print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
-        print(f'loss:{lista_loss} Cont:{lista_contador}')
+        #print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
         print()
