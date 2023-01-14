@@ -236,6 +236,7 @@ while True:
             gale = g
             somas_gale = g + valor_entrada
 
+        guardar3 = gain - guardar2
 
 
             #Preencher log
@@ -267,8 +268,8 @@ while True:
         print(f'Rodada Nº{[total_partidas]}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         print(f'Valor Branco: {"%.2f"%branco} Ultimo loss: Nº{[ultimo_loss]}')
-        print(f'ultima derrota na vitoria {guardar1} Diferença losses:{lista_diferenca_loss}')
-        print(f'Tempo de trabalho: {"%.1f" %tempo_trabalho} min.')
+        print(f'ultima derrota na vitoria {[guardar1]} Diferença losses:{lista_diferenca_loss}')
+        print(f'Tempo de trabalho: {"%.1f" %tempo_trabalho} min. Diferença atual: {[guardar3]}')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
