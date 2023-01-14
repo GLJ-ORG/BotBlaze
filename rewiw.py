@@ -266,7 +266,7 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{total_partidas}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
-        print(f'Ultimo loss: Nº{ultimo_loss} Valor Branco: {branco}')
+        print(f'Valor Branco: {"%.2f"%branco} Ultimo loss: Nº{ultimo_loss}')
         print(f'Diferença losses: {lista_diferenca_loss} {guardar1, guardar2, guardar3}')
         print(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min.')
         # print dos dados para análise
