@@ -238,6 +238,8 @@ while True:
 
         guardar3 = gain - guardar1
 
+        if cont1 == 3:
+            guardar = gain
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -267,7 +269,7 @@ while True:
         print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
         print(f'Rodada Nº{[total_partidas]}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
-        print(f'Diferença atual: {[guardar3]}')
+        print(f'Diferença atual: {[guardar3]} Ultimo G3: {guardar}')
         print(f'Ultima derrota na vitoria {[guardar1]}')
         print(f'Diferença losses:{lista_diferenca_loss}')
         print(f'Tempo de trabalho: {"%.1f" %tempo_trabalho} min. ')
