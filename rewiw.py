@@ -14,6 +14,8 @@ lista_contador = [0, 0, 0]
 lista_loss = [0, 0]
 lista_somagales = [0, 0]
 lista_diferenca_loss = [0, 0, 0]
+lista_diferenca_branco = [0, 0, 0, 0, 0]
+
 
 soma_color = 0
 soma_roll = 0
@@ -61,9 +63,13 @@ gale = 0
 somas_gale = float(0)
 ultimo_loss = int(0)
 diferenca_loss = int(0)
+guardar = int(0)
 guardar1 = int(0)
 guardar2 = int(0)
 guardar3 = int(0)
+branco_guardar = int(0)
+branco_guardar1 = int(0)
+
 
 g = 0
 g1 = 0
@@ -105,7 +111,10 @@ while True:
         somas += a
         dividir_somas = somas
         resultado_divisao = int(dividir_somas / 2)
-        total_partidas = total_partidas + 1
+        total_partidas += 1
+        if somas >= 100:
+            somas = 0
+
 
     #previsão da partida
         if resultado_divisao % 2 == 0:
@@ -241,6 +250,13 @@ while True:
         if cont1 == 3:
             guardar = gain
 
+        if num1 == 0:
+            branco_guardar = contador_gain - branco_guardar1
+            branco_guardar1 = gain
+            lista_diferenca_branco.insert(0, int(branco_guardar))
+            lista_diferenca_branco.pop()
+        branco_guardar3 = gain - branco_guardar1
+
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
@@ -266,13 +282,17 @@ while True:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        print(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
-        print(f'Rodada Nº{[total_partidas]}', f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
+        print(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
+        print(f'Rodada Nº{[total_partidas]}', f'Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
-        print(f'Diferença atual: {[guardar3]} Ultimo G3: {guardar}')
-        print(f'Ultima derrota na vitoria {[guardar1]}')
+        print(f'Diferença LOSS atual: {[guardar3]} Ultimo G3:{guardar}')
+        print(f'Ultimo LOSS {[guardar1]}')
         print(f'Diferença losses:{lista_diferenca_loss}')
-        print(f'Tempo de trabalho: {"%.1f" %tempo_trabalho} min. ')
+        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        print(f'Ultimo branco:{branco_guardar1} Diferença branco atual:{branco_guardar3}')
+        print(f'Lista diferenca branco:{lista_diferenca_branco}')
+
+        print(f'Tempo de trabalho: {"%.1f" %tempo_trabalho} min.')
         # print dos dados para análise
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
@@ -282,7 +302,9 @@ while True:
         #print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
-        print()
+        #print(somas, soma_roll, soma_roll_back, lista_somagales)
+        #print()
+
 
 
 
