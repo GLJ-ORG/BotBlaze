@@ -251,11 +251,11 @@ while True:
             guardar = gain
 
         if num1 == 0:
-            branco_guardar = contador_gain - branco_guardar1
-            branco_guardar1 = gain
+            branco_guardar = total_partidas - branco_guardar1
+            branco_guardar1 = total_partidas
             lista_diferenca_branco.insert(0, int(branco_guardar))
             lista_diferenca_branco.pop()
-        branco_guardar3 = gain - branco_guardar1
+        branco_guardar3 = total_partidas - branco_guardar1
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -274,7 +274,7 @@ while True:
         #Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
         #Log.PreencheLog(f'{gain, loss}')
         #Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
-        Log.PreencheLog(f'~')
+        #Log.PreencheLog(f'~')
 
         print()
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -285,7 +285,7 @@ while True:
         print(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
         print(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
-        print(f'Diferença entre LOSS atual: {[guardar3]} Ultimo G3:{guardar}')
+        print(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
         print(f'Ultimo LOSS {[guardar1]}')
         print(f'Diferença losses:{lista_diferenca_loss}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -294,11 +294,11 @@ while True:
 
         print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
         # print dos dados para análise
-        print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        #print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         #print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
        #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
         #print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
-        print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
+        #print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
         #print(f'loss:{lista_loss} Cont:{lista_contador}')
         #print(f'G:{gain} P:{loss}')
         #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
