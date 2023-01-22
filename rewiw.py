@@ -110,19 +110,21 @@ while True:
         a = num1
         somas += a
         dividir_somas = somas
-        resultado_divisao = int(dividir_somas / 2)
+        resultado_divisao = (round(dividir_somas / 2))
         total_partidas += 1
-        if somas >= 100:
+        if somas == 20:
             somas = 0
+        elif somas > 20:
+            somas = 1
 
 
     #previsão da partida
         if resultado_divisao % 2 == 0:
-            previsao = 1
-            prev_text = 'Vermelho'
-        else:
             previsao = 2
             prev_text = 'Preto'
+        else:
+            previsao = 1
+            prev_text = 'Vermelho'
 
         lista_previsoes.insert(0, int(previsao))
         lista_previsoes.pop()
@@ -148,6 +150,7 @@ while True:
 
         if num1 == 0:
             coringa +=1
+            contador_loss = 0
 
         def cor_rodada(num1):
             if num1 == 1:
@@ -267,14 +270,7 @@ while True:
         Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
         Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min. Ultimo loss: Nº{ultimo_loss}')
         Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
-        # print dos dados para análise
-        #Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        #Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_entrada]} {["%.2f" % valor_branco]}')
-        #Log.PreencheLog(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}loss:{lista_loss}Gsoma:{lista_somagales}')
-        #Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
-        #Log.PreencheLog(f'{gain, loss}')
-        #Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
-        #Log.PreencheLog(f'~')
+
 
         print()
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -287,24 +283,21 @@ while True:
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         print(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
         print(f'Ultimo LOSS {[guardar1]}')
-        print(f'Diferença losses:{lista_diferenca_loss}')
+        print(f'Diferença losses:{lista_diferenca_loss} Soma: {somas, resultado_divisao}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
         print(f'Lista diferenca branco:{lista_diferenca_branco}')
 
         print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
-        # print dos dados para análise
-        #print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        #print(f'{["%.2f"%gale]} {["%.2f"%somas_gale]} {["%.2f"%branco]} {["%.2f"%valor_branco]}')
-       #print(f'Num atual:{num1} Prev Ante:{prev2} List Prev:{lista_previsoes}')
-        #print(f'Cor:{[num1, num2, num3]}Prev:{[prev1, prev2, prev3]}')
-        #print(f'{["%.2f"%g]} {["%.2f"%g1]} {["%.2f"%g2]} {["%.2f"%g3]} {["%.2f"%g4]} {["%.2f"%g5]}')
-        #print(f'loss:{lista_loss} Cont:{lista_contador}')
-        #print(f'G:{gain} P:{loss}')
-        #print(f'ContG:{contador_gain} ContP:{contador_loss} ZLss:{zerador_loss}')'''
-        #print(somas, soma_roll, soma_roll_back, lista_somagales)
-        #print()
 
+        # print dos dados para análise
+        #Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        #Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_entrada]} {["%.2f" % valor_branco]}')
+        #Log.PreencheLog(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}loss:{lista_loss}Gsoma:{lista_somagales}')
+        #Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
+        #Log.PreencheLog(f'{gain, loss}')
+        #Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
+        #Log.PreencheLog(f'~')
 
 
 
