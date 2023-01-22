@@ -13,7 +13,7 @@ lista_previsoes = [0, 0, 0]
 lista_contador = [0, 0, 0]
 lista_loss = [0, 0]
 lista_somagales = [0, 0]
-lista_diferenca_loss = [0, 0, 0]
+lista_diferenca_loss = [0, 0, 0, 0, 0]
 lista_diferenca_branco = [0, 0, 0, 0, 0]
 
 
@@ -282,8 +282,8 @@ while True:
         print(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
         #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         print(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
-        print(f'Ultimo LOSS {[guardar1]}')
-        print(f'Diferença losses:{lista_diferenca_loss} Soma: {somas, resultado_divisao}')
+        print(f'Ultimo LOSS {[guardar1]} Soma: {somas, resultado_divisao}')
+        print(f'Diferença losses:{lista_diferenca_loss}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
         print(f'Lista diferenca branco:{lista_diferenca_branco}')
