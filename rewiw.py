@@ -70,13 +70,15 @@ guardar3 = int(0)
 branco_guardar = int(0)
 branco_guardar1 = int(0)
 
-
-g = 0
-g1 = 0
-g2 = 0
-g3 = 0
-g4 = 0
-g5 = 0
+saldo_banca = 0
+aplicar = 0
+aplicar1 = 0
+aplicar2 = 0
+aplicar3 = 0
+v_branco = 0
+v_branco1 = 0
+v_branco2 = 0
+montante = 550
 #informações usuario
 
 while True:
@@ -200,14 +202,14 @@ while True:
         branco_guardar3 = total_partidas - branco_guardar1
 
         def gale_conservador():
-            aplicar = 0
-            aplicar1 = 0
-            aplicar2 = 0
-            aplicar3 = 0
-            v_branco = 0
-            v_branco1 = 0
-            v_branco2 = 0
-            montante = 550
+            global aplicar
+            global aplicar1
+            global aplicar2
+            global aplicar3
+            global v_branco
+            global v_branco1
+            global v_branco2
+            global montante
 
             if contador_loss == 0:
                 aplicar = (round(montante * 0.0025, 2))
@@ -229,32 +231,38 @@ while True:
             return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2
 
         def saldo():
-            saldo_banca = 0
-            if contador_loss == 0 & prev2 != num1:
+            global saldo_banca
+            global prev2
+            global num1
+            global contador_loss
+            
+            if contador_loss == 0 and prev2 != num1:
                 saldo_banca -= (gale_conservador()[0])
-            elif contador_loss == 0 & prev2 == num1:
-                saldo_banca += (gale_conservador()[0]) * 2
+            if prev2 == num1 and cont1 == 0:
+                saldo_banca += (gale_conservador()[0]) *2
 
-            if contador_loss == 1 & prev2 != num1:
+            if contador_loss == 1 and prev2 != num1:
                 saldo_banca -= (gale_conservador()[1])
                 saldo_banca -= (gale_conservador()[4]) * 2
-            elif contador_loss == 1 & prev2 == num1:
+            if prev2 == num1 and cont1 == 1:
                 saldo_banca += (gale_conservador()[1]) * 2
-                saldo_banca += (gale_conservador()[1]) * 2
+                saldo_banca += (gale_conservador()[4]) * 2
 
-            if contador_loss == 2 & prev2 != num1:
+            if contador_loss == 2 and prev2 != num1:
                 saldo_banca -= (gale_conservador()[2])
                 saldo_banca -= (gale_conservador()[5]) * 2
-            elif contador_loss == 2 & prev2 == num1:
-                saldo_banca += (gale_conservador()[2]) * 2
+            if prev2 == num1 and cont1 == 2:
+                saldo_banca += (gale_conservador()[2]) * 3
                 saldo_banca += (gale_conservador()[5]) * 2
 
-            if contador_loss == 3 & prev2 != num1:
+            if contador_loss == 3 and prev2 != num1:
                 saldo_banca -= (gale_conservador()[3])
                 saldo_banca -= (gale_conservador()[6]) * 2
-            elif contador_loss == 3 & prev2 == num1:
-                saldo_banca += (gale_conservador()[3]) * 2
+            if prev2 == num1 and cont1 == 3:
+                saldo_banca += (gale_conservador()[3]) * 3
                 saldo_banca += (gale_conservador()[6]) * 2
+            if num1 == 0:
+
             return saldo_banca
 
 
@@ -271,8 +279,6 @@ while True:
         Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
 
         print()
-        print(round(saldo(), 2))
-        print(gale_conservador())
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -289,6 +295,9 @@ while True:
         print(f'Lista diferenca branco:{lista_diferenca_branco}')
 
         print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
+        print(round(saldo(), 2))
+        print(gale_conservador())
+        print(prev2, num1, contador_loss)
 
         # print dos dados para análise
         #Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
