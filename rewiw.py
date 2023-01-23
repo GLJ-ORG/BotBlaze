@@ -184,11 +184,6 @@ while True:
             lista_diferenca_loss.insert(0, int(guardar2))
             lista_diferenca_loss.pop()
 
-        if num1 == 0 & cont1 > 0:
-            valor_banca += (branco * 14)
-            gale = g
-            somas_gale = g + valor_entrada
-
         guardar3 = gain - guardar1
 
         if cont1 == 3:
