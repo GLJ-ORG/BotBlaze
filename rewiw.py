@@ -230,26 +230,29 @@ while True:
 
         def saldo():
             saldo_banca = 0
-            if contador_loss == 0:
+            if contador_loss == 0 & prev2 != num1:
                 saldo_banca -= (gale_conservador()[0])
-            if contador_loss == 0 & prev2 == num1:
+            elif contador_loss == 0 & prev2 == num1:
                 saldo_banca += (gale_conservador()[0]) * 2
-            if contador_loss == 1:
+
+            if contador_loss == 1 & prev2 != num1:
                 saldo_banca -= (gale_conservador()[1])
                 saldo_banca -= (gale_conservador()[4]) * 2
-            if contador_loss == 1 & prev2 == num1:
+            elif contador_loss == 1 & prev2 == num1:
                 saldo_banca += (gale_conservador()[1]) * 2
                 saldo_banca += (gale_conservador()[1]) * 2
-            if contador_loss == 2:
+
+            if contador_loss == 2 & prev2 != num1:
                 saldo_banca -= (gale_conservador()[2])
                 saldo_banca -= (gale_conservador()[5]) * 2
-            if contador_loss == 2 & prev2 == num1:
+            elif contador_loss == 2 & prev2 == num1:
                 saldo_banca += (gale_conservador()[2]) * 2
                 saldo_banca += (gale_conservador()[5]) * 2
-            if contador_loss == 3:
+
+            if contador_loss == 3 & prev2 != num1:
                 saldo_banca -= (gale_conservador()[3])
                 saldo_banca -= (gale_conservador()[6]) * 2
-            if contador_loss == 3 & prev2 == num1:
+            elif contador_loss == 3 & prev2 == num1:
                 saldo_banca += (gale_conservador()[3]) * 2
                 saldo_banca += (gale_conservador()[6]) * 2
             return saldo_banca
