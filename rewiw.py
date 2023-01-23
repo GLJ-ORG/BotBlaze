@@ -173,69 +173,8 @@ while True:
         #def tempo_trabalhado():
         tempo_trabalho = float(0)
         tempo_trabalho = total_partidas * 0.3 / 0.6
-        #return Tempo_trabalhado
-
-    #Simulador de banca
-        # Definindo entrada
-        valor_entrada = banca * 0.01
-        if valor_entrada < 1.1:
-            valor_entrada = 1.1
-        else:
-            valor_entrada = banca * 0.01
-
-        branco = gale * 0.15
-        if branco < 1.09:
-            branco = float(1.1)
-            valor_branco = float(1.1)
-        else:
-            branco = gale * 0.15
-            valor_branco = branco
-
-        # definindo valores dos gales
-        g = valor_entrada + (valor_branco * 2)
-        g1 = (g * 2) + valor_entrada + (valor_branco * 2)
-        g2 = (g1 * 2) + valor_entrada + (valor_branco * 2)
-        g3 = (g2 * 2) + valor_entrada + (valor_branco * 2)
-        g4 = (g3 * 2) + valor_entrada + (valor_branco * 2)
-        g5 = (g4 * 2) + valor_entrada + (valor_branco * 2)
-
-        if contador_loss == 1:
-            gale = 0
-            somas_gale = 0
-            valor_branco = 0
-            gale = g
-            somas_gale = g + valor_entrada
-            branco = g * 0.15
-
-        elif contador_loss == 2:
-            gale = g1
-            somas_gale += g1
-            branco = g1 * 0.15
-
-        elif contador_loss == 3:
-            gale = g2
-            somas_gale += g2
-            branco = g2 * 0.15
-
-        elif contador_loss == 4:
-            gale = g3
-            somas_gale += g3
-            branco = g3 * 0.15
-
-        elif contador_loss == 5:
-            gale = g4
-            somas_gale += g4
-            branco = g4 * 0.15
-
-        if num1 != prev2:
-            valor_banca -= gale
-
-        if cont1 < cont2 & num1 > 0:
-            valor_banca += somas_gale
-            banca += valor_entrada
 
         if loss1 > loss2:
-            banca -= somas_gale
             ultimo_loss = total_partidas
             guardar2 = contador_gain - guardar1
             guardar1 = gain
@@ -260,6 +199,63 @@ while True:
             lista_diferenca_branco.pop()
         branco_guardar3 = total_partidas - branco_guardar1
 
+        def gale_conservador():
+            aplicar = 0
+            aplicar1 = 0
+            aplicar2 = 0
+            aplicar3 = 0
+            v_branco = 0
+            v_branco1 = 0
+            v_branco2 = 0
+            montante = 550
+
+            if contador_loss == 0:
+                aplicar = (round(montante * 0.0025, 2))
+            elif contador_loss == 1:
+                aplicar = (round(montante * 0.0025, 2))
+                aplicar1 = (round(aplicar * 2.5, 2))
+                v_branco = float(1.1)
+            elif contador_loss == 2:
+                aplicar = (round(montante * 0.0025, 2))
+                aplicar1 = (round(aplicar * 2.5, 2))
+                aplicar2 = (round(aplicar1 * 2.8, 2))
+                v_branco1 = float(1.5)
+            elif contador_loss == 3:
+                aplicar = (round(montante * 0.0025, 2))
+                aplicar1 = (round(aplicar * 2.5, 2))
+                aplicar2 = (round(aplicar1 * 2.8, 2))
+                aplicar3 = (round(aplicar2 * 3, 2))
+                v_branco2 = (round(aplicar3 * 0.14, 2))
+            return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2
+
+        def saldo():
+            saldo_banca = 0
+            if contador_loss == 0:
+                saldo_banca -= (gale_conservador()[0])
+            if contador_loss == 0 & prev2 == num1:
+                saldo_banca += (gale_conservador()[0]) * 2
+            if contador_loss == 1:
+                saldo_banca -= (gale_conservador()[1])
+                saldo_banca -= (gale_conservador()[4]) * 2
+            if contador_loss == 1 & prev2 == num1:
+                saldo_banca += (gale_conservador()[1]) * 2
+                saldo_banca += (gale_conservador()[1]) * 2
+            if contador_loss == 2:
+                saldo_banca -= (gale_conservador()[2])
+                saldo_banca -= (gale_conservador()[5]) * 2
+            if contador_loss == 2 & prev2 == num1:
+                saldo_banca += (gale_conservador()[2]) * 2
+                saldo_banca += (gale_conservador()[5]) * 2
+            if contador_loss == 3:
+                saldo_banca -= (gale_conservador()[3])
+                saldo_banca -= (gale_conservador()[6]) * 2
+            if contador_loss == 3 & prev2 == num1:
+                saldo_banca += (gale_conservador()[3]) * 2
+                saldo_banca += (gale_conservador()[6]) * 2
+            return saldo_banca
+
+
+
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
@@ -271,8 +267,9 @@ while True:
         Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min. Ultimo loss: Nº{ultimo_loss}')
         Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
 
-
         print()
+        print(round(saldo(), 2))
+        print(gale_conservador())
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Entrar na Cor: ~~{prev_text.upper()}~~')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
