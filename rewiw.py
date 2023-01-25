@@ -70,15 +70,16 @@ guardar3 = int(0)
 branco_guardar = int(0)
 branco_guardar1 = int(0)
 
-saldo_banca = 0
-aplicar = 0
-aplicar1 = 0
-aplicar2 = 0
-aplicar3 = 0
-v_branco = 0
-v_branco1 = 0
-v_branco2 = 0
-montante = 550
+saldo_banca = float(0)
+aplicar = float(0)
+aplicar1 = float(0)
+aplicar2 = float(0)
+aplicar3 = float(0)
+v_branco = float(0)
+v_branco1 = float(0)
+v_branco2 = float(0)
+v_branco3 = float(0)
+montante = float(550)
 #informações usuario
 
 while True:
@@ -204,54 +205,65 @@ while True:
             global v_branco
             global v_branco1
             global v_branco2
+            global v_branco3
             global montante
             aplicar = (round(montante * 0.0025, 2))
-            aplicar1 = (round(aplicar * 2.5, 2))
-            aplicar2 = (round(aplicar1 * 2.8, 2))
-            aplicar3 = (round(aplicar2 * 3, 2))
-            v_branco = float(1.1)
-            v_branco1 = float(1.5)
-            v_branco2 = (round(aplicar3 * 0.14, 2))
-            return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2
+            aplicar1 = (round(aplicar * 2.3, 2))
+            aplicar2 = (round(aplicar1 * 2.5, 2))
+            aplicar3 = (round(aplicar2 * 2.8, 2))
+            v_branco = (round(1.1, 2))
+            v_branco1 = (round(1.3, 2))
+            v_branco2 = (round(aplicar2 * 0.15, 2))
+            v_branco3 = (round(aplicar3 * 0.15, 2))
+            return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
 
         def saldo():
             global saldo_banca
             global prev2
             global num1
-            global contador_loss
+            global cont1
+            global cont2
 
-            if contador_loss == 0:
-                saldo_banca -= (gale_conservador()[0])
-            if prev2 == num1 and cont2 == 0:
-                saldo_banca += (gale_conservador()[0]) *2
+            if cont2 == 3 & cont1 == 0 and prev2 != num1:
+                saldo_banca -= aplicar3 + (v_branco3 * 2)
 
-            if contador_loss == 1 and prev2 != num1:
-                saldo_banca -= (gale_conservador()[1])
-                saldo_banca -= (gale_conservador()[4]) * 2
-            if prev2 == num1 and cont2 == 1:
-                saldo_banca += (gale_conservador()[1]) * 2
-                saldo_banca += (gale_conservador()[4]) * 2
+            if cont2 == 2 & cont1 == 3 and prev2 != num1:
+                saldo_banca -= aplicar2 + (v_branco2 * 2)
 
-            if contador_loss == 2 and prev2 != num1:
-                saldo_banca -= (gale_conservador()[2])
-                saldo_banca -= (gale_conservador()[5]) * 2
-            if prev2 == num1 and cont2 == 2:
-                saldo_banca += (gale_conservador()[2]) * 2
-                saldo_banca += (gale_conservador()[5]) * 2
+            if cont2 == 1 & cont1 == 2 and prev2 != num1:
+                saldo_banca -= aplicar1 + (v_branco1 * 2)
 
-            if contador_loss == 3 and prev2 != num1:
-                saldo_banca -= (gale_conservador()[3])
-                saldo_banca -= (gale_conservador()[6]) * 2
-            if prev2 == num1 and cont2 == 3:
-                saldo_banca += (gale_conservador()[3]) * 2
-                saldo_banca += (gale_conservador()[6]) * 2
+            if cont2 == 0 & cont1 == 1 and prev2 != num1:
+                saldo_banca -= aplicar + (v_branco * 2)
 
-            if num1 == 0 and cont2 == 1:
+            if cont2 == 0 & cont1 == 0 and prev2 != num1:
+                saldo_banca -= aplicar + (v_branco * 2)
+
+
+            if cont2 == 3 & cont1 == 0 and prev2 == num1:
+                saldo_banca += (aplicar3 * 2) + (v_branco3 * 2)
+
+            if cont2 == 2 & cont1 == 0 and prev2 == num1:
+                saldo_banca += (aplicar2 * 2) + (v_branco2 * 2)
+
+            if cont2 == 1 & cont1 == 0 and prev2 == num1:
+                saldo_banca += (aplicar1 * 2) + (v_branco1 * 2)
+
+            if cont2 == 0 & cont1 == 1 and prev2 == num1:
+                saldo_banca += (aplicar * 2) + (v_branco * 2)
+
+            if cont2 == 0 & cont1 == 0 and prev2 == num1:
+                saldo_banca += (aplicar * 2) + (v_branco * 2)
+
+
+            if num1 == 0 and cont1 == 0:
                 saldo_banca += v_branco * 14
-            if num1 == 0 and cont2 == 2:
+            if num1 == 0 and cont1 == 1:
                 saldo_banca += v_branco1 * 14
-            if num1 == 0 and cont2 == 3:
+            if num1 == 0 and cont1 == 2:
                 saldo_banca += v_branco2 * 14
+            if num1 == 0 and cont1 == 3:
+                saldo_banca += v_branco3 * 14
 
 
             return saldo_banca
