@@ -213,7 +213,7 @@ while True:
             aplicar3 = (round(10, 2))
             v_branco = (round(1.25, 2))
             v_branco1 = (round(1.25, 2))
-            v_branco2 = (round(2.5, 2))
+            v_branco2 = (round(1.5, 2))
             v_branco3 = (round(2.5, 2))
             return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
 
@@ -270,14 +270,24 @@ while True:
 
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Ganhos: {gain} Perdas: {loss} Coringa: {coringa}')
-        Log.PreencheLog(f'Rodada Nº{total_partidas}' f'Data e hora Atual: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(f'Tempo de trabalho: {"%.1f" % tempo_trabalho} min. Ultimo loss: Nº{ultimo_loss}')
-        Log.PreencheLog(f'Saldo atual: {"%.2f"%banca} Aposta:{["%.2f"%valor_entrada]}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
+        Log.PreencheLog(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
+        Log.PreencheLog(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
+        Log.PreencheLog(f'Ultimo LOSS {[guardar1]} Soma: {somas, resultado_divisao}')
+        Log.PreencheLog(f'Diferença losses:{lista_diferenca_loss}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
+        Log.PreencheLog(f'Lista diferenca branco:{lista_diferenca_branco}')
+        Log.PreencheLog('--------------------------------------------')
+        Log.PreencheLog(f'TEMPO ATIVO: {"%.1f" % tempo_trabalho} min.')
+        Log.PreencheLog(f'{round(saldo(), 2)}')
+        Log.PreencheLog(f'{gale_conservador()}')
+        Log.PreencheLog(f'{prev2, num1, cont1, cont2}')
 
         print()
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -287,27 +297,15 @@ while True:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
         print(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
-        #print(f'Saldo atual: {"%.2f"%valor_banca, banca} Aposta:{["%.2f"%valor_entrada]}')
         print(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
         print(f'Ultimo LOSS {[guardar1]} Soma: {somas, resultado_divisao}')
         print(f'Diferença losses:{lista_diferenca_loss}')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
         print(f'Lista diferenca branco:{lista_diferenca_branco}')
-
         print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
         print(round(saldo(), 2))
+        print('--------------------------------------------')
         print(gale_conservador())
         print(prev2, num1, cont1, cont2)
-
-        # print dos dados para análise
-        #Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        #Log.PreencheLog(f'{["%.2f" % gale]} {["%.2f" % somas_gale]} {["%.2f" % valor_entrada]} {["%.2f" % valor_branco]}')
-        #Log.PreencheLog(f'Cor:{lista_cor}Prev:{lista_previsoes}Cont:{lista_contador}loss:{lista_loss}Gsoma:{lista_somagales}')
-        #Log.PreencheLog(f'{num1, prev2, lista_previsoes}')
-        #Log.PreencheLog(f'{gain, loss}')
-        #Log.PreencheLog(f'{contador_gain, contador_loss, zerador_loss}')
-        #Log.PreencheLog(f'~')
-
-
 
