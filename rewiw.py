@@ -207,14 +207,14 @@ while True:
             global v_branco2
             global v_branco3
             global montante
-            aplicar = (round(1.25, 2))
-            aplicar1 = (round(2.5, 2))
-            aplicar2 = (round(5, 2))
-            aplicar3 = (round(10, 2))
-            v_branco = (round(1.25, 2))
-            v_branco1 = (round(1.25, 2))
-            v_branco2 = (round(1.5, 2))
-            v_branco3 = (round(2.5, 2))
+            aplicar = 1.25
+            aplicar1 = 2.5
+            aplicar2 = 5
+            aplicar3 = 10
+            v_branco = 1.25
+            v_branco1 = 1.25
+            v_branco2 = 1.5
+            v_branco3 = 2.5
             return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
 
         def saldo():
@@ -233,35 +233,35 @@ while True:
             if num1 == 0 and cont1 == 3:
                 saldo_banca += v_branco3 * 14
 
-            if num1 > 0 and cont1 == 0 and total_partidas > 4:
+            if num1 > 0 and cont1 == 0 and prev2 > 0:
                 saldo_banca -= aplicar + (v_branco * 2)
 
 
-            if num1 > 0 and num1 != prev2 and cont1 == 1 and cont2 == 0 and total_partidas > 4:
+            if num1 > 0 and num1 != prev2 and cont1 == 1 and cont2 == 0 and prev2 > 0:
                 saldo_banca -= aplicar1 + (v_branco1 * 2)
 
 
-            if num1 > 0 and num1 != prev2 and cont1 == 2 and cont2 == 1 and total_partidas > 4:
+            if num1 > 0 and num1 != prev2 and cont1 == 2 and cont2 == 1 and prev2 > 0:
                 saldo_banca -= aplicar2 + (v_branco2 * 2)
 
 
-            if num1 > 0 and num1 != prev2 and cont1 == 3 and cont2 == 2 and total_partidas > 4:
+            if num1 > 0 and num1 != prev2 and cont1 == 3 and cont2 == 2 and prev2 > 0:
                 saldo_banca -= aplicar3 + (v_branco1 * 3)
 
 
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 0 and total_partidas > 4:
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 0 and prev2 > 0:
                 saldo_banca += (aplicar * 2) + (v_branco * 2)
 
 
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 1 and total_partidas > 4:
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 1 and prev2 > 0:
                 saldo_banca += (aplicar1 * 2) + (v_branco1 * 2)
 
 
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 2 and total_partidas > 4:
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 2 and prev2 > 0:
                 saldo_banca += (aplicar2 * 2) + (v_branco2 * 2)
 
 
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 3 and total_partidas > 4:
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 3 and prev2 > 0:
                 saldo_banca += (aplicar3 * 2) + (v_branco3 * 2)
 
             return saldo_banca
