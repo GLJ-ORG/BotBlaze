@@ -224,38 +224,6 @@ while True:
             global cont1
             global cont2
 
-            if cont2 == 3 & cont1 == 0 and prev2 != num1:
-                saldo_banca -= aplicar3 + (v_branco3 * 2)
-
-            if cont2 == 2 & cont1 == 3 and prev2 != num1:
-                saldo_banca -= aplicar2 + (v_branco2 * 2)
-
-            if cont2 == 1 & cont1 == 2 and prev2 != num1:
-                saldo_banca -= aplicar1 + (v_branco1 * 2)
-
-            if cont2 == 0 & cont1 == 1 and prev2 != num1:
-                saldo_banca -= aplicar + (v_branco * 2)
-
-            if cont2 == 0 & cont1 == 0 and prev2 != num1:
-                saldo_banca -= aplicar + (v_branco * 2)
-
-
-            if cont2 == 3 & cont1 == 0 and prev2 == num1:
-                saldo_banca += (aplicar3 * 2) + (v_branco3 * 2)
-
-            if cont2 == 2 & cont1 == 0 and prev2 == num1:
-                saldo_banca += (aplicar2 * 2) + (v_branco2 * 2)
-
-            if cont2 == 1 & cont1 == 0 and prev2 == num1:
-                saldo_banca += (aplicar1 * 2) + (v_branco1 * 2)
-
-            if cont2 == 0 & cont1 == 1 and prev2 == num1:
-                saldo_banca += (aplicar * 2) + (v_branco * 2)
-
-            if cont2 == 0 & cont1 == 0 and prev2 == num1:
-                saldo_banca += (aplicar * 2) + (v_branco * 2)
-
-
             if num1 == 0 and cont1 == 0:
                 saldo_banca += v_branco * 14
             if num1 == 0 and cont1 == 1:
@@ -265,6 +233,36 @@ while True:
             if num1 == 0 and cont1 == 3:
                 saldo_banca += v_branco3 * 14
 
+            if num1 > 0 and cont1 == 0 and total_partidas > 4:
+                saldo_banca -= aplicar + (v_branco * 2)
+
+
+            if num1 > 0 and num1 != prev2 and cont1 == 1 and cont2 == 0 and total_partidas > 4:
+                saldo_banca -= aplicar1 + (v_branco1 * 2)
+
+
+            if num1 > 0 and num1 != prev2 and cont1 == 2 and cont2 == 1 and total_partidas > 4:
+                saldo_banca -= aplicar2 + (v_branco2 * 2)
+
+
+            if num1 > 0 and num1 != prev2 and cont1 == 3 and cont2 == 2 and total_partidas > 4:
+                saldo_banca -= aplicar3 + (v_branco1 * 3)
+
+
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 0 and total_partidas > 4:
+                saldo_banca += (aplicar * 2) + (v_branco * 2)
+
+
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 1 and total_partidas > 4:
+                saldo_banca += (aplicar1 * 2) + (v_branco1 * 2)
+
+
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 2 and total_partidas > 4:
+                saldo_banca += (aplicar2 * 2) + (v_branco2 * 2)
+
+
+            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 3 and total_partidas > 4:
+                saldo_banca += (aplicar3 * 2) + (v_branco3 * 2)
 
             return saldo_banca
 
@@ -300,7 +298,7 @@ while True:
         print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
         print(round(saldo(), 2))
         print(gale_conservador())
-        print(prev2, num1, contador_loss, cont1, cont2)
+        print(prev2, num1, cont1, cont2)
 
         # print dos dados para análise
         #Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
