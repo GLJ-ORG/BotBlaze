@@ -207,14 +207,14 @@ while True:
             global v_branco2
             global v_branco3
             global montante
-            aplicar = (round(montante * 0.0025, 2))
-            aplicar1 = (round(aplicar * 2.3, 2))
-            aplicar2 = (round(aplicar1 * 2.5, 2))
-            aplicar3 = (round(aplicar2 * 2.8, 2))
-            v_branco = (round(1.1, 2))
-            v_branco1 = (round(1.3, 2))
-            v_branco2 = (round(aplicar2 * 0.15, 2))
-            v_branco3 = (round(aplicar3 * 0.15, 2))
+            aplicar = (round(1.25, 2))
+            aplicar1 = (round(2.5, 2))
+            aplicar2 = (round(5, 2))
+            aplicar3 = (round(10, 2))
+            v_branco = (round(1.25, 2))
+            v_branco1 = (round(1.25, 2))
+            v_branco2 = (round(2.5, 2))
+            v_branco3 = (round(2.5, 2))
             return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
 
         def saldo():
