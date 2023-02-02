@@ -3,7 +3,6 @@ import requests
 import json
 import Log
 
-
 #variaveis globais
 rodada = 0
 lista_cor = [0, 0, 0]
@@ -15,7 +14,6 @@ lista_loss = [0, 0]
 lista_somagales = [0, 0]
 lista_diferenca_loss = [0, 0, 0, 0, 0]
 lista_diferenca_branco = [0, 0, 0, 0, 0]
-
 
 soma_color = 0
 soma_roll = 0
@@ -80,6 +78,8 @@ v_branco1 = float(0)
 v_branco2 = float(0)
 v_branco3 = float(0)
 montante = float(550)
+g1 = int(0)
+
 #informações usuario
 
 while True:
@@ -113,13 +113,12 @@ while True:
         a = num1
         somas += a
         dividir_somas = somas
+        if somas == 10:
+            somas = 0
+        elif somas > 10:
+            somas = 1
         resultado_divisao = (round(dividir_somas / 2))
         total_partidas += 1
-        if somas == 20:
-            somas = 0
-        elif somas > 20:
-            somas = 1
-
 
     #previsão da partida
         if resultado_divisao % 2 == 0:
@@ -148,8 +147,6 @@ while True:
             loss += 1
             contador_loss = 0
             zerador_loss = 0
-
-
 
         if num1 == 0:
             coringa +=1
@@ -187,7 +184,7 @@ while True:
 
         guardar3 = gain - guardar1
 
-        if cont1 == 3:
+        if cont1 == 2:
             guardar = gain
 
         if num1 == 0:
@@ -207,14 +204,14 @@ while True:
             global v_branco2
             global v_branco3
             global montante
-            aplicar = 1.25
-            aplicar1 = 2.5
-            aplicar2 = 5
-            aplicar3 = 10
-            v_branco = 1.25
-            v_branco1 = 1.25
+            aplicar = 1
+            aplicar1 = 2
+            aplicar2 = 4
+            aplicar3 = 8
+            v_branco = 0.5
+            v_branco1 = 1
             v_branco2 = 1.5
-            v_branco3 = 2.5
+            v_branco3 = 2
             return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
 
         def saldo():
@@ -223,71 +220,52 @@ while True:
             global num1
             global cont1
             global cont2
+            global v_branco
+            global v_branco1
+            global v_branco2
+            global v_branco3
+            global aplicar
+            global aplicar1
+            global aplicar2
+            global aplicar3
 
-            if num1 == 0 and cont1 == 0:
+            if num1 == prev2:
+                if cont1 == 0:
+                    if cont2 == 0:
+                        saldo_banca += (aplicar * 2) + (v_branco * 2)
+                    elif cont2 == 1:
+                        saldo_banca += (aplicar * 2) + (v_branco * 2)
+                    elif cont2 == 2:
+                        saldo_banca += (aplicar * 2) + (v_branco * 2)
+                    elif cont2 == 3:
+                        saldo_banca += (aplicar * 2) + (v_branco * 2)
+            else:
+                'calculo invalido'
+
+
+            if num1 != prev2:
+                if cont1 == 0:
+                    if cont2 == 0:
+                        saldo_banca -= (aplicar) + (v_branco * 2)
+                    elif cont2 == 1:
+                        saldo_banca -= (aplicar) + (v_branco * 2)
+                    elif cont2 == 2:
+                        saldo_banca -= (aplicar) + (v_branco * 2)
+                    elif cont2 == 3:
+                        saldo_banca -= (aplicar) + (v_branco * 2)
+
+            if num1 == 0:
                 saldo_banca += v_branco * 14
-            if num1 == 0 and cont1 == 1:
-                saldo_banca += v_branco1 * 14
-            if num1 == 0 and cont1 == 2:
-                saldo_banca += v_branco2 * 14
-            if num1 == 0 and cont1 == 3:
-                saldo_banca += v_branco3 * 14
-
-            if num1 > 0 and cont1 == 0 and prev2 > 0:
-                saldo_banca -= aplicar + (v_branco * 2)
-
-
-            if num1 > 0 and num1 != prev2 and cont1 == 1 and cont2 == 0 and prev2 > 0:
-                saldo_banca -= aplicar1 + (v_branco1 * 2)
-
-
-            if num1 > 0 and num1 != prev2 and cont1 == 2 and cont2 == 1 and prev2 > 0:
-                saldo_banca -= aplicar2 + (v_branco2 * 2)
-
-
-            if num1 > 0 and num1 != prev2 and cont1 == 3 and cont2 == 2 and prev2 > 0:
-                saldo_banca -= aplicar3 + (v_branco1 * 3)
-
-
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 0 and prev2 > 0:
-                saldo_banca += (aplicar * 2) + (v_branco * 2)
-
-
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 1 and prev2 > 0:
-                saldo_banca += (aplicar1 * 2) + (v_branco1 * 2)
-
-
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 2 and prev2 > 0:
-                saldo_banca += (aplicar2 * 2) + (v_branco2 * 2)
-
-
-            if num1 > 0 and num1 == prev2 and cont1 == 0 and cont2 == 3 and prev2 > 0:
-                saldo_banca += (aplicar3 * 2) + (v_branco3 * 2)
 
             return saldo_banca
 
-
-
+        if cont1 == 1:
+            g1 += 1
+        if cont1 == 0 and cont2 == 3:
+            if prev2 != num1:
+                g1 -= 1
             #Preencher log
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
-        Log.PreencheLog(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
-        Log.PreencheLog(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
-        Log.PreencheLog(f'Ultimo LOSS {[guardar1]} Soma: {somas, resultado_divisao}')
-        Log.PreencheLog(f'Diferença losses:{lista_diferenca_loss}')
-        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-        Log.PreencheLog(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
-        Log.PreencheLog(f'Lista diferenca branco:{lista_diferenca_branco}')
-        Log.PreencheLog('--------------------------------------------')
-        Log.PreencheLog(f'TEMPO ATIVO: {"%.1f" % tempo_trabalho} min.')
-        Log.PreencheLog(f'{round(saldo(), 2)}')
-        Log.PreencheLog(f'{gale_conservador()}')
-        Log.PreencheLog(f'{prev2, num1, cont1, cont2}')
 
         print()
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -303,9 +281,26 @@ while True:
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
         print(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
         print(f'Lista diferenca branco:{lista_diferenca_branco}')
-        print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min.')
+        print(f'TEMPO ATIVO: {"%.1f" %tempo_trabalho} min. Vitórias G1:{g1}')
         print(round(saldo(), 2))
         print('--------------------------------------------')
-        print(gale_conservador())
+        print(aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3)
         print(prev2, num1, cont1, cont2)
 
+        Log.PreencheLog(f'Entrar na Cor: ~~{prev_text.upper()}~~')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'GALE:{[contador_loss]} Cor atual:{cor_rodada(num1)} {[roll1]}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'GANHOS: {gain} PERDAS: {loss} CORINGA: {coringa}')
+        Log.PreencheLog(f'Rodada Nº:{[total_partidas]} Data e hora: {datetime.now().strftime("%d/%m %H:%M")}')
+        Log.PreencheLog(f'Diferença entre LOSS: {[guardar3]} Ultimo G3:{guardar}')
+        Log.PreencheLog(f'Ultimo LOSS {[guardar1]} Soma: {somas, resultado_divisao}')
+        Log.PreencheLog(f'Diferença losses:{lista_diferenca_loss}')
+        Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+        Log.PreencheLog(f'Ultimo branco:{branco_guardar1} DIFERENÇA BRANCO ATUAL:{branco_guardar3}')
+        Log.PreencheLog(f'Lista diferenca branco:{lista_diferenca_branco}')
+        Log.PreencheLog('--------------------------------------------')
+        Log.PreencheLog(f'TEMPO ATIVO: {"%.1f" % tempo_trabalho} min. Vitórias G1:{g1}')
+        Log.PreencheLog(f'{round(saldo(), 2)}')
+        Log.PreencheLog(f'{gale_conservador()}')
+        Log.PreencheLog(f'{prev2, num1, cont1, cont2}')
