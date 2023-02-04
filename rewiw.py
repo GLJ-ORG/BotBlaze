@@ -268,7 +268,12 @@ while True:
         msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota,\n Nunca saia da sua gestão de risco!'
         msgn4 = f'PARABÉNS CORINGA! ⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
-        msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
+        msgn3 = str('')
+        if branco_guardar3 > 9:
+            msgn3 = f'Vamos para o Gale:{cont1}\n Proteja o ⚪\n🔥💰🤑🚀'
+        else:
+            msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
+
         msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
 
         if prev_text == 'Vermelho':
@@ -283,7 +288,7 @@ while True:
             msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅\n{msgn2}\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
         elif cont2 == 3 and num1 != 0:
-            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!\n❌❌❌\n'
+            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal, ou volte mais tarde!\n❌❌❌\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
         elif num1 == 0:
             msgn = f'{msgn4}\n{msgn2}'
