@@ -264,7 +264,7 @@ while True:
         if cont1 == 0 and cont2 == 3:
             if prev2 != num1:
                 g1 -= 1
-
+        msgn_prox = str('')
         msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota\n Nunca saia da sua gestão de risco!'
         msgn4 = f'PARABÉNS CORINGA!⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
@@ -280,24 +280,29 @@ while True:
 
         msgn = f'ENTRAR NA COR: {prev_text.upper()}'
         if prev2 == num1:
-            msgn = f'VITÓRIA NO GALE:{cont2}\n {msgn5}\n✅✅✅\n{msgn2}'
+            msgn = f'VITÓRIA NO GALE:{cont2}\n {msgn5}\n✅✅✅\n{msgn2}\n'
+            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
         elif cont2 == 3 and num1 != 0:
-            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!\n❌❌❌\n{msgn2}'
+            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!\n❌❌❌\n'
+            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
         elif num1 == 0:
             msgn = f'{msgn4}\n{msgn2}'
         else:
             msgn = f'{msgn}\n{msgn3}\n{msgn2}'
 
+
+
         token = '6192919039:AAGMJx8Fktd3UUrVIh5YgE15AgTWjmXJB-E'
         chat_id = '-1001875785629'
 
         URL = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1
-        url = "https://api.telegram.org/bot"+token+ "/sendMessage?chat_id="+chat_id+"&text="+msgn
+        url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + msgn
+        url1 = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + str(msgn_prox)
 
 
         resposta = requests.get(URL)
         resposta = requests.get(url)
-
+        resposta = requests.get(url1)
 
 
 
