@@ -266,12 +266,15 @@ while True:
                 g1 -= 1
 
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
-        msgn1 = f'Ganhos{gain} Perdas{loss} Branco{coringa}'
+        msgn3 = f'Vamos para o gale:{cont1}'
+        msgn1 = f'GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}'
         msgn = f'Entrar na cor: {prev_text}'
         if prev2 == num1:
-            msgn = f'Vitoria no gale:{gale}'
+            msgn = f'VITÓRIA no gale:{cont2}'
         elif cont2 == 3:
-            msgn = f'Derrota, não desanime siga a gestao e aguarde o proximo sinal!'
+            msgn = f'DERROTA, não desanime siga a gestao e aguarde o proximo sinal!'
+        else:
+            msgn = msgn3
 
         token = '6192919039:AAGMJx8Fktd3UUrVIh5YgE15AgTWjmXJB-E'
         chat_id = '-1001875785629'
