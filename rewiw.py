@@ -154,9 +154,9 @@ while True:
 
         def cor_rodada(num1):
             if num1 == 1:
-                return "Vermelho 🔴"
+                return "Vermelho "
             elif num1 == 2:
-                return "Preto ⚫"
+                return "Preto"
             elif num1 == 0:
                 return "CORINGA"
 
@@ -270,6 +270,14 @@ while True:
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
         msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
         msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
+
+        if prev_text == 'Vermelho':
+            prev_text = 'Vermelho 🔴'
+        elif prev_text == 'Preto':
+            prev_text = 'Preto ⚫'
+        else:
+            prev_text = 'Coringa ⚪'
+
         msgn = f'ENTRAR NA COR: {prev_text.upper()}'
         if prev2 == num1:
             msgn = f'VITÓRIA NO GALE:{cont2}\n {msgn5}\n✅✅✅\n{msgn2}'
