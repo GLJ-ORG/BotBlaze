@@ -154,9 +154,9 @@ while True:
 
         def cor_rodada(num1):
             if num1 == 1:
-                return "Vermelho"
+                return "Vermelho 🔴"
             elif num1 == 2:
-                return "Preto"
+                return "Preto ⚫"
             elif num1 == 0:
                 return "CORINGA"
 
@@ -265,27 +265,31 @@ while True:
             if prev2 != num1:
                 g1 -= 1
 
+        msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota\n Nunca saia da sua gestão de risco!'
+        msgn4 = f'PARABÉNS CORINGA!⚪\n Sempre proteger o branco com 15% do valor da sua entrada na rodada\n Good Luck 🍀'
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
-        msgn3 = f'Vamos para o gale:{cont1}'
-        msgn1 = f'GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}'
-        msgn = f'Entrar na cor: {prev_text}'
+        msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
+        msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
+        msgn = f'ENTRAR NA COR: {prev_text.upper()}'
         if prev2 == num1:
-            msgn = f'VITÓRIA no gale:{cont2}'
-        elif cont2 == 3:
-            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!'
+            msgn = f'VITÓRIA NO GALE:{cont2}\n {msgn5}\n✅✅✅\n{msgn2}'
+        elif cont2 == 3 and num1 != 0:
+            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!\n❌❌❌\n{msgn2}'
+        elif num1 == 0:
+            msgn = f'{msgn4}\n{msgn2}'
         else:
-            msgn = msgn3
+            msgn = f'{msgn}\n{msgn3}\n{msgn2}'
 
         token = '6192919039:AAGMJx8Fktd3UUrVIh5YgE15AgTWjmXJB-E'
         chat_id = '-1001875785629'
 
         URL = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1
         url = "https://api.telegram.org/bot"+token+ "/sendMessage?chat_id="+chat_id+"&text="+msgn
-        url2 = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn2
+
 
         resposta = requests.get(URL)
         resposta = requests.get(url)
-        resposta = requests.get(url2)
+
 
 
 
