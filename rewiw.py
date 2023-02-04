@@ -266,7 +266,7 @@ while True:
                 g1 -= 1
 
         msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota\n Nunca saia da sua gestão de risco!'
-        msgn4 = f'PARABÉNS CORINGA!⚪\n Sempre proteger o branco com 15% do valor da sua entrada na rodada\n Good Luck 🍀'
+        msgn4 = f'PARABÉNS CORINGA!⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
         msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
         msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
