@@ -264,6 +264,29 @@ while True:
         if cont1 == 0 and cont2 == 3:
             if prev2 != num1:
                 g1 -= 1
+
+        msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
+        msgn1 = f'Ganhos{gain} Perdas{loss} Branco{coringa}'
+        msgn = f'Entrar na cor: {prev_text}'
+        if prev2 == num1:
+            msgn = f'Vitoria no gale:{gale}'
+        elif cont2 == 3:
+            msgn = f'Derrota, não desanime siga a gestao e aguarde o proximo sinal!'
+
+        token = '6192919039:AAGMJx8Fktd3UUrVIh5YgE15AgTWjmXJB-E'
+        chat_id = '-1001875785629'
+
+        URL = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1
+        url = "https://api.telegram.org/bot"+token+ "/sendMessage?chat_id="+chat_id+"&text="+msgn
+        url2 = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn2
+
+        resposta = requests.get(URL)
+        resposta = requests.get(url)
+        resposta = requests.get(url2)
+
+
+
+
             #Preencher log
         Log.PreencheLog('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
