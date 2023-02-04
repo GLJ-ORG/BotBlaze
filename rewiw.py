@@ -272,7 +272,7 @@ while True:
         if prev2 == num1:
             msgn = f'VITÓRIA no gale:{cont2}'
         elif cont2 == 3:
-            msgn = f'DERROTA, não desanime siga a gestao e aguarde o proximo sinal!'
+            msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal!'
         else:
             msgn = msgn3
 
