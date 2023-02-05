@@ -264,18 +264,19 @@ while True:
         if cont1 == 0 and cont2 == 3:
             if prev2 != num1:
                 g1 -= 1
+
         msgn_prox = str('')
-        msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota,\n Nunca saia da sua gestão de risco!'
+        msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota, Nunca saia da sua gestão de risco!'
         msgn4 = f'PARABÉNS CORINGA! ⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
-        msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
+        msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~\n'
         msgn3 = str('')
         if branco_guardar3 > 6 & branco_guardar3 < 11 & branco_guardar3 > 22 & branco_guardar3 < 28:
-            msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
+            msgn3 = f'Vamos para o GALE: {cont1}\nNúmero recent: {[roll1]}\n🔥💰🤑🚀\n'
         else:
-            msgn3 = f'Vamos para o Gale:{cont1}\n Proteja o BRANCO ⚪\n🔥💰🤑🚀'
+            msgn3 = f'Vamos para o GALE: {cont1}\n Proteja o BRANCO ⚪\nNúmero recente {[roll1]}\n🔥💰🤑🚀\n'
 
 
-        msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
+        msgn1 = f'🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸\n{msgn2}'
 
         if prev_text == 'Vermelho':
             prev_text = 'Vermelho 🔴'
@@ -286,13 +287,13 @@ while True:
 
         msgn = f'ENTRAR NA COR: {prev_text.upper()}'
         if prev2 == num1:
-            msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅'
+            msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         elif cont2 == 3 and num1 != 0:
             msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal, ou volte mais tarde!\n❌❌❌\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         elif num1 == 0:
-            msgn = f'{msgn4}\n{msgn2}'
+            msgn = f'{msgn4}'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         else:
             msgn = f'{msgn}\n{msgn3}'
@@ -302,12 +303,12 @@ while True:
         token = '6192919039:AAGMJx8Fktd3UUrVIh5YgE15AgTWjmXJB-E'
         chat_id = '-1001875785629'
 
-        URL = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1
-        url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + msgn
+
+        url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1 + "%0A" + str(msgn)
         url1 = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + str(msgn_prox)
 
 
-        resposta = requests.get(URL)
+
         resposta = requests.get(url)
         resposta = requests.get(url1)
 
