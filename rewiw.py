@@ -269,10 +269,11 @@ while True:
         msgn4 = f'PARABÉNS CORINGA! ⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
         msgn2 = '~~~~~~~~~~~~~~~~~~~~~~~'
         msgn3 = str('')
-        if branco_guardar3 > 9:
-            msgn3 = f'Vamos para o Gale:{cont1}\n Proteja o ⚪\n🔥💰🤑🚀'
-        else:
+        if branco_guardar3 > 6 & branco_guardar3 < 11 & branco_guardar3 > 22 & branco_guardar3 < 28:
             msgn3 = f'Vamos para o Gale:{cont1}\n🔥💰🤑🚀'
+        else:
+            msgn3 = f'Vamos para o Gale:{cont1}\n Proteja o BRANCO ⚪\n🔥💰🤑🚀'
+
 
         msgn1 = f'{msgn2}\n🛸GANHOS: {gain} PERDAS: {loss} BRANCO: {coringa}🛸'
 
@@ -285,16 +286,16 @@ while True:
 
         msgn = f'ENTRAR NA COR: {prev_text.upper()}'
         if prev2 == num1:
-            msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅\n{msgn2}\n'
-            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
+            msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅'
+            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         elif cont2 == 3 and num1 != 0:
             msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal, ou volte mais tarde!\n❌❌❌\n'
-            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
+            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         elif num1 == 0:
             msgn = f'{msgn4}\n{msgn2}'
-            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn2}'
+            msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         else:
-            msgn = f'{msgn}\n{msgn3}\n{msgn2}'
+            msgn = f'{msgn}\n{msgn3}'
 
 
 
