@@ -304,7 +304,7 @@ while True:
         chat_id = '-1001875785629'
 
 
-        url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1 + "%0A" + str(msgn)
+        url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1+'%0A'+msgn
         url1 = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + str(msgn_prox)
 
 
