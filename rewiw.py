@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 import requests
 import json
@@ -107,6 +108,10 @@ while True:
 
     nume1, nume2, nume3, *outros_nume = lista_cor
 
+    print(num1, nume1, roll1, rolo1)
+
+    time.sleep(1)
+
     if rolo1 != rolo2:
         num1, num2, num3,num, numm, *outras_lista = lista_color
     #Calculo de previsão
@@ -194,77 +199,6 @@ while True:
             lista_diferenca_branco.pop()
         branco_guardar3 = total_partidas - branco_guardar1
 
-        def gale_conservador():
-            global aplicar
-            global aplicar1
-            global aplicar2
-            global aplicar3
-            global v_branco
-            global v_branco1
-            global v_branco2
-            global v_branco3
-            global montante
-            aplicar = 1
-            aplicar1 = 2
-            aplicar2 = 4
-            aplicar3 = 8
-            v_branco = 0.5
-            v_branco1 = 1
-            v_branco2 = 1.5
-            v_branco3 = 2
-            return aplicar, aplicar1, aplicar2, aplicar3, v_branco, v_branco1, v_branco2, v_branco3
-
-        def saldo():
-            global saldo_banca
-            global prev2
-            global num1
-            global cont1
-            global cont2
-            global v_branco
-            global v_branco1
-            global v_branco2
-            global v_branco3
-            global aplicar
-            global aplicar1
-            global aplicar2
-            global aplicar3
-
-            if num1 == prev2:
-                if cont1 == 0:
-                    if cont2 == 0:
-                        saldo_banca += (aplicar * 2) + (v_branco * 2)
-                    elif cont2 == 1:
-                        saldo_banca += (aplicar * 2) + (v_branco * 2)
-                    elif cont2 == 2:
-                        saldo_banca += (aplicar * 2) + (v_branco * 2)
-                    elif cont2 == 3:
-                        saldo_banca += (aplicar * 2) + (v_branco * 2)
-            else:
-                'calculo invalido'
-
-
-            if num1 != prev2:
-                if cont1 == 0:
-                    if cont2 == 0:
-                        saldo_banca -= (aplicar) + (v_branco * 2)
-                    elif cont2 == 1:
-                        saldo_banca -= (aplicar) + (v_branco * 2)
-                    elif cont2 == 2:
-                        saldo_banca -= (aplicar) + (v_branco * 2)
-                    elif cont2 == 3:
-                        saldo_banca -= (aplicar) + (v_branco * 2)
-
-            if num1 == 0:
-                saldo_banca += v_branco * 14
-
-            return saldo_banca
-
-        if cont1 == 1:
-            g1 += 1
-        if cont1 == 0 and cont2 == 3:
-            if prev2 != num1:
-                g1 -= 1
-
         msgn_prox = str('')
         msgn5 = f'Continue com cautela, estipule uma meta de vitória e derrota, Nunca saia da sua gestão de risco!'
         msgn4 = f'PARABÉNS CORINGA! ⚪\n Sempre proteger o branco com 15% do valor da sua entrada!\n Good Luck 🍀'
@@ -289,7 +223,7 @@ while True:
         if prev2 == num1:
             msgn = f'VITÓRIA NO GALE: {cont2}\n {msgn5}\n✅✅✅\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
-        elif cont2 == 3 and num1 != 0:
+        elif cont1 == 3 and num1 != 0:
             msgn = f'DERROTA, não desanime siga a gestão e aguarde o próximo sinal, ou volte mais tarde!\n❌❌❌\n'
             msgn_prox = f'ENTRAR NA COR: {prev_text.upper()}\n{msgn3}'
         elif num1 == 0:
@@ -304,7 +238,7 @@ while True:
         chat_id = '-1001875785629'
 
 
-        url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1+'%0A'+msgn
+        url = "https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msgn1+'%0a'+msgn
         url1 = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + str(msgn_prox)
 
 
@@ -355,3 +289,5 @@ while True:
         Log.PreencheLog(f'{round(saldo(), 2)}')
         Log.PreencheLog(f'{gale_conservador()}')
         Log.PreencheLog(f'{prev2, num1, cont1, cont2}')
+
+    continue

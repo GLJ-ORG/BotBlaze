@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 
@@ -17,6 +18,13 @@ esp3 = sleep(5)
 clicarem_entrar = nav.find_element(By.XPATH, '//*[@id="auth-modal"]/div[2]/form/div[4]/button').click()
 esp4 = sleep(20)
 nav.get('https://blaze.com/pt/games/double')
+esp5 = sleep(10)
+
+colocar_valor = nav.find_element(By.XPATH, '//*[@id="roulette-controller"]/div[1]/div[2]/div[1]/div/div[1]/input').send_keys('1.25')
+esp6 = sleep(2)
+colocar_valor = nav.find_element(By.XPATH, '//*[@id="roulette-controller"]/div[1]/div[2]/div[2]/div/div[2]/div').click()
+
+#Variaveis globais
 
 
 
@@ -24,7 +32,9 @@ nav.get('https://blaze.com/pt/games/double')
 
 
 
-esp40 = sleep(100)
+
+
+esp40 = sleep(30)
 
 
 
