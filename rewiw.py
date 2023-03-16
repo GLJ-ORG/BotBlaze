@@ -309,8 +309,8 @@ while True:
 
 
 
-        resposta = requests.get(url)
-        resposta = requests.get(url1)
+        #resposta = requests.get(url)
+        #resposta = requests.get(url1)
 
 
 
